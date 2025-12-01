@@ -265,13 +265,13 @@ body.nav-open {
 .footer-icons {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
-  margin-top: 0.25rem;
+  gap: 1.75rem;
+  margin-top: 0.4rem;
 }
 
 .icon-btn {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -281,8 +281,8 @@ body.nav-open {
 }
 
 .icon-btn svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   fill: currentColor;
 }
 
@@ -414,11 +414,19 @@ body.nav-open {
   color: var(--color-1);
   text-decoration: none;
   border-bottom: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .contact-list a:hover,
 .contact-list a:focus-visible {
   border-bottom-color: var(--color-1);
+}
+.contact-list svg {
+  width: 22px;
+  height: 22px;
+  margin-right: 2px;
 }
 
 .page-hero {
@@ -609,4 +617,16 @@ body.nav-open {
   .page-content {
     padding: calc(var(--header-height) + 5rem) 1.25rem 15rem;
   }
+}
+
+.contact-list svg {
+  width: 22px;
+  height: 22px;
+  margin-right: 6px;
+}
+
+.contact-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
