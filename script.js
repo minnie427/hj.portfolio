@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const slides = document.querySelectorAll(".slide");
   if (slides.length) {
     let current = 0;
-    const delay = 6000; // time per image in ms (6000 = 6 seconds)
+    const delay = 4000; // time per image in ms (6000 = 6 seconds)
 
     function showSlide(index) {
       slides.forEach((slide, i) => {
