@@ -25,11 +25,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Mobile nav toggle
 const hamburgerBtn = document.querySelector(".hamburger-btn");
-const navDrawer = document.querySelector(".nav-drawer");
-const body = document.body;
+  const navDrawer = document.querySelector(".nav-drawer");
+  const body = document.body;
 
-function closeNav() {
-  body.classList.remove("nav-open");
+  function closeNav() {
+    body.classList.remove("nav-open");
   if (hamburgerBtn) hamburgerBtn.setAttribute("aria-expanded", "false");
   }
 
@@ -46,5 +46,33 @@ if (hamburgerBtn && navDrawer) {
   document.addEventListener("keyup", (e) => {
     if (e.key === "Escape") closeNav();
   });
-}
+  }
+});
+
+// Progressive load for artwork grid
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelector(".art-grid");
+  if (!grid) return;
+
+  const cards = Array.from(grid.querySelectorAll(".art-card"));
+  const batchSize = 12;
+  if (cards.length <= batchSize) return;
+
+  cards.slice(batchSize).forEach((card) => card.classList.add("hidden"));
+
+  const btn = document.createElement("button");
+  btn.className = "load-more";
+  btn.type = "button";
+  btn.textContent = "Load more artworks";
+  grid.insertAdjacentElement("afterend", btn);
+
+  let shown = batchSize;
+  btn.addEventListener("click", () => {
+    const next = cards.slice(shown, shown + batchSize);
+    next.forEach((card) => card.classList.remove("hidden"));
+    shown += next.length;
+    if (shown >= cards.length) {
+      btn.remove();
+    }
+  });
 });

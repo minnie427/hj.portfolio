@@ -265,7 +265,7 @@ body.nav-open {
 .footer-icons {
   display: flex;
   justify-content: center;
-  gap: 1.75rem;
+  gap: 1.25rem;
   margin-top: 0.4rem;
 }
 
@@ -421,11 +421,11 @@ body.nav-open {
 
 .contact-list a:hover,
 .contact-list a:focus-visible {
-  border-bottom-color: var(--color-1);
+  border-bottom-color: transparent;
 }
 .contact-list svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   margin-right: 2px;
 }
 
@@ -479,7 +479,7 @@ body.nav-open {
 .feature-image figcaption {
   color: var(--color-3);
   font-size: 0.9rem;
-  margin-top: 0.35rem;
+  margin-top: 0.7rem;
   text-align: center;
 }
 
@@ -492,7 +492,7 @@ body.nav-open {
 .art-card {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.5rem;
 }
 
 .art-card figure {
@@ -519,6 +519,7 @@ body.nav-open {
   color: var(--color-ink);
   font-size: 0.95rem;
   text-align: center;
+  margin-bottom: 0.7rem;
 }
 
 .art-card p {
