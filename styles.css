@@ -631,3 +631,17 @@ body {
   align-items: center;
   gap: 6px;
 }
+
+.statement-body {
+  text-align: center;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.statement-body p {
+  text-align: center;
+}
+
+.statement-body .info-heading {
+  text-align: center;
+}
