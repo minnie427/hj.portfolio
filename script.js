@@ -102,4 +102,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape") closeNav();
     });
   }
+
+  // Detail pages: swap thumbs to full images after load
+  const detailImages = document.querySelectorAll(".feature-image img");
+  detailImages.forEach((img) => {
+    const src = img.getAttribute("src") || "";
+    if (!src.includes("/thumbs/")) return;
+    const fullSrc = src.replace("/thumbs/", "/");
+
+    const hiRes = new Image();
+    hiRes.decoding = "async";
+    hiRes.onload = () => {
+      img.src = fullSrc;
+    };
+    hiRes.src = fullSrc;
+  });
 });
