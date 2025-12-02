@@ -195,10 +195,6 @@ body {
   text-transform: uppercase;
 }
 
-body.nav-open {
-  overflow: hidden;
-}
-
 /* ========== HERO / SLIDESHOW ========== */
 .hero {
   position: relative;
@@ -598,6 +594,10 @@ body.nav-open {
 
   .nav-drawer {
     display: flex;
+  }
+
+  body.nav-open {
+    overflow: hidden;
   }
 
   .footer-inner {
