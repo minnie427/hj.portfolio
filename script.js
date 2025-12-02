@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const slideshow = document.querySelector(".slideshow");
   if (slides.length) {
     let current = 0;
-    const delay = 4000;
+    const delay = 3000;
     let autoTimer;
 
     const showSlide = (index) => {
