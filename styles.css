@@ -52,7 +52,7 @@ body {
 
 .header-inner {
   height: 100%;
-  max-width: 1200px;
+  max-width: none;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -239,7 +239,7 @@ body {
 }
 
 .footer-inner {
-  max-width: 1200px;
+  max-width: none;
   margin: 0 auto;
   text-align: center;
   line-height: 1.8;
@@ -317,14 +317,20 @@ body {
 }
 
 .page-content {
-  /* max-width: 960px; */
+  max-width: 960px;
   margin: 0 auto;
-  padding: calc(var(--header-height) + 5rem) 3rem 20rem;
+  padding: calc(var(--header-height) + 5rem) 3rem 23rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   line-height: 1.6;
   color: var(--color-ink);
+}
+
+.art-page {
+  max-width: none;
+  width: 100%;
+  padding: calc(var(--header-height) + 5rem) 3rem 23rem;
 }
 
 .page-title {
@@ -453,6 +459,7 @@ body {
   color: var(--color-3);
   font-size: 0.95rem;
   text-align: center;
+  margin-bottom: 5rem;
 }
 
 .page-body {
@@ -489,6 +496,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .art-card figure {
@@ -539,11 +547,19 @@ body {
 }
 
 .info-heading {
-  font-weight: var(--fw-bold);
+  font-weight: var(--fw-semi);
+  font-style: italic;
+  font-family: Georgia, "Times New Roman", serif;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-size: 1rem;
   color: var(--color-ink);
+  margin: 0.9rem 0;
+}
+
+.statement-body .info-heading {
+  margin-bottom: 0.5rem;
+  margin-top: 3rem;
 }
 
 .info-grid {
@@ -584,8 +600,18 @@ body {
     --header-height: 64px;
   }
 
+  .page-title {
+    font-size: 1.5rem;
+    
+  }
+
+  .page-meta {
+    margin-bottom: 5rem;
+    font-size: 0.85rem;
+  }
   .site-header {
     padding: 0.5rem 1rem;
+    
   }
 
   .main-nav {
@@ -599,6 +625,8 @@ body {
   body.nav-open {
     overflow: hidden;
   }
+
+  
 
   .footer-inner {
     
