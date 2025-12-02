@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!grid) return;
 
   const cards = Array.from(grid.querySelectorAll(".art-card"));
-  const batchSize = 12;
+  const batchSize = 8;
   if (cards.length <= batchSize) return;
 
   cards.slice(batchSize).forEach((card) => card.classList.add("hidden"));
@@ -75,4 +75,41 @@ document.addEventListener("DOMContentLoaded", () => {
       btn.remove();
     }
   });
+});
+
+// Lightweight image lazy-loader for artwork grid
+document.addEventListener("DOMContentLoaded", () => {
+  const imgs = Array.from(document.querySelectorAll(".art-grid img"));
+  if (!imgs.length) return;
+
+  const placeholder =
+    "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
+
+  imgs.forEach((img) => {
+    if (!img.dataset.src) {
+      img.dataset.src = img.getAttribute("src");
+      img.setAttribute("src", placeholder);
+    }
+  });
+
+  const onIntersect = (entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        const realSrc = img.dataset.src;
+        if (realSrc) {
+          img.src = realSrc;
+          img.removeAttribute("data-src");
+        }
+        obs.unobserve(img);
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(onIntersect, {
+    rootMargin: "300px 0px",
+    threshold: 0.01,
+  });
+
+  imgs.forEach((img) => observer.observe(img));
 });
