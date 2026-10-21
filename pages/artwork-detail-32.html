@@ -27,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css?v=20261022" />
+  <link rel="stylesheet" href="../styles.css?v=20261022b" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -45,14 +45,16 @@
           <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
-      <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
-        <span class="lang-sep" aria-hidden="true">/</span>
-        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+        </div>
+        <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger-icon"></span>
+        </button>
       </div>
-      <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
-        <span class="hamburger-icon"></span>
-      </button>
     </div>
   </header>
 
@@ -63,6 +65,11 @@
       <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
       <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
+    <div class="drawer-lang" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+      <span class="lang-sep" aria-hidden="true">/</span>
+      <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+    </div>
   </nav>
 
   <main class="page-content">
@@ -126,6 +133,6 @@ Only upon completing the painting did I finally understand: all of this was the 
     </div>
   </footer>
 
-  <script src="../script.js?v=20261022"></script>
+  <script src="../script.js?v=20261022b"></script>
 </body>
 </html>

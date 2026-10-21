@@ -722,14 +722,31 @@ html[data-lang="ko"] body {
   word-break: keep-all;
 }
 
-.lang-switch {
-  margin-left: auto;
+.header-actions {
+  position: relative;
   display: flex;
+  align-items: center;
+}
+
+/* Shown only while the menu is open (desktop); kept out of the flow so the nav stays where it was */
+.lang-switch {
+  display: none;
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-right: 0.75rem;
   align-items: center;
   gap: 0.35rem;
   font-size: 0.75rem;
   font-weight: var(--fw-semi);
   letter-spacing: 0.12em;
+}
+
+@media (min-width: 901px) {
+  .nav-open .lang-switch {
+    display: flex;
+  }
 }
 
 .lang-switch button {
@@ -751,6 +768,43 @@ html[data-lang="ko"] body {
 
 .lang-sep {
   color: rgba(245, 245, 245, 0.25);
+}
+
+/* Mobile: inside the menu drawer, under the links */
+.drawer-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: min(320px, 100%);
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(245, 245, 245, 0.12);
+  font-size: 0.95rem;
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.12em;
+}
+
+.drawer-lang button {
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0;
+  font: inherit;
+  letter-spacing: inherit;
+  color: rgba(245, 245, 245, 0.4);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.drawer-lang button:hover,
+.drawer-lang button:focus-visible,
+.drawer-lang button[aria-pressed="true"] {
+  color: var(--color-2);
+}
+
+@media (max-width: 900px) {
+  .nav-drawer {
+    flex-direction: column;
+  }
 }
 
 /* Korean typography */
