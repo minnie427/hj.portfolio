@@ -26,6 +26,8 @@ body {
   --fs-drawer-nav: 1.15rem;
   --fs-footer: 0.75rem;
   --fs-footer-sm: 0.7rem;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-serif-ko: "Noto Serif KR", "Apple SD Gothic Neo", serif;
 }
 
 body {
@@ -823,4 +825,167 @@ html[data-lang="ko"] .art-pager {
 
 html[data-lang="ko"] .page-body p {
   line-height: 1.8;
+}
+
+/* ========== EDITORIAL PAGES (Artist, Statement) ========== */
+.page-content.ed-page {
+  max-width: 1040px;
+  gap: 0;
+}
+
+.ed-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 0.7rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-3);
+}
+
+.ed-no {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+}
+
+.ed-rule {
+  width: 48px;
+  height: 1px;
+  background: var(--color-ink);
+}
+
+.ed-title {
+  margin-top: 1.6rem;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 5.5rem;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+}
+
+html[data-lang="ko"] .ed-title {
+  font-family: var(--font-serif-ko);
+  font-size: 4.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.ed-hair {
+  height: 1px;
+  background: rgba(0, 0, 0, 0.14);
+  margin: 3.25rem 0 3.5rem;
+}
+
+.ed-grid {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 3rem;
+}
+
+.ed-side {
+  padding-top: 0.3rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
+  line-height: 2;
+  text-transform: uppercase;
+  color: var(--color-3);
+}
+
+html[data-lang="ko"] .ed-side {
+  letter-spacing: 0.12em;
+}
+
+.ed-body {
+  max-width: 640px;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.ed-body p {
+  font-size: 1.03rem;
+  line-height: 1.8;
+  color: var(--color-ink);
+}
+
+html[data-lang="ko"] .ed-body p {
+  line-height: 1.9;
+}
+
+/* Statement: numbered sections */
+.ed-row + .ed-row {
+  margin-top: 3.5rem;
+  padding-top: 3.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ed-num {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--color-ink);
+}
+
+.ed-sub {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.45rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-ink);
+}
+
+html[data-lang="ko"] .ed-sub {
+  font-family: var(--font-serif-ko);
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.ed-sign {
+  margin-top: 4.5rem;
+  text-align: right;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-3);
+}
+
+html[data-lang="ko"] .ed-sign {
+  font-family: var(--font-serif-ko);
+  font-style: normal;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .ed-title {
+    font-size: 3.4rem;
+  }
+
+  html[data-lang="ko"] .ed-title {
+    font-size: 2.75rem;
+  }
+
+  .ed-hair {
+    margin: 2.1rem 0 2rem;
+  }
+
+  .ed-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+
+  .ed-row + .ed-row {
+    margin-top: 2.5rem;
+    padding-top: 2.5rem;
+  }
+
+  .ed-sign {
+    margin-top: 3rem;
+  }
 }
