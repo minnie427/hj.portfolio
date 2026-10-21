@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="황금빛 시작 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>Golden Start – Lee Hyun Jung</title>
   <meta name="description" content="Golden Start (2025) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-57.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">Golden Start</h1>
+      <h1 class="page-title"><span lang="en">Golden Start</span><span lang="ko">황금빛 시작</span></h1>
     
     </section>
 
@@ -65,20 +79,23 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 This painting commemorates the golden start that arrived in my life, at the moment when everything begins to bloom anew. The warm golden light filling the canvas symbolizes infinite possibilities, while below, blue flowers quietly form waves of hope. Gazing at that light, I feel a trembling anticipation for the future and the hidden potential within me. This painting is my resolve, expressing the courage to dispel darkness and radiate one's own light. I earnestly hope that this golden energy permeates the viewer's heart, conveying the warm courage to begin anew.
+      </p>
+      <p lang="ko">
+이 그림은 모든 것이 새롭게 피어나기 시작하는 순간, 내 삶에 찾아온 황금빛 시작을 기념한다. 화면을 채운 따뜻한 금빛은 무한한 가능성을 상징하고, 그 아래에서는 푸른 꽃들이 조용히 희망의 물결을 이룬다. 그 빛을 바라보며 나는 미래에 대한 설레는 기대와 내 안에 숨은 가능성을 느낀다. 이 그림은 어둠을 걷어 내고 자신만의 빛을 내는 용기를 표현한 나의 다짐이다. 이 황금빛 에너지가 보는 이의 마음에 스며들어, 새롭게 시작할 따뜻한 용기를 전하기를 간절히 바란다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-56.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-58.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-56.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-58.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -92,11 +109,11 @@ This painting commemorates the golden start that arrived in my life, at the mome
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

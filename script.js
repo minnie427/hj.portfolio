@@ -118,6 +118,30 @@ document.addEventListener("DOMContentLoaded", () => {
     hiRes.src = fullSrc;
   });
 
+  // Language toggle (EN / KO) — initial language is set by the inline script in <head>
+  const root = document.documentElement;
+  const titles = { en: document.title, ko: root.dataset.titleKo || document.title };
+  const langButtons = document.querySelectorAll("[data-set-lang]");
+  const applyLang = (lang) => {
+    root.setAttribute("data-lang", lang);
+    root.lang = lang;
+    document.title = titles[lang];
+    langButtons.forEach((btn) => btn.setAttribute("aria-pressed", String(btn.dataset.setLang === lang)));
+    try {
+      localStorage.setItem("lang", lang);
+    } catch (e) {}
+  };
+  applyLang(root.getAttribute("data-lang") === "ko" ? "ko" : "en");
+  langButtons.forEach((btn) => btn.addEventListener("click", () => applyLang(btn.dataset.setLang)));
+  // Drop ?lang= from the address bar once applied, so the saved choice wins afterwards
+  try {
+    const url = new URL(location.href);
+    if (url.searchParams.has("lang")) {
+      url.searchParams.delete("lang");
+      history.replaceState(null, "", url);
+    }
+  } catch (e) {}
+
   // Footer year
   const year = String(new Date().getFullYear());
   document.querySelectorAll(".js-year").forEach((el) => (el.textContent = year));

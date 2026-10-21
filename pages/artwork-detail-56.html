@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="혼돈 속의 질서 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>Order in Chaos – Lee Hyun Jung</title>
   <meta name="description" content="Order in Chaos (2025) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-56.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">Order in Chaos</h1>
+      <h1 class="page-title"><span lang="en">Order in Chaos</span><span lang="ko">혼돈 속의 질서</span></h1>
     
     </section>
 
@@ -65,20 +79,23 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 This painting contains my aspiration to find unwavering order even within chaos. The canvas features the strong protection of the Vajra Guardian (Geumgang Yeoksa) and the soft solace of the Celestial Maidens (Cheonnyeo) coexisting in harmony, despite their contrast. Just as life demands both strength and gentleness, defense and flow, these two beings symbolize the perfect balance within our inner selves. While the Vajra Guardian wards off evil forces, the Celestial Maidens soothe our hearts with heavenly music. I finally discover the safest and most complete peace within this interplay of opposing forces.
+      </p>
+      <p lang="ko">
+이 그림은 혼돈 속에서도 흔들리지 않는 질서를 찾고자 하는 나의 염원을 담고 있다. 화면에는 금강역사의 강한 수호와 천녀의 부드러운 위안이 대비를 이루면서도 조화롭게 공존한다. 삶이 강함과 부드러움, 방어와 흐름을 모두 요구하듯, 이 두 존재는 우리 내면의 완전한 균형을 상징한다. 금강역사가 사악한 기운을 막아 내는 동안, 천녀는 천상의 음악으로 우리의 마음을 달랜다. 나는 이 상반된 힘들의 어우러짐 속에서 마침내 가장 안전하고 온전한 평화를 발견한다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-55.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-57.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-55.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-57.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -92,11 +109,11 @@ This painting contains my aspiration to find unwavering order even within chaos.
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

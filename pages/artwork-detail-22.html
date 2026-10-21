@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="이유는 몰라도 나는 춤춘다 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>I Dance, Though I Know Not the Reason – Lee Hyun Jung</title>
   <meta name="description" content="I Dance, Though I Know Not the Reason (1991) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-22.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title"> I Dance, Though I Know Not the Reason</h1>
+      <h1 class="page-title"><span lang="en">I Dance, Though I Know Not the Reason</span><span lang="ko">이유는 몰라도 나는 춤춘다</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 Why do I dance? For no reason at all, simply because music flows and my heart responds instinctively. This painting visualizes joy without reason, an emotion that cannot be explained, yet an inner energy that clearly exists.
       </p>
-      <p>
+      <p lang="en">
 The colors are vivid, and the lines are free. The way those lines and colors collide, embrace, and sway is like a being existing wholeheartedly on a stage. That dance has no goal, no calculation. There is only fidelity to the present moment.
       </p>
-      <p>
+      <p lang="en">
 Sometimes we miss the genuine movement and vitality in life because we are too busy searching for reasons. This painting whispers to us to simply dance, without those intellectual questions. It urges us to live for 'this very moment,' not 'why?' If we do so, we realize it ourselves: Though we may not know the reason, dancing is the truth.
+      </p>
+      <p lang="ko">
+나는 왜 춤추는가? 아무 이유 없이, 그저 음악이 흐르고 내 마음이 본능적으로 반응하기 때문이다. 이 그림은 이유 없는 기쁨, 설명할 수 없지만 분명히 존재하는 내면의 에너지를 시각화한 것이다.
+      </p>
+      <p lang="ko">
+색은 선명하고 선은 자유롭다. 그 선과 색이 부딪히고, 끌어안고, 흔들리는 모습은 무대 위에서 온 마음을 다해 존재하는 이와 같다. 그 춤에는 목표도, 계산도 없다. 오직 지금 이 순간에 대한 충실함만 있다.
+      </p>
+      <p lang="ko">
+우리는 때로 이유를 찾느라 너무 바빠서 삶의 진정한 움직임과 생명력을 놓친다. 이 그림은 그런 머릿속 질문 없이 그저 춤추라고 우리에게 속삭인다. '왜?'가 아니라 '바로 이 순간'을 위해 살라고 권한다. 그렇게 하면 우리는 스스로 깨닫는다. 이유는 몰라도, 춤추는 것이 진실이라는 것을.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-21.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-23.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-21.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-23.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ Sometimes we miss the genuine movement and vitality in life because we are too b
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="고요 속의 깨어남 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>Awakening in Stillness – Lee Hyun Jung</title>
   <meta name="description" content="Awakening in Stillness — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-48.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">Awakening in Stillness</h1>
+      <h1 class="page-title"><span lang="en">Awakening in Stillness</span><span lang="ko">고요 속의 깨어남</span></h1>
     
     </section>
 
@@ -65,20 +79,23 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 This painting captures the moment when the true self awakens within a stillness that transcends all external noise. Against the dark night sky, I sit in the posture of a practitioner, embracing the intense light and energy that rises from my core. The dynamic curves and vibrant colors represent the inner movement and a dance toward liberation, where tranquility and intensity merge. Enlightenment does not come from the outside. Only by halting all senses and listening quietly does it finally fill one completely from within. This work declares that stillness is the very source of the most powerful energy.
+      </p>
+      <p lang="ko">
+이 그림은 모든 바깥의 소음을 넘어선 고요 속에서 참된 자아가 깨어나는 순간을 담고 있다. 어두운 밤하늘을 배경으로 나는 수행자의 자세로 앉아, 내 중심에서 솟아오르는 강렬한 빛과 에너지를 품는다. 역동적인 곡선과 생생한 색은 고요와 강렬함이 하나가 되는 내면의 움직임이자 해탈을 향한 춤을 나타낸다. 깨달음은 바깥에서 오지 않는다. 모든 감각을 멈추고 조용히 귀 기울일 때 비로소 안에서부터 온전히 차오른다. 이 작품은 고요야말로 가장 강력한 에너지의 근원임을 선언한다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-33.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-49.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-33.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-49.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -92,11 +109,11 @@ This painting captures the moment when the true self awakens within a stillness 
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

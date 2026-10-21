@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="연꽃의 시간은 줄기에서 시작된다 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>The Lotus's Time Begins with the Stem – Lee Hyun Jung</title>
   <meta name="description" content="The Lotus's Time Begins with the Stem (2004) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-28.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">The Lotus's Time Begins with the Stem</h1>
+      <h1 class="page-title"><span lang="en">The Lotus's Time Begins with the Stem</span><span lang="ko">연꽃의 시간은 줄기에서 시작된다</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 The lotus (蓮) does not exist solely as a flower itself. The lotus is an entity that wholly embraces its stem, roots, and all its origins: the mud and the water. This painting captures the time of solitary waiting just before the splendid flower bursts into bloom.
       </p>
-      <p>
+      <p lang="en">
 The life energy flowing along the stem, the vitality rising from the mud, the stillness inside the unbloomed bud. Everything is being meticulously prepared, and it will soon bloom majestically. Through this painting, I sing of the time of waiting and silence.
       </p>
-      <p>
+      <p lang="en">
 Life is not always remembered only by the moment of the flower. We grow stronger little by little within the time of the stem, the quiet of the roots, and the chaos of the mud. The lotus's time begins with the stem. And it is because of that arduous time spent in the roots and stem that the flower finally comes into being.
+      </p>
+      <p lang="ko">
+연(蓮)은 꽃 그 자체만으로 존재하지 않는다. 연은 줄기와 뿌리, 그리고 그 모든 근원인 진흙과 물까지 온전히 품은 존재다. 이 그림은 화려한 꽃이 피어나기 직전, 홀로 기다리는 시간을 담고 있다.
+      </p>
+      <p lang="ko">
+줄기를 따라 흐르는 생명 에너지, 진흙에서 올라오는 생명력, 피지 않은 꽃봉오리 안의 고요. 모든 것이 꼼꼼히 준비되고 있고, 곧 장엄하게 피어날 것이다. 이 그림을 통해 나는 기다림과 침묵의 시간을 노래한다.
+      </p>
+      <p lang="ko">
+삶은 언제나 꽃의 순간으로만 기억되지 않는다. 우리는 줄기의 시간, 뿌리의 고요, 진흙의 혼돈 속에서 조금씩 더 단단해진다. 연꽃의 시간은 줄기에서 시작된다. 그리고 뿌리와 줄기에서 보낸 그 고된 시간이 있기에 꽃은 마침내 피어난다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-27.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-29.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-27.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-29.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ Life is not always remembered only by the moment of the flower. We grow stronger
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

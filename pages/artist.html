@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="작가 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>Artist – Lee Hyun Jung</title>
   <meta name="description" content="Biography of Lee Hyun Jung, a Korean painter trained in Oriental painting at Ewha Womans University." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artist.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <!-- HEADER -->
@@ -31,12 +40,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -46,36 +60,40 @@
   <!-- MOBILE NAV OVERLAY -->
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
       <div class="page-divider">◆</div>
-      <h1 class="page-title">Artist</h1>
+      <h1 class="page-title"><span lang="en">Artist</span><span lang="ko">작가</span></h1>
       <!-- <p class="page-meta">Lee Hyun Jung · Editor | Dummy</p> -->
-      <p class="page-subtitle">Biography</p><br>
+      <p class="page-subtitle"><span lang="en">Biography</span><span lang="ko">약력</span></p><br>
     </section>
 
     <br>
     <section class="page-body">
-      <h2 class="info-heading">Hyun Jung Lee</h2>
-      <p>
+      <h2 class="info-heading"><span lang="en">Hyun Jung Lee</span><span lang="ko">이현정</span></h2>
+      <p lang="en">
         Hyun Jung Lee specialized in Oriental Painting (Korean painting) at Ewha Womans University and completed her master's degree in the same field at the university's graduate school. Furthermore, she earned a master's degree in Journalism and Mass Communication (Buddhist Communication) and a Ph.D. in Political Science from Dongguk University.
       </p>
-      <p>
+      <p lang="ko">이현정은 이화여자대학교에서 동양화(한국화)를 전공하고, 같은 대학 대학원에서 동양화 석사 과정을 마쳤다. 또한 동국대학교에서 신문방송학(불교커뮤니케이션) 석사 학위와 정치학 박사 학위를 받았다.</p>
+      <p lang="en">
         Having grown up with art from an early age, Lee Hyun Jung has built her unique world by interpreting various moments of life through art and spiritual practice. In particular, she communicated with the public as an Announcer for Buddhist Broadcasting System (BBS) for over 20 years. She also led civic movements as a first-generation pioneer of the Korean multicultural movement.
       </p>
-      <p>
+      <p lang="ko">어린 시절부터 예술과 함께 자란 이현정은 삶의 다양한 순간을 예술과 수행으로 해석하며 자신만의 세계를 만들어 왔다. 특히 20년 넘게 불교방송(BBS) 아나운서로 대중과 소통했다. 또한 한국 다문화 운동의 1세대 개척자로서 시민운동을 이끌었다.</p>
+      <p lang="en">
         Her artistic career began in 1985 with the Korean Young Artists Exhibition. She has participated in numerous domestic and international group exhibitions, including the Frontier Festival and receiving a Special Selection in the Grand Buddhist Exhibition of Korea. In 1990, her works were showcased at the A.A.I. Grand Art Exhibition and the Salon Grandes Et Jeunes D'Aujourd'hui (Grand Palais, Paris, France). She has continued her active career with many solo and group exhibitions, including a solo exhibition in Düsseldorf, Germany in 1991.
       </p>
-      <p>
+      <p lang="ko">작가로서의 활동은 1985년 한국청년작가전에서 시작되었다. 프런티어 페스티벌을 비롯한 국내외 여러 단체전에 참여했으며, 대한민국불교미술대전에서 특선을 받았다. 1990년에는 A.A.I. 대전과 프랑스 파리 그랑팔레의 Salon Grandes Et Jeunes D'Aujourd'hui에 작품을 선보였다. 1991년 독일 뒤셀도르프 개인전을 비롯해 여러 개인전과 단체전을 열며 활동을 이어 오고 있다.</p>
+      <p lang="en">
         Book: [It’s Okay to Tremble, You are Blooming Now], Ye Seo Won, 2025
       </p>
+      <p lang="ko">저서: 『흔들려도 괜찮아, 당신은 지금 피어나고 있다』, 예서원, 2025</p>
     </section>
 
    
@@ -88,14 +106,14 @@
   <!-- FOOTER -->
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
     
       <!-- <nav class="footer-nav" aria-label="Footer">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav> -->
 
@@ -113,11 +131,11 @@
       </div>
 
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

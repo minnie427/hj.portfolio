@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="화려한 환영 위의 무대 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>The Stage Upon the Splendid Illusion – Lee Hyun Jung</title>
   <meta name="description" content="The Stage Upon the Splendid Illusion (2001) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-17.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">The Stage Upon the Splendid Illusion</h1>
+      <h1 class="page-title"><span lang="en">The Stage Upon the Splendid Illusion</span><span lang="ko">화려한 환영 위의 무대</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 This painting expresses the stage of life with vivid colors and a dynamic composition. On the stage, various roles and scenes continuously shift, and the audience applauds while enjoying those moments. However, a quiet darkness always resides backstage. Though often ignored, that darkness may, in fact, be a more truthful space than the brilliant stage itself.
       </p>
-      <p>
+      <p lang="en">
 Our lives are similar. Every day, we stand on the stage, performing roles and striving to meet someone else's expectations. Yet, I sometimes ask: ‘Am I the true me right now? Am I genuinely smiling while laughing on this stage?’ There is an illusion hidden within the splendor, and within that illusion, there is still the voice of truth that writhes and stirs.
       </p>
-      <p>
+      <p lang="en">
 This painting is not meant to critique or deny the stage of life. Rather, it captures the moment of finding myself and confronting my heart directly within that setting. There must be a stage for there to be acting, and within that act, we feel the genuine self more desperately. The stage of life is the essential space for me to discover the truth and find my own rightful place.
+      </p>
+      <p lang="ko">
+이 그림은 삶의 무대를 선명한 색과 역동적인 구도로 표현한다. 무대 위에서는 여러 역할과 장면이 끊임없이 바뀌고, 관객은 그 순간을 즐기며 박수를 보낸다. 그러나 무대 뒤에는 언제나 조용한 어둠이 머물러 있다. 흔히 외면되지만, 그 어둠이 사실은 화려한 무대 자체보다 더 진실한 공간일지도 모른다.
+      </p>
+      <p lang="ko">
+우리의 삶도 비슷하다. 우리는 매일 무대에 서서 역할을 연기하고, 누군가의 기대에 부응하려 애쓴다. 그러나 나는 때때로 묻는다. '지금의 나는 진짜 나인가? 이 무대 위에서 웃고 있는 나는 진심으로 웃고 있는가?' 화려함 속에는 환영이 숨어 있고, 그 환영 속에도 여전히 꿈틀거리는 진실의 목소리가 있다.
+      </p>
+      <p lang="ko">
+이 그림은 삶의 무대를 비판하거나 부정하려는 것이 아니다. 오히려 그 무대 안에서 나 자신을 찾고 내 마음과 정면으로 마주하는 순간을 담는다. 무대가 있어야 연기가 있고, 그 연기 속에서 우리는 진짜 자신을 더 절실하게 느낀다. 삶의 무대는 내가 진실을 발견하고 나의 제자리를 찾기 위해 꼭 필요한 공간이다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-16.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-18.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-16.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-18.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ This painting is not meant to critique or deny the stage of life. Rather, it cap
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

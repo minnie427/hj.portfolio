@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="옛날 옛적에 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>Once Upon a Time – Lee Hyun Jung</title>
   <meta name="description" content="Once Upon a Time (1991) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-2.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">Once Upon a Time</h1>
+      <h1 class="page-title"><span lang="en">Once Upon a Time</span><span lang="ko">옛날 옛적에</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 This work expresses the inner dragon's surge—the desire to roar out to the world, like a chick breaking out of its confining shell. 'Why am I so bound? What is the cause? What lies at that fundamental base?' These were the essential questions I posed to myself. There was some primal, unknown thing hidden within, and from this, a basic instinctual desire began to bud in my heart.
       </p>
-      <p>
+      <p lang="en">
 I sought to create a launching pad to awaken my potential and move forward powerfully. I aim to weave complex emotions and resolute will together to achieve a dynamic and compounded synergy of feelings. The process of reflecting on myself can sometimes be burdensome, but it is the absolutely necessary journey. My confrontation with myself becomes my spiritual practice and my attitude toward life.
       </p>
-      <p>
+      <p lang="en">
 Meditation is not a grand act. It is an intentional and instinctive reaction by anyone who seeks to find themselves. Self-reflection is a noble endeavor, and finding the energy of life that writhes within is the most crucial process within it.
+      </p>
+      <p lang="ko">
+이 작품은 내 안의 용솟음, 즉 갇힌 껍질을 깨고 나오는 병아리처럼 세상을 향해 포효하고 싶은 욕망을 표현한다. '나는 왜 이렇게 묶여 있는가? 그 원인은 무엇인가? 그 근본 바탕에는 무엇이 있는가?' 이것이 내가 스스로에게 던진 본질적인 질문이었다. 내 안에는 알 수 없는 근원적인 무언가가 숨어 있었고, 그로부터 원초적이고 본능적인 욕망이 내 마음에서 움트기 시작했다.
+      </p>
+      <p lang="ko">
+나는 내 잠재력을 깨우고 힘차게 나아가기 위한 발판을 만들고자 했다. 복잡한 감정과 굳은 의지를 함께 엮어 역동적이고 복합적인 감정의 시너지를 이루고자 한다. 나 자신을 돌아보는 과정은 때로 버겁지만, 반드시 필요한 여정이다. 나 자신과의 대면은 나의 수행이 되고 삶을 대하는 태도가 된다.
+      </p>
+      <p lang="ko">
+명상은 거창한 행위가 아니다. 자신을 찾고자 하는 누구에게나 있는 의도적이고 본능적인 반응이다. 자기 성찰은 고귀한 일이며, 그 안에서 꿈틀거리는 삶의 에너지를 찾는 것이 가장 중요한 과정이다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-1.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-3.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-1.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-3.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ Meditation is not a grand act. It is an intentional and instinctive reaction by 
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

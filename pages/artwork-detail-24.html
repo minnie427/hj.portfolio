@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="나는 지금 반등한다 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>I Rebound Now – Lee Hyun Jung</title>
   <meta name="description" content="I Rebound Now (1991) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-24.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">I Rebound Now</h1>
+      <h1 class="page-title"><span lang="en">I Rebound Now</span><span lang="ko">나는 지금 반등한다</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 The moment life sinks deeply, we begin to prepare ourselves for the rebound. This painting captures precisely that intense energy of recoil. Even amidst helplessness, frustration, and resignation, the power to rise back up to the surface clearly exists within us.
       </p>
-      <p>
+      <p lang="en">
 The red background, submerged as if underwater, is penetrated by a single line of light at its center. That light is suppressed emotion, self-esteem that had vanished, and hope that is blooming anew. Through this painting, I intended to convey the message that everyone can powerfully rebound someday.
       </p>
-      <p>
+      <p lang="en">
 That rebound does not have to be grand. Merely opening one's eyes, sitting up firmly, or taking a small, deep breath—that is enough. That is the rebound of life force itself.
+      </p>
+      <p lang="ko">
+삶이 깊이 가라앉는 순간, 우리는 반등을 준비하기 시작한다. 이 그림은 바로 그 강렬한 반동의 에너지를 담고 있다. 무력감과 좌절, 체념 속에서도 다시 수면 위로 떠오르는 힘은 분명히 우리 안에 있다.
+      </p>
+      <p lang="ko">
+물속에 잠긴 듯한 붉은 배경을 한 줄기 빛이 중심에서 꿰뚫는다. 그 빛은 억눌린 감정이고, 사라졌던 자존감이며, 새로 피어나는 희망이다. 이 그림을 통해 나는 누구나 언젠가 힘차게 반등할 수 있다는 메시지를 전하고자 했다.
+      </p>
+      <p lang="ko">
+그 반등은 거창하지 않아도 된다. 그저 눈을 뜨는 것, 단정히 일어나 앉는 것, 작고 깊게 숨을 들이쉬는 것, 그것으로 충분하다. 그것이 바로 생명력 자체의 반등이다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-23.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-25.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-23.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-25.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ That rebound does not have to be grand. Merely opening one's eyes, sitting up fi
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

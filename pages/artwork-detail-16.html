@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="흔들리는 것들 사이를 바삐 걷다 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>Walking Busily Among the Shaking Things – Lee Hyun Jung</title>
   <meta name="description" content="Walking Busily Among the Shaking Things (1991) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-16.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">Walking Busily Among the Shaking Things</h1>
+      <h1 class="page-title"><span lang="en">Walking Busily Among the Shaking Things</span><span lang="ko">흔들리는 것들 사이를 바삐 걷다</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 Streetlights sway, clouds drift rapidly, constantly changing their form. Even the tree standing in the heart of the city seems loosely rooted. When the wind sweeps by, the tree simply surrenders its body. Through this scene, people walk busily, as if they must not stop—as if they cannot even pause their thoughts. Everything on the path is shaking, yet we walk forward, trusting it.
       </p>
-      <p>
+      <p lang="en">
 Life, perhaps, is merely a velocity passing through that trembling landscape. The road, the streetlight, the car, the tree, the cloud, the wind, time, and myself—is there anything among these that is truly fixed?
       </p>
-      <p>
+      <p lang="en">
 I use various colors to paint, capture forms, and compose the canvas, yet a sudden question arises: What, truly, is the original nature of all these things? Original nature has no light, no color, and no form. Nevertheless, I must paint something. And I have no choice but to paint. The act of reflecting my heart and transferring what I saw, just as it is—that is my spiritual practice, my painting, and my way of navigating this city now.
+      </p>
+      <p lang="ko">
+가로등이 흔들리고, 구름은 빠르게 흘러가며 끊임없이 모양을 바꾼다. 도시 한복판에 서 있는 나무조차 뿌리가 느슨해 보인다. 바람이 스쳐 가면 나무는 그저 몸을 내맡긴다. 이 풍경 속을 사람들은 멈추면 안 된다는 듯, 생각조차 멈출 수 없다는 듯 바삐 걸어간다. 길 위의 모든 것이 흔들리는데도, 우리는 그것을 믿고 앞으로 걸어간다.
+      </p>
+      <p lang="ko">
+삶이란 어쩌면 그 흔들리는 풍경을 지나가는 하나의 속도일 뿐인지도 모른다. 길, 가로등, 자동차, 나무, 구름, 바람, 시간, 그리고 나. 이 가운데 진정으로 고정된 것이 있을까?
+      </p>
+      <p lang="ko">
+나는 여러 색으로 그리고, 형태를 잡고, 화면을 구성하지만, 문득 질문이 떠오른다. 이 모든 것의 본성은 진정 무엇인가? 본성에는 빛도, 색도, 형태도 없다. 그럼에도 나는 무언가를 그려야 한다. 그리고 그릴 수밖에 없다. 내 마음을 비추고 본 것을 있는 그대로 옮기는 행위, 그것이 나의 수행이자 나의 그림이며, 지금 내가 이 도시를 건너가는 방식이다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-15.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-17.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-15.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-17.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ I use various colors to paint, capture forms, and compose the canvas, yet a sudd
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

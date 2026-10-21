@@ -711,3 +711,62 @@ body {
 .art-pager a:focus-visible {
   border-bottom-color: currentColor;
 }
+
+/* ========== LANGUAGE (EN / KO) ========== */
+html[data-lang="en"] [lang="ko"],
+html[data-lang="ko"] [lang="en"] {
+  display: none !important;
+}
+
+html[data-lang="ko"] body {
+  word-break: keep-all;
+}
+
+.lang-switch {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.12em;
+}
+
+.lang-switch button {
+  border: none;
+  background: transparent;
+  padding: 0.35rem 0.15rem;
+  font: inherit;
+  letter-spacing: inherit;
+  color: rgba(245, 245, 245, 0.4);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.lang-switch button:hover,
+.lang-switch button:focus-visible,
+.lang-switch button[aria-pressed="true"] {
+  color: var(--color-2);
+}
+
+.lang-sep {
+  color: rgba(245, 245, 245, 0.25);
+}
+
+/* Korean typography */
+html[data-lang="ko"] .info-heading {
+  font-family: inherit;
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+
+html[data-lang="ko"] .page-title,
+html[data-lang="ko"] .main-nav a,
+html[data-lang="ko"] .nav-drawer a,
+html[data-lang="ko"] .art-pager {
+  letter-spacing: 0.04em;
+}
+
+html[data-lang="ko"] .page-body p {
+  line-height: 1.8;
+}

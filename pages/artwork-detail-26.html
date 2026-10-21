@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="도시에서 늙어 간다는 것 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>What It Means to Grow Old in the City – Lee Hyun Jung</title>
   <meta name="description" content="What It Means to Grow Old in the City (2002) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-26.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">What It Means to Grow Old in the City </h1>
+      <h1 class="page-title"><span lang="en">What It Means to Grow Old in the City</span><span lang="ko">도시에서 늙어 간다는 것</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 I was born in the city and have grown old in the city my entire life. What does it mean to age within the modern metropolis? Amidst the splendid lights, endless forest of buildings, and constantly shifting trends and technology, we gradually grow old. And we strive to live as if forgetting that fact, always pretending to be young.
       </p>
-      <p>
+      <p lang="en">
 This painting captures precisely that inner self of the city dweller. The city lights are brilliant but lonely, and though there are many people, they are solitary. A person leaning against a wall, a shadow gazing from afar, the void between the clouds and neon signs. I combined such scenes to paint a portrait of the city.
       </p>
-      <p>
+      <p lang="en">
 Aging is not merely about the passage of time. It is about things once familiar becoming strange, and seeing the world at my own unique pace. This painting speaks directly to that 'difference in speed'. The viewpoint of the one who walks slowly in a rapidly spinning world. That is the true meaning of growing old that I have discovered.
+      </p>
+      <p lang="ko">
+나는 도시에서 태어나 평생 도시에서 늙어 왔다. 현대의 대도시 속에서 나이 든다는 것은 무엇을 의미할까? 화려한 불빛과 끝없는 빌딩 숲, 끊임없이 바뀌는 유행과 기술 속에서 우리는 조금씩 늙어 간다. 그리고 그 사실을 잊은 듯, 늘 젊은 척하며 살아가려 애쓴다.
+      </p>
+      <p lang="ko">
+이 그림은 바로 그 도시인의 내면을 담고 있다. 도시의 불빛은 찬란하지만 외롭고, 사람은 많지만 저마다 혼자다. 벽에 기대선 사람, 멀리서 바라보는 그림자, 구름과 네온사인 사이의 공허. 나는 그런 장면들을 엮어 도시의 초상을 그렸다.
+      </p>
+      <p lang="ko">
+늙는다는 것은 단지 시간이 흐르는 것만이 아니다. 익숙했던 것들이 낯설어지고, 나만의 속도로 세상을 보게 되는 것이다. 이 그림은 바로 그 '속도의 차이'를 말한다. 빠르게 돌아가는 세상 속에서 천천히 걷는 이의 시선. 그것이 내가 발견한 늙어 감의 진정한 의미다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-25.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-27.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-25.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-27.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -98,11 +121,11 @@ Aging is not merely about the passage of time. It is about things once familiar 
         </a>
       </div>
       <p class="footer-info">
-        All artworks and images © Lee Hyun Jung. All rights reserved.
+        <span lang="en">All artworks and images © Lee Hyun Jung. All rights reserved.</span><span lang="ko">모든 작품과 이미지의 저작권은 이현정에게 있습니다.</span>
       </p>
     </div>
   </footer>
 
-  <script src="../script.js"></script>
+  <script src="../script.js?v=20261022"></script>
 </body>
 </html>

@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-title-ko="자연의 존재 – 이현정">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    (function () {
+      var l;
+      try { l = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang"); } catch (e) {}
+      if (l !== "ko") l = "en";
+      document.documentElement.setAttribute("data-lang", l);
+      document.documentElement.lang = l;
+    })();
+  </script>
   <title>The Natural Being – Lee Hyun Jung</title>
   <meta name="description" content="The Natural Being (1991) — artwork by Korean painter Lee Hyun Jung." />
   <link rel="canonical" href="https://leehyunjung.art/pages/artwork-detail-5.html" />
@@ -18,7 +27,7 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="../styles.css?v=20261022" />
 </head>
 <body class="page">
   <header class="site-header">
@@ -30,12 +39,17 @@
       </div>
       <nav class="main-nav" aria-label="Primary">
         <ul>
-          <li><a href="artist.html">ARTIST</a></li>
-          <li><a href="statement.html">STATEMENT</a></li>
-          <li><a href="artwork.html">ARTWORK</a></li>
-          <li><a href="contact.html">CONTACT</a></li>
+          <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+          <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en" aria-pressed="true">EN</button>
+        <span class="lang-sep" aria-hidden="true">/</span>
+        <button type="button" data-set-lang="ko" aria-pressed="false">KO</button>
+      </div>
       <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false">
         <span class="hamburger-icon"></span>
       </button>
@@ -44,17 +58,17 @@
 
   <nav class="nav-drawer" aria-label="Mobile menu">
     <ul>
-      <li><a href="artist.html">ARTIST</a></li>
-      <li><a href="statement.html">STATEMENT</a></li>
-      <li><a href="artwork.html">ARTWORK</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
+      <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
+      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
   </nav>
 
   <main class="page-content">
     <section class="page-hero">
        <div class="page-divider">◆</div> 
-      <h1 class="page-title">The Natural Being</h1>
+      <h1 class="page-title"><span lang="en">The Natural Being</span><span lang="ko">자연의 존재</span></h1>
     
     </section>
 
@@ -65,26 +79,35 @@
     </figure>
 
     <div class="page-body">
-      <p>
+      <p lang="en">
 I do not readily agree with the statement that 'humans are superior beings who rule nature'. While I acknowledge that only humans have cultivated civilization based on intellect and unrestrained imagination, and have continuously evolved, I believe the more we do so, the more we need boundless humility. Humans are merely a fragment of nature. We can be swept away by strong winds, engulfed by floods, or extinguished by a single strike of lightning. We might even be miserably defeated by an invisible virus. Nevertheless, the imagination, technology, and wisdom residing within us grant us a special life force.
       </p>
-      <p>
+      <p lang="en">
 We often live forgetful of nature's embrace. We only realize the preciousness of oxygen when a crisis strikes. In my painting, fish freely fly across the sky, trees quietly grow below them, and clouds drift leisurely between them. Within that vast flow, humans might be merely specks of dust floating serenely.
       </p>
-      <p>
+      <p lang="en">
 Even in an era where machines threaten to dominate everything, pure instinct and curiosity as a part of nature still breathe within us. I hope that we never forget that deep-rooted connection, and I sincerely yearn for us to live in harmony with nature.
+      </p>
+      <p lang="ko">
+나는 '인간은 자연을 지배하는 우월한 존재'라는 말에 쉽게 동의하지 않는다. 오직 인간만이 지성과 거침없는 상상력을 바탕으로 문명을 일구고 끊임없이 진화해 왔다는 것은 인정하지만, 그럴수록 더욱 끝없는 겸손이 필요하다고 믿는다. 인간은 자연의 한 조각일 뿐이다. 우리는 강한 바람에 휩쓸리고, 홍수에 잠기고, 단 한 번의 번개에 스러질 수 있다. 보이지 않는 바이러스에 처참하게 패배할 수도 있다. 그럼에도 우리 안에 있는 상상력과 기술, 지혜는 우리에게 특별한 생명력을 준다.
+      </p>
+      <p lang="ko">
+우리는 자주 자연의 품을 잊고 산다. 위기가 닥쳐서야 산소의 소중함을 깨닫는다. 내 그림 속에서 물고기는 하늘을 자유롭게 날고, 그 아래에서 나무는 조용히 자라며, 그 사이로 구름이 한가로이 흘러간다. 그 거대한 흐름 속에서 인간은 고요히 떠다니는 먼지 한 톨에 지나지 않을지도 모른다.
+      </p>
+      <p lang="ko">
+기계가 모든 것을 지배하려 하는 시대에도, 자연의 일부로서의 순수한 본능과 호기심은 여전히 우리 안에서 숨 쉰다. 나는 우리가 그 깊이 뿌리내린 연결을 결코 잊지 않기를 바라며, 우리가 자연과 조화를 이루며 살아가기를 진심으로 소망한다.
       </p>
     </div>
     <nav class="art-pager" aria-label="Artwork navigation">
-      <a class="art-pager-prev" href="artwork-detail-4.html" rel="prev">← Prev</a>
-      <a class="art-pager-all" href="artwork.html">All Works</a>
-      <a class="art-pager-next" href="artwork-detail-6.html" rel="next">Next →</a>
+      <a class="art-pager-prev" href="artwork-detail-4.html" rel="prev">← <span lang="en">Prev</span><span lang="ko">이전</span></a>
+      <a class="art-pager-all" href="artwork.html"><span lang="en">All Works</span><span lang="ko">전체 작품</span></a>
+      <a class="art-pager-next" href="artwork-detail-6.html" rel="next"><span lang="en">Next</span><span lang="ko">다음</span> →</a>
     </nav>
   </main>
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p class="footer-name">© <span class="js-year">2026</span> Lee Hyun Jung</p>
+      <p class="footer-name">© <span class="js-year">2026</span> <span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
       <div class="footer-icons" aria-label="Social and contact links">
         <a class="icon-btn" href="https://www.instagram.com/leehyunjung_art" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true">
