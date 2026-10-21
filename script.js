@@ -103,12 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Detail pages: swap thumbs to full images after load
+  // Detail pages: show the small thumb first, then swap to the web-size image (images/web)
   const detailImages = document.querySelectorAll(".feature-image img");
   detailImages.forEach((img) => {
     const src = img.getAttribute("src") || "";
     if (!src.includes("/thumbs/")) return;
-    const fullSrc = src.replace("/thumbs/", "/");
+    const fullSrc = src.replace("/thumbs/", "/web/");
 
     const hiRes = new Image();
     hiRes.decoding = "async";
@@ -117,4 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     hiRes.src = fullSrc;
   });
+
+  // Footer year
+  const year = String(new Date().getFullYear());
+  document.querySelectorAll(".js-year").forEach((el) => (el.textContent = year));
 });
