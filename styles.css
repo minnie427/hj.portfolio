@@ -1564,3 +1564,136 @@ html[data-lang="ko"] .ix-t {
     text-align: left;
   }
 }
+
+/* ========== CONTACT (editorial) ========== */
+.ct-list {
+  max-width: 640px;
+}
+
+.ct-row {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr) 24px;
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.ct-row:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.ct-k {
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-3);
+}
+
+.ct-v {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.ct-ar {
+  justify-self: end;
+  opacity: 0.35;
+  transition: opacity 0.25s ease;
+}
+
+.ct-row:hover .ct-v,
+.ct-row:focus-visible .ct-v {
+  transform: translateX(8px);
+}
+
+.ct-row:hover .ct-ar,
+.ct-row:focus-visible .ct-ar {
+  opacity: 1;
+}
+
+.ct-row:focus {
+  outline: none;
+}
+
+@media (max-width: 900px) {
+  .ct-row {
+    grid-template-columns: minmax(0, 1fr) 20px;
+    gap: 0.4rem;
+  }
+
+  .ct-k {
+    grid-column: 1 / -1;
+  }
+
+  .ct-v {
+    font-size: 1.5rem;
+  }
+}
+
+/* ========== ARTWORK DETAIL (editorial) ========== */
+/* Same title language as Artist / Statement / Artwork / Contact: serif, left, hairline below */
+.page-content .page-hero {
+  display: block;
+  margin-top: 0;
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  text-align: left;
+}
+
+.page-content .page-title,
+html[data-lang="ko"] .page-content .page-title {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 3.4rem;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  text-wrap: balance;
+  color: var(--color-ink);
+}
+
+html[data-lang="ko"] .page-content .page-title {
+  font-family: var(--font-serif-ko);
+  font-size: 2.6rem;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+}
+
+.feature-image br {
+  display: none;
+}
+
+.feature-image .page-meta {
+  margin: 0.9rem 0 3.5rem;
+  text-align: left;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-3);
+}
+
+@media (max-width: 900px) {
+  .page-content .page-title,
+  html[data-lang="ko"] .page-content .page-title {
+    font-size: 2.2rem;
+  }
+
+  html[data-lang="ko"] .page-content .page-title {
+    font-size: 1.8rem;
+  }
+
+  .page-content .page-hero {
+    padding-bottom: 1.5rem;
+  }
+
+  .feature-image .page-meta {
+    margin-bottom: 2.5rem;
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+  }
+}
