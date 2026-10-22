@@ -27,7 +27,10 @@
   <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="../styles.css?v=20261022c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+KR:wght@300;400&display=swap" />
+  <link rel="stylesheet" href="../styles.css?v=20261023c" />
 </head>
 <body class="page">
   <!-- HEADER -->
@@ -74,413 +77,206 @@
     </div>
   </nav>
 
-  <main class="page-content art-page">
-    <section class="page-hero">
-      <div class="page-divider">◆</div>
-      <h1 class="page-title"><span lang="en">Artwork</span><span lang="ko">작품</span></h1>
-      <p class="page-meta"><span lang="en">Lee Hyun Jung</span><span lang="ko">이현정</span></p>
-      <!-- <p class="page-subtitle">this is the page subtitle dummy text</p> -->
-    </section>
+  <main class="page-content art-page aw-page">
+    <h1 class="ed-title"><span lang="en">Artwork</span><span lang="ko">작품</span></h1>
+    <div class="ed-hair" aria-hidden="true"></div>
 
-    <div class="art-grid">
-      <div class="art-card">
-        <a href="artwork-detail-1.html">
-          <figure>
-            <img src="../images/thumbs/1.jpg" alt="Avalokiteshvara" width="651" height="1600" decoding="async" />
-          </figure>
-          <h3><span lang="en">Avalokiteshvara</span><span lang="ko">관세음보살</span></h3>
-        </a>
+    <div class="aw-bar">
+      <p class="aw-count"><span lang="en"><b>44</b> Works</span><span lang="ko">작품 <b>44</b>점</span></p>
+      <div class="aw-tools">
+        <label class="aw-sort"><span><span lang="en">Sort</span><span lang="ko">정렬</span></span>
+          <select aria-label="Sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="title">Title A–Z</option></select>
+        </label>
+        <div class="aw-view" role="group" aria-label="View">
+          <button type="button" data-view="grid" aria-pressed="true"><svg viewBox="0 0 12 12" aria-hidden="true"><rect width="5" height="5"/><rect x="7" width="5" height="5"/><rect y="7" width="5" height="5"/><rect x="7" y="7" width="5" height="5"/></svg><span lang="en">Grid</span><span lang="ko">그리드</span></button>
+          <button type="button" data-view="index" aria-pressed="false"><svg viewBox="0 0 12 12" aria-hidden="true"><rect y="1" width="12" height="1.2"/><rect y="5.4" width="12" height="1.2"/><rect y="9.8" width="12" height="1.2"/></svg><span lang="en">Index</span><span lang="ko">목록</span></button>
+        </div>
       </div>
-      <div class="art-card">
-        <a href="artwork-detail-2.html">
-          <figure>
-            <img src="../images/thumbs/2.jpg" alt="Once Upon a Time" width="720" height="1415" decoding="async" />
-          </figure>
-          <h3><span lang="en">Once Upon a Time</span><span lang="ko">옛날 옛적에</span></h3>
-        </a>
-      </div>
-      <div class="art-card">
-        <a href="artwork-detail-3.html">
-          <figure>
-            <img src="../images/thumbs/3.jpg" alt="Inner Dragon's Surge" width="720" height="886" decoding="async" />
-          </figure>
-          <h3><span lang="en">Inner Dragon's Surge</span><span lang="ko">내 안의 용솟음</span></h3>
-        </a>
-      </div>
-      <div class="art-card">
-        <a href="artwork-detail-4.html">
-          <figure>
-            <img src="../images/thumbs/4.jpg" alt="Where the Energy of My Life Flows" width="720" height="930" decoding="async" />
-          </figure>
-          <h3><span lang="en">Where the Energy of My Life Flows</span><span lang="ko">내 삶의 에너지가 흐르는 곳</span></h3>
-        </a>
-      </div>
-      <div class="art-card">
-        <a href="artwork-detail-5.html">
-          <figure>
-            <img src="../images/thumbs/5.jpg" alt="The Natural Being" width="720" height="980" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Natural Being</span><span lang="ko">자연의 존재</span></h3>
-        </a>
-      </div>
-      <div class="art-card">
-        <a href="artwork-detail-6.html">
-          <figure>
-            <img src="../images/thumbs/6.jpg" alt="The Free Spirit Illuminates the Sky" width="720" height="821" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Free Spirit Illuminates the Sky</span><span lang="ko">자유로운 영혼이 하늘을 밝히다</span></h3>
-        </a>
-      </div>
-      <div class="art-card">
-        <a href="artwork-detail-7.html">
-          <figure>
-            <img src="../images/thumbs/7.jpg" alt="Is There Still Hope?" width="720" height="840" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Is There Still Hope?</span><span lang="ko">아직 희망은 있는가?</span></h3>
-        </a>
-      </div>
+    </div>
 
-      <div class="art-card">
-        <a href="artwork-detail-8.html">
-          <figure>
-            <img src="../images/thumbs/8.jpg" alt="Is My Dream Within a Mysterious Whisper?" width="720" height="769" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Is My Dream Within a Mysterious Whisper?</span><span lang="ko">나의 꿈은 신비로운 속삭임 속에 있는가?</span></h3>
-        </a>
-      </div>
-    
+    <div class="aw-grid">
+      <a class="aw" href="artwork-detail-58.html" data-id="58" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/58.jpg" alt="Crossroads of Flow" width="720" height="1006" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Crossroads of Flow</span><span lang="ko">흐름의 교차로</span></h2><p class="aw-m">136 × 95 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-57.html" data-id="57" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/57.jpg" alt="Golden Start" width="720" height="966" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Golden Start</span><span lang="ko">황금빛 시작</span></h2><p class="aw-m">94.5 × 68 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-56.html" data-id="56" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/56.jpg" alt="Order in Chaos" width="720" height="1029" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Order in Chaos</span><span lang="ko">혼돈 속의 질서</span></h2><p class="aw-m">133.5 × 95 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-55.html" data-id="55" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/55.jpg" alt="Dancing Avalokiteshvara" width="720" height="1396" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Dancing Avalokiteshvara</span><span lang="ko">춤추는 관세음보살</span></h2><p class="aw-m">137 × 70 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-54.html" data-id="54" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/54.jpg" alt="In Search of the True Face" width="720" height="731" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">In Search of the True Face</span><span lang="ko">참된 얼굴을 찾아서</span></h2><p class="aw-m">72.5 × 71 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-53.html" data-id="53" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/53.jpg" alt="Swimming Toward Freedom" width="720" height="934" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Swimming Toward Freedom</span><span lang="ko">자유를 향한 헤엄</span></h2><p class="aw-m">116 × 90 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-52.html" data-id="52" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/52.jpg" alt="Ray of Compassion" width="720" height="1475" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Ray of Compassion</span><span lang="ko">자비의 빛줄기</span></h2><p class="aw-m">137 × 66 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-51.html" data-id="51" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/51.jpg" alt="Three Eyes, Guardian of the Soul" width="720" height="709" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Three Eyes, Guardian of the Soul</span><span lang="ko">세 개의 눈, 영혼의 수호자</span></h2><p class="aw-m">67.5 × 70 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-50.html" data-id="50" data-year="2025">
+        <div class="aw-mat"><img src="../images/thumbs/50.jpg" alt="Confronting the Self Within" width="720" height="974" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Confronting the Self Within</span><span lang="ko">내 안의 나와 마주하다</span></h2><p class="aw-m">152 × 111 cm, 2025</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-33.html" data-id="33" data-year="2024">
+        <div class="aw-mat"><img src="../images/thumbs/33.jpg" alt="The Sun and the Water Jar on Her Head" width="720" height="1038" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Sun and the Water Jar on Her Head</span><span lang="ko">태양과 머리에 인 물동이</span></h2><p class="aw-m">213 × 148 cm, 2024</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-32.html" data-id="32" data-year="2024">
+        <div class="aw-mat"><img src="../images/thumbs/32.jpg" alt="When Joy Creates the Curve" width="720" height="1040" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">When Joy Creates the Curve</span><span lang="ko">기쁨이 곡선을 만들 때</span></h2><p class="aw-m">213 × 148 cm, 2024</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-6.html" data-id="6" data-year="2024">
+        <div class="aw-mat"><img src="../images/thumbs/6.jpg" alt="The Free Spirit Illuminates the Sky" width="720" height="821" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Free Spirit Illuminates the Sky</span><span lang="ko">자유로운 영혼이 하늘을 밝히다</span></h2><p class="aw-m">85 × 73 cm, 2024</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-31.html" data-id="31" data-year="2023">
+        <div class="aw-mat"><img src="../images/thumbs/31.jpg" alt="Heavenly Garment, Embroidering the Cosmos" width="720" height="1029" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Heavenly Garment, Embroidering the Cosmos</span><span lang="ko">하늘의 옷, 우주를 수놓다</span></h2><p class="aw-m">213 × 148 cm, 2023</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-30.html" data-id="30" data-year="2022">
+        <div class="aw-mat"><img src="../images/thumbs/30.jpg" alt="The Place Where the Wind Lingered" width="720" height="905" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Place Where the Wind Lingered</span><span lang="ko">바람이 머물다 간 자리</span></h2><p class="aw-m">169 × 135 cm, 2022</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-29.html" data-id="29" data-year="2019">
+        <div class="aw-mat"><img src="../images/thumbs/29.jpg" alt="Crossing the World with a Crooked Posture" width="720" height="903" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Crossing the World with a Crooked Posture</span><span lang="ko">삐딱한 자세로 세상을 건너다</span></h2><p class="aw-m">115 × 91 cm, 2019</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-7.html" data-id="7" data-year="2019">
+        <div class="aw-mat"><img src="../images/thumbs/7.jpg" alt="Is There Still Hope?" width="720" height="840" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Is There Still Hope?</span><span lang="ko">아직 희망은 있는가?</span></h2><p class="aw-m">84 × 71.5 cm, 2019</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-28.html" data-id="28" data-year="2004">
+        <div class="aw-mat"><img src="../images/thumbs/28.jpg" alt="The Lotus&#x27;s Time Begins with the Stem" width="720" height="966" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Lotus's Time Begins with the Stem</span><span lang="ko">연꽃의 시간은 줄기에서 시작된다</span></h2><p class="aw-m">96 × 73 cm, 2004</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-27.html" data-id="27" data-year="2004">
+        <div class="aw-mat"><img src="../images/thumbs/27.jpg" alt="Blue Freedom within a Red Frame" width="720" height="965" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Blue Freedom within a Red Frame</span><span lang="ko">붉은 틀 안의 푸른 자유</span></h2><p class="aw-m">94 × 66.5 cm, 2004</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-26.html" data-id="26" data-year="2002">
+        <div class="aw-mat"><img src="../images/thumbs/26.jpg" alt="What It Means to Grow Old in the City" width="720" height="941" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">What It Means to Grow Old in the City</span><span lang="ko">도시에서 늙어 간다는 것</span></h2><p class="aw-m">70.5 × 55.5 cm, 2002</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-25.html" data-id="25" data-year="2002">
+        <div class="aw-mat"><img src="../images/thumbs/25.jpg" alt="Shin Yunbok Swings in the Cosmos" width="720" height="874" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Shin Yunbok Swings in the Cosmos</span><span lang="ko">우주에서 그네 타는 신윤복</span></h2><p class="aw-m">182 × 151 cm, 2002</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-19.html" data-id="19" data-year="2002">
+        <div class="aw-mat"><img src="../images/thumbs/19.jpg" alt="Two Bodhisattvas Cross the World on Clouds" width="720" height="950" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Two Bodhisattvas Cross the World on Clouds</span><span lang="ko">두 보살이 구름을 타고 세상을 건너다</span></h2><p class="aw-m">133 × 102 cm, 2002</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-23.html" data-id="23" data-year="2001">
+        <div class="aw-mat"><img src="../images/thumbs/23.jpg" alt="Celestial Beings Liberated from the Bell" width="720" height="1291" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Celestial Beings Liberated from the Bell</span><span lang="ko">종에서 풀려난 비천</span></h2><p class="aw-m">133 × 74.5 cm, 2001</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-17.html" data-id="17" data-year="2001">
+        <div class="aw-mat"><img src="../images/thumbs/17.jpg" alt="The Stage Upon the Splendid Illusion" width="720" height="1012" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Stage Upon the Splendid Illusion</span><span lang="ko">화려한 환영 위의 무대</span></h2><p class="aw-m">133.5 × 95 cm, 2001</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-15.html" data-id="15" data-year="2001">
+        <div class="aw-mat"><img src="../images/thumbs/15.jpg" alt="Time Passes Over the Mountain and Water Flows Through the Heart" width="720" height="898" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Time Passes Over the Mountain and Water Flows Through the Heart</span><span lang="ko">산 위로 시간이 지나고 마음으로 물이 흐른다</span></h2><p class="aw-m">149 × 119 cm, 2001</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-11.html" data-id="11" data-year="2000">
+        <div class="aw-mat"><img src="../images/thumbs/11.jpg" alt="The Clown from the Mural Who Crossed the Waves" width="720" height="887" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Clown from the Mural Who Crossed the Waves</span><span lang="ko">파도를 건너온 벽화 속 광대</span></h2><p class="aw-m">98 × 77 cm, 2000</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-8.html" data-id="8" data-year="2000">
+        <div class="aw-mat"><img src="../images/thumbs/8.jpg" alt="Is My Dream Within a Mysterious Whisper?" width="720" height="769" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Is My Dream Within a Mysterious Whisper?</span><span lang="ko">나의 꿈은 신비로운 속삭임 속에 있는가?</span></h2><p class="aw-m">72.5 × 68 cm, 2000</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-24.html" data-id="24" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/24.jpg" alt="I Rebound Now" width="720" height="925" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">I Rebound Now</span><span lang="ko">나는 지금 반등한다</span></h2><p class="aw-m">163 × 127 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-22.html" data-id="22" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/22.jpg" alt="I Dance, Though I Know Not the Reason" width="720" height="877" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">I Dance, Though I Know Not the Reason</span><span lang="ko">이유는 몰라도 나는 춤춘다</span></h2><p class="aw-m">98 × 79.5 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-21.html" data-id="21" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/21.jpg" alt="Smiling, Compassion; Dancing, Nirvana" width="720" height="993" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Smiling, Compassion; Dancing, Nirvana</span><span lang="ko">웃으니 자비, 춤추니 열반</span></h2><p class="aw-m">134 × 96.5 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-20.html" data-id="20" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/20.jpg" alt="It Flows, Even If It&#x27;s Not Straight" width="720" height="895" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">It Flows, Even If It's Not Straight</span><span lang="ko">곧지 않아도 흐른다</span></h2><p class="aw-m">146 × 118 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-18.html" data-id="18" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/18.jpg" alt="Peace in Disorderly Chaos" width="720" height="950" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Peace in Disorderly Chaos</span><span lang="ko">무질서한 혼돈 속의 평화</span></h2><p class="aw-m">118 × 89.5 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-16.html" data-id="16" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/16.jpg" alt="Walking Busily Among the Shaking Things" width="720" height="906" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Walking Busily Among the Shaking Things</span><span lang="ko">흔들리는 것들 사이를 바삐 걷다</span></h2><p class="aw-m">146 × 116.5 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-14.html" data-id="14" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/14.jpg" alt="The Bodhisattva Dances to the Chant, Crossing the Waves" width="720" height="907" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Bodhisattva Dances to the Chant, Crossing the Waves</span><span lang="ko">보살이 염불에 춤추며 파도를 건넌다</span></h2><p class="aw-m">146 × 116 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-13.html" data-id="13" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/13.jpg" alt="Maitreya&#x27;s Contemplation Becomes a Ripple" width="720" height="925" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Maitreya's Contemplation Becomes a Ripple</span><span lang="ko">미륵의 사유, 물결이 되다</span></h2><p class="aw-m">124 × 100 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-10.html" data-id="10" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/10.jpg" alt="Time Passes Over the Old House" width="720" height="1415" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Time Passes Over the Old House</span><span lang="ko">옛집 위로 시간이 지나간다</span></h2><p class="aw-m">137.5 × 70 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-9.html" data-id="9" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/9.jpg" alt="That Day, The Lotus Spoke to Me on the Wind" width="720" height="1536" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">That Day, The Lotus Spoke to Me on the Wind</span><span lang="ko">그날, 연꽃이 바람결에 내게 말했다</span></h2><p class="aw-m">124 × 100 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-5.html" data-id="5" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/5.jpg" alt="The Natural Being" width="720" height="980" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Natural Being</span><span lang="ko">자연의 존재</span></h2><p class="aw-m">133 × 97 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-4.html" data-id="4" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/4.jpg" alt="Where the Energy of My Life Flows" width="720" height="930" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Where the Energy of My Life Flows</span><span lang="ko">내 삶의 에너지가 흐르는 곳</span></h2><p class="aw-m">161 × 89 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-3.html" data-id="3" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/3.jpg" alt="Inner Dragon&#x27;s Surge" width="720" height="886" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Inner Dragon's Surge</span><span lang="ko">내 안의 용솟음</span></h2><p class="aw-m">124 × 100 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-2.html" data-id="2" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/2.jpg" alt="Once Upon a Time" width="720" height="1415" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Once Upon a Time</span><span lang="ko">옛날 옛적에</span></h2><p class="aw-m">124 × 100 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-1.html" data-id="1" data-year="1991">
+        <div class="aw-mat"><img src="../images/thumbs/1.jpg" alt="Avalokiteshvara" width="651" height="1600" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Avalokiteshvara</span><span lang="ko">관세음보살</span></h2><p class="aw-m">124 × 100 cm, 1991</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-12.html" data-id="12" data-year="1990">
+        <div class="aw-mat"><img src="../images/thumbs/12.jpg" alt="Folding the Cosmos into My Heart" width="720" height="1089" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Folding the Cosmos into My Heart</span><span lang="ko">우주를 마음에 접다</span></h2><p class="aw-m">103 × 68 cm, 1990</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-49.html" data-id="49" data-year="">
+        <div class="aw-mat"><img src="../images/thumbs/49.jpg" alt="Wave in Stillness: Walking with Geumboki at Dosan Park" width="720" height="1436" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Wave in Stillness: Walking with Geumboki at Dosan Park</span><span lang="ko">고요 속의 파동: 금복이와 도산공원을 걷다</span></h2><p class="aw-m">141 × 69.5 cm</p></div>
+      </a>
+      <a class="aw" href="artwork-detail-48.html" data-id="48" data-year="">
+        <div class="aw-mat"><img src="../images/thumbs/48.jpg" alt="Awakening in Stillness" width="720" height="985" loading="lazy" decoding="async" /></div>
+        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Awakening in Stillness</span><span lang="ko">고요 속의 깨어남</span></h2><p class="aw-m">95 × 69.5 cm</p></div>
+      </a>
+    </div>
 
-          <div class="art-card">
-        <a href="artwork-detail-9.html">
-          <figure>
-            <img src="../images/thumbs/9.jpg" alt="That Day, The Lotus Spoke to Me on the Wind" width="720" height="1536" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">That Day, The Lotus Spoke to Me on the Wind</span><span lang="ko">그날, 연꽃이 바람결에 내게 말했다</span></h3>
-        </a>
-      </div>
-   
-
-     <div class="art-card">
-        <a href="artwork-detail-10.html">
-          <figure>
-            <img src="../images/thumbs/10.jpg" alt="Time Passes Over the Old House" width="720" height="1415" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Time Passes Over the Old House</span><span lang="ko">옛집 위로 시간이 지나간다</span></h3>
-        </a>
-      </div>
-    
-
-       <div class="art-card">
-        <a href="artwork-detail-11.html">
-          <figure>
-            <img src="../images/thumbs/11.jpg" alt="The Clown from the Mural Who Crossed the Waves" width="720" height="887" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Clown from the Mural Who Crossed the Waves</span><span lang="ko">파도를 건너온 벽화 속 광대</span></h3>
-        </a>
-      </div>
- 
-
-       <div class="art-card">
-        <a href="artwork-detail-12.html">
-          <figure>
-            <img src="../images/thumbs/12.jpg" alt="Folding the Cosmos into My Heart" width="720" height="1089" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Folding the Cosmos into My Heart</span><span lang="ko">우주를 마음에 접다</span></h3>
-        </a>
-      </div>
-  
-
-          <div class="art-card">
-        <a href="artwork-detail-13.html">
-          <figure>
-            <img src="../images/thumbs/13.jpg" alt="Maitreya's Contemplation Becomes a Ripple" width="720" height="925" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Maitreya's Contemplation Becomes a Ripple</span><span lang="ko">미륵의 사유, 물결이 되다</span></h3>
-        </a>
-      </div>
-
-
-          <div class="art-card">
-        <a href="artwork-detail-14.html">
-          <figure>
-            <img src="../images/thumbs/14.jpg" alt="The Bodhisattva Dances to the Chant, Crossing the Waves" width="720" height="907" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Bodhisattva Dances to the Chant, Crossing the Waves</span><span lang="ko">보살이 염불에 춤추며 파도를 건넌다</span></h3>
-        </a>
-      </div>
-  
-
-          <div class="art-card">
-        <a href="artwork-detail-15.html">
-          <figure>
-            <img src="../images/thumbs/15.jpg" alt="Time Passes Over the Mountain and Water Flows Through the Heart" width="720" height="898" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Time Passes Over the Mountain and Water Flows Through the Heart</span><span lang="ko">산 위로 시간이 지나고 마음으로 물이 흐른다</span></h3>
-        </a>
-      </div>
-   
-        <div class="art-card">
-        <a href="artwork-detail-16.html">
-          <figure>
-            <img src="../images/thumbs/16.jpg" alt="Walking Busily Among the Shaking Things" width="720" height="906" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Walking Busily Among the Shaking Things</span><span lang="ko">흔들리는 것들 사이를 바삐 걷다</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-17.html">
-          <figure>
-            <img src="../images/thumbs/17.jpg" alt="The Stage Upon the Splendid Illusion" width="720" height="1012" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Stage Upon the Splendid Illusion</span><span lang="ko">화려한 환영 위의 무대</span></h3>
-        </a>
-      </div>
-
-         <div class="art-card">
-        <a href="artwork-detail-18.html">
-          <figure>
-            <img src="../images/thumbs/18.jpg" alt="Peace in Disorderly Chaos" width="720" height="950" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Peace in Disorderly Chaos</span><span lang="ko">무질서한 혼돈 속의 평화</span></h3>
-        </a>
-      </div>
-
-
-
-         <div class="art-card">
-        <a href="artwork-detail-19.html">
-          <figure>
-            <img src="../images/thumbs/19.jpg" alt="Two Bodhisattvas Cross the World on Clouds" width="720" height="950" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Two Bodhisattvas Cross the World on Clouds</span><span lang="ko">두 보살이 구름을 타고 세상을 건너다</span></h3>
-        </a>
-      </div>
-
-         <div class="art-card">
-        <a href="artwork-detail-20.html">
-          <figure>
-            <img src="../images/thumbs/20.jpg" alt="It Flows, Even If It's Not Straight" width="720" height="895" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">It Flows, Even If It's Not Straight</span><span lang="ko">곧지 않아도 흐른다</span></h3>
-        </a>
-      </div>
-
-
-         <div class="art-card">
-        <a href="artwork-detail-21.html">
-          <figure>
-            <img src="../images/thumbs/21.jpg" alt="Smiling, Compassion; Dancing, Nirvana" width="720" height="993" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Smiling, Compassion; Dancing, Nirvana</span><span lang="ko">웃으니 자비, 춤추니 열반</span></h3>
-        </a>
-      </div>
-
-         <div class="art-card">
-        <a href="artwork-detail-22.html">
-          <figure>
-            <img src="../images/thumbs/22.jpg" alt="I Dance, Though I Know Not the Reason" width="720" height="877" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">I Dance, Though I Know Not the Reason</span><span lang="ko">이유는 몰라도 나는 춤춘다</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-23.html">
-          <figure>
-            <img src="../images/thumbs/23.jpg" alt="Celestial Beings Liberated from the Bell" width="720" height="1291" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Celestial Beings Liberated from the Bell</span><span lang="ko">종에서 풀려난 비천</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-24.html">
-          <figure>
-            <img src="../images/thumbs/24.jpg" alt="I Rebound Now" width="720" height="925" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">I Rebound Now</span><span lang="ko">나는 지금 반등한다</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-25.html">
-          <figure>
-            <img src="../images/thumbs/25.jpg" alt="Shin Yunbok Swings in the Cosmos" width="720" height="874" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Shin Yunbok Swings in the Cosmos</span><span lang="ko">우주에서 그네 타는 신윤복</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-26.html">
-          <figure>
-            <img src="../images/thumbs/26.jpg" alt="What It Means to Grow Old in the City" width="720" height="941" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">What It Means to Grow Old in the City</span><span lang="ko">도시에서 늙어 간다는 것</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-27.html">
-          <figure>
-            <img src="../images/thumbs/27.jpg" alt="Blue Freedom within a Red Frame" width="720" height="965" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Blue Freedom within a Red Frame</span><span lang="ko">붉은 틀 안의 푸른 자유</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-28.html">
-          <figure>
-            <img src="../images/thumbs/28.jpg" alt="The Lotus's Time Begins with the Stem" width="720" height="966" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Lotus's Time Begins with the Stem</span><span lang="ko">연꽃의 시간은 줄기에서 시작된다</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-29.html">
-          <figure>
-            <img src="../images/thumbs/29.jpg" alt="Crossing the World with a Crooked Posture" width="720" height="903" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Crossing the World with a Crooked Posture</span><span lang="ko">삐딱한 자세로 세상을 건너다</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-30.html">
-          <figure>
-            <img src="../images/thumbs/30.jpg" alt="The Place Where the Wind Lingered" width="720" height="905" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Place Where the Wind Lingered</span><span lang="ko">바람이 머물다 간 자리</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-31.html">
-          <figure>
-            <img src="../images/thumbs/31.jpg" alt="Heavenly Garment, Embroidering the Cosmos" width="720" height="1029" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Heavenly Garment, Embroidering the Cosmos</span><span lang="ko">하늘의 옷, 우주를 수놓다</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-32.html">
-          <figure>
-            <img src="../images/thumbs/32.jpg" alt="When Joy Creates the Curve" width="720" height="1040" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">When Joy Creates the Curve</span><span lang="ko">기쁨이 곡선을 만들 때</span></h3>
-        </a>
-      </div>
-
-       <div class="art-card">
-        <a href="artwork-detail-33.html">
-          <figure>
-            <img src="../images/thumbs/33.jpg" alt="The Sun and the Water Jar on Her Head" width="720" height="1038" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">The Sun and the Water Jar on Her Head</span><span lang="ko">태양과 머리에 인 물동이</span></h3>
-        </a>
-      </div>
-
-      <div class="art-card">
-        <a href="artwork-detail-48.html">
-          <figure>
-            <img src="../images/thumbs/48.jpg" alt="Awakening in Stillness" width="720" height="985" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Awakening in Stillness</span><span lang="ko">고요 속의 깨어남</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-49.html">
-          <figure>
-            <img src="../images/thumbs/49.jpg" alt="Wave in Stillness: Walking with Geumboki at Dosan Park" width="720" height="1436" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Wave in Stillness: Walking with Geumboki at Dosan Park</span><span lang="ko">고요 속의 파동: 금복이와 도산공원을 걷다</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-50.html">
-          <figure>
-            <img src="../images/thumbs/50.jpg" alt="Confronting the Self Within" width="720" height="974" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Confronting the Self Within</span><span lang="ko">내 안의 나와 마주하다</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-51.html">
-          <figure>
-            <img src="../images/thumbs/51.jpg" alt="Three Eyes, Guardian of the Soul" width="720" height="709" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Three Eyes, Guardian of the Soul</span><span lang="ko">세 개의 눈, 영혼의 수호자</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-52.html">
-          <figure>
-            <img src="../images/thumbs/52.jpg" alt="Ray of Compassion" width="720" height="1475" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Ray of Compassion</span><span lang="ko">자비의 빛줄기</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-53.html">
-          <figure>
-            <img src="../images/thumbs/53.jpg" alt="Swimming Toward Freedom" width="720" height="934" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Swimming Toward Freedom</span><span lang="ko">자유를 향한 헤엄</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-54.html">
-          <figure>
-            <img src="../images/thumbs/54.jpg" alt="In Search of the True Face" width="720" height="731" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">In Search of the True Face</span><span lang="ko">참된 얼굴을 찾아서</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-55.html">
-          <figure>
-            <img src="../images/thumbs/55.jpg" alt="Dancing Avalokiteshvara" width="720" height="1396" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Dancing Avalokiteshvara</span><span lang="ko">춤추는 관세음보살</span></h3>
-        </a>
-      </div>
-      
-        <div class="art-card">
-        <a href="artwork-detail-56.html">
-          <figure>
-            <img src="../images/thumbs/56.jpg" alt="Order in Chaos" width="720" height="1029" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Order in Chaos</span><span lang="ko">혼돈 속의 질서</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-57.html">
-          <figure>
-            <img src="../images/thumbs/57.jpg" alt="Golden Start" width="720" height="966" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Golden Start</span><span lang="ko">황금빛 시작</span></h3>
-        </a>
-      </div>
-
-        <div class="art-card">
-        <a href="artwork-detail-58.html">
-          <figure>
-            <img src="../images/thumbs/58.jpg" alt="Crossroads of Flow" width="720" height="1006" loading="lazy" decoding="async" />
-          </figure>
-          <h3><span lang="en">Crossroads of Flow</span><span lang="ko">흐름의 교차로</span></h3>
-        </a>
+    <div class="aw-index" hidden>
+      <div class="ix-list"></div>
+      <div class="ix-pv" aria-hidden="true">
+        <div class="ix-pv-in"><img alt="" /><div class="aw-cap"><div class="aw-t"></div><p class="aw-m"></p></div></div>
       </div>
     </div>
   </main>
@@ -518,6 +314,7 @@
     </div>
   </footer>
 
-  <script src="../script.js?v=20261022c"></script>
+  <script src="../script.js?v=20261023c"></script>
+  <script src="artwork.js?v=20261023c"></script>
 </body>
 </html>

@@ -27,9 +27,12 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
-  <link rel="stylesheet" href="styles.css?v=20261022c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+KR:wght@300;400&display=swap" />
+  <link rel="stylesheet" href="styles.css?v=20261023c" />
 </head>
-<body>
+<body class="home">
   <!-- HEADER -->
   <header class="site-header">
     <div class="header-inner">
@@ -74,46 +77,26 @@
     </div>
   </nav>
 
-  <!-- MAIN FULLSCREEN SLIDESHOW -->
-  <main class="hero">
-    <div class="slideshow">
-
-      <!-- ▼▼▼ GALLERY IMAGES ▼▼▼
-        To change images:
-          1. Replace the src="" with your own image file.
-          2. Keep the class="slide" and the <img loading="lazy" decoding="async"> tag as they are.
-
-        To ADD a new image:
-          1. Copy one <div class="slide">...</div> block.
-          2. Paste it below the others.
-          3. Change the src="" and alt="" text.
-        No need to touch JavaScript or CSS at all.
-      -->
-
-      <div class="slide active">
-        <img src="images/slides/13.jpg" alt="Maitreya's Contemplation Becomes a Ripple" width="2400" height="3084" fetchpriority="high" decoding="async" />
-      </div>
-
-      <div class="slide">
-        <img src="images/slides/20.jpg" alt="It Flows, Even If It's Not Straight" width="2400" height="2984" loading="lazy" decoding="async" />
-      </div>
-
-      <div class="slide">
-        <img src="images/slides/3.jpg" alt="Is My Dream Within a Mysterious Whisper?" width="2400" height="2564" loading="lazy" decoding="async" />
-      </div>
-
-      <div class="slide">
-        <img src="images/slides/4.jpg" alt="Blue Freedom within a Red Frame" width="2400" height="3217" loading="lazy" decoding="async" />
-      </div>
-
-      <div class="slide">
-        <img src="images/slides/5.jpg" alt="The Natural Being" width="2400" height="3266" loading="lazy" decoding="async" />
-      </div>
-     
-
-      <!-- END OF GALLERY IMAGES -->
-
+  <!-- MAIN — passe-partout hero (home.js). Works: 13, 20, 8, 27, 5 -->
+  <main class="pp" aria-label="Selected works">
+   <div class="pp-stage">
+    <img class="pp-img" src="images/slides/13.jpg" alt="Maitreya&#x27;s Contemplation Becomes a Ripple" width="2400" height="3084" fetchpriority="high" decoding="async" />
+    <img class="pp-img" data-src="images/slides/20.jpg" alt="It Flows, Even If It&#x27;s Not Straight" width="2400" height="2984" decoding="async" />
+    <img class="pp-img" data-src="images/slides/3.jpg" alt="Is My Dream Within a Mysterious Whisper?" width="2400" height="2564" decoding="async" />
+    <img class="pp-img" data-src="images/slides/4.jpg" alt="Blue Freedom within a Red Frame" width="2400" height="3217" decoding="async" />
+    <img class="pp-img" data-src="images/slides/5.jpg" alt="The Natural Being" width="2400" height="3266" decoding="async" />
+    <a class="pp-cap" href="pages/artwork-detail-13.html"><span class="t"><span lang="en">Maitreya's Contemplation Becomes a Ripple</span><span lang="ko">미륵의 사유, 물결이 되다</span></span><span class="y">1991</span></a>
+    <a class="pp-cap" href="pages/artwork-detail-20.html"><span class="t"><span lang="en">It Flows, Even If It's Not Straight</span><span lang="ko">곧지 않아도 흐른다</span></span><span class="y">1991</span></a>
+    <a class="pp-cap" href="pages/artwork-detail-8.html"><span class="t"><span lang="en">Is My Dream Within a Mysterious Whisper?</span><span lang="ko">나의 꿈은 신비로운 속삭임 속에 있는가?</span></span><span class="y">2000</span></a>
+    <a class="pp-cap" href="pages/artwork-detail-27.html"><span class="t"><span lang="en">Blue Freedom within a Red Frame</span><span lang="ko">붉은 틀 안의 푸른 자유</span></span><span class="y">2004</span></a>
+    <a class="pp-cap" href="pages/artwork-detail-5.html"><span class="t"><span lang="en">The Natural Being</span><span lang="ko">자연의 존재</span></span><span class="y">1991</span></a>
+    <div class="pp-ctl">
+      <button type="button" class="pp-prev" aria-label="Previous work"><svg viewBox="0 0 28 10" aria-hidden="true"><path d="M27 5H1M5.5.5 1 5l4.5 4.5"/></svg></button>
+      <span><b class="pp-cn">01</b> / 05</span>
+      <button type="button" class="pp-next" aria-label="Next work"><svg viewBox="0 0 28 10" aria-hidden="true"><path d="M1 5h26M22.5.5 27 5l-4.5 4.5"/></svg></button>
     </div>
+    <div class="pp-hint" aria-hidden="true"><span lang="en">Scroll</span><span lang="ko">스크롤</span><i></i></div>
+   </div>
   </main>
 
   <!-- FOOTER -->
@@ -149,6 +132,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261022c"></script>
+  <script src="script.js?v=20261023c"></script>
+  <script src="home.js?v=20261023c"></script>
 </body>
 </html>

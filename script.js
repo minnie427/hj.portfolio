@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       localStorage.setItem("lang", lang);
     } catch (e) {}
+    document.dispatchEvent(new CustomEvent("langchange", { detail: lang }));
   };
   applyLang(root.getAttribute("data-lang") === "ko" ? "ko" : "en");
   langButtons.forEach((btn) => btn.addEventListener("click", () => applyLang(btn.dataset.setLang)));
@@ -141,6 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
       history.replaceState(null, "", url);
     }
   } catch (e) {}
+
+  // Header: take the page colour once the page scrolls (inner pages)
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    const onScroll = () => siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
 
   // Footer year
   const year = String(new Date().getFullYear());
