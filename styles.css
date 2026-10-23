@@ -10,6 +10,30 @@ body {
   height: 100%;
 }
 
+/* iOS-safe controls */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+button {
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+a,
+button,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* no focus boxes on buttons */
+button:focus,
+button:focus-visible {
+  outline: none;
+}
+
 :root {
   --header-height: 72px;
   --color-1: #151515; /* shared header/footer color */
@@ -122,6 +146,8 @@ body.home .site-header.is-scrolled {
 .hamburger-btn {
   border: none;
   background: transparent;
+  color: inherit;
+  padding: 0;
   width: 3rem;
   height: 3rem;
   display: inline-flex;
@@ -339,12 +365,20 @@ body.home .hero {
   background: var(--color-2);
   color: var(--color-ink);
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* short pages: the footer still sits on the bottom edge */
+.page > main {
+  flex: 1 0 auto;
+  width: 100%;
 }
 
 .page-content {
   max-width: 960px;
   margin: 0 auto;
-  padding: calc(var(--header-height) + 5rem) 3rem 23rem;
+  padding: calc(var(--header-height) + 5rem) 3rem 12rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -355,7 +389,7 @@ body.home .hero {
 .art-page {
   max-width: none;
   width: 100%;
-  padding: calc(var(--header-height) + 5rem) 3rem 23rem;
+  padding: calc(var(--header-height) + 5rem) 3rem 12rem;
 }
 
 .page-title {
@@ -669,7 +703,7 @@ body.home .hero {
   }
 
   .page-content {
-    padding: calc(var(--header-height) + 5rem) 1.25rem 15rem;
+    padding: calc(var(--header-height) + 5rem) 1.25rem 8rem;
   }
 }
 
@@ -1039,8 +1073,8 @@ body.home.hero-light .site-header {
   height: 100svh;
   overflow: hidden;
   /* space kept above and below the fully revealed work (px) */
-  --top: 86;
-  --bot: 88;
+  --top: 124;
+  --bot: 100;
 }
 
 .pp-img {
@@ -1144,8 +1178,7 @@ body.hero-light .pp-ctl {
 }
 
 .pp-ctl button:focus-visible {
-  outline: 1px solid currentColor;
-  outline-offset: 2px;
+  outline: none;
 }
 
 .pp-ctl svg {
@@ -1191,8 +1224,12 @@ body.hero-light .pp-ctl {
 
 @media (max-width: 600px) {
   .pp-stage {
-    --top: 72;
+    --top: 84;
     --bot: 118;
+  }
+
+  .pp-cap .sub {
+    display: none;
   }
 
   .pp-cap {
@@ -1567,8 +1604,12 @@ html[data-lang="ko"] .ix-t {
 }
 
 /* ========== CONTACT (editorial) ========== */
+.ct-grid {
+  align-items: baseline;
+}
+
 .ct-list {
-  max-width: 640px;
+  min-width: 0;
 }
 
 .ct-row {
@@ -1579,6 +1620,11 @@ html[data-lang="ko"] .ix-t {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
   color: var(--color-ink);
   text-decoration: none;
+}
+
+.ct-row:first-child {
+  padding-top: 0;
+  border-top: 0;
 }
 
 .ct-row:last-child {
@@ -1595,8 +1641,8 @@ html[data-lang="ko"] .ix-t {
 .ct-v {
   font-family: var(--font-serif);
   font-weight: 300;
-  font-size: 2rem;
-  line-height: 1.2;
+  font-size: 1.55rem;
+  line-height: 1.25;
   overflow-wrap: anywhere;
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
@@ -1632,7 +1678,11 @@ html[data-lang="ko"] .ix-t {
   }
 
   .ct-v {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  .ct-grid .ed-side {
+    display: none;
   }
 }
 

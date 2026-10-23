@@ -1,5 +1,11 @@
 // Slideshow
 document.addEventListener("DOMContentLoaded", () => {
+  // iOS Safari zooms in when a form control under 16px gets focus (the Sort menu).
+  // maximum-scale stops that; iOS still lets people pinch-zoom.
+  const isIOS = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const vp = document.querySelector('meta[name="viewport"]');
+  if (isIOS && vp && !/maximum-scale/.test(vp.content)) vp.content += ", maximum-scale=1";
+
   const slides = document.querySelectorAll(".slide");
   const slideshow = document.querySelector(".slideshow");
   if (slides.length) {
