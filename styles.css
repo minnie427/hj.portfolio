@@ -1697,3 +1697,43 @@ html[data-lang="ko"] .page-content .page-title {
     letter-spacing: 0.08em;
   }
 }
+
+/* Detail — medium line + diptych panels */
+.feature-image .page-meta .pm-med {
+  display: block;
+  margin-top: 0.45rem;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+html[data-lang="ko"] .feature-image .page-meta .pm-med {
+  letter-spacing: 0;
+}
+
+.fi-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.fi-panels img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 0.58;
+  object-fit: cover;
+  display: block;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 900px) {
+  .feature-image .page-meta .pm-med {
+    font-size: 0.74rem;
+  }
+
+  .fi-panels {
+    gap: 0.6rem;
+  }
+}
