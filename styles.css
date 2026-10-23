@@ -1790,38 +1790,9 @@ html[data-lang="ko"] .feature-image .page-meta .pm-med {
 }
 
 /* ========== ARTWORK SECTIONS — Paintings / Fan Paintings ========== */
-/* menu: ARTWORK > Paintings / Fan Paintings */
-.main-nav li {
-  position: relative;
-}
-
+/* desktop menu shows ARTWORK only — Paintings / Fan Paintings are switched on the Artwork page */
 .main-nav .nav-sub {
-  position: absolute;
-  top: 100%;
-  left: -0.8rem;
-  padding: 0.75rem 0.8rem 0.8rem;
-  display: grid;
-  gap: 0.55rem;
-  white-space: nowrap;
-}
-
-body:not(.home) .main-nav .nav-sub {
-  background: var(--color-2);
-}
-
-.main-nav .nav-sub a {
-  font-size: 0.74rem;
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  text-transform: none;
-  opacity: 0.75;
-}
-
-.main-nav .nav-sub a:hover,
-.main-nav .nav-sub a:focus-visible,
-.main-nav .nav-sub a[aria-current="page"] {
-  opacity: 1;
-  border-bottom-color: currentColor;
+  display: none;
 }
 
 .nav-drawer .nav-sub {
@@ -1932,6 +1903,3 @@ html[data-lang="ko"] .aw-sec a {
   }
 }
 
-body.home .main-nav .nav-sub a {
-  opacity: 0.95;
-}
