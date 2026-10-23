@@ -988,11 +988,11 @@ html[data-lang="ko"] .ed-sign {
 
 @media (max-width: 900px) {
   .ed-title {
-    font-size: 3.4rem;
+    font-size: 2.6rem;
   }
 
   html[data-lang="ko"] .ed-title {
-    font-size: 2.75rem;
+    font-size: 2.1rem;
   }
 
   .ed-hair {
@@ -1737,4 +1737,151 @@ html[data-lang="ko"] .feature-image .page-meta .pm-med {
   .fi-panels {
     gap: 0.6rem;
   }
+}
+
+/* ========== ARTWORK SECTIONS — Paintings / Fan Paintings ========== */
+/* menu: ARTWORK > Paintings / Fan Paintings */
+.main-nav li {
+  position: relative;
+}
+
+.main-nav .nav-sub {
+  position: absolute;
+  top: 100%;
+  left: -0.8rem;
+  padding: 0.75rem 0.8rem 0.8rem;
+  display: grid;
+  gap: 0.55rem;
+  white-space: nowrap;
+}
+
+body:not(.home) .main-nav .nav-sub {
+  background: var(--color-2);
+}
+
+.main-nav .nav-sub a {
+  font-size: 0.74rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: none;
+  opacity: 0.75;
+}
+
+.main-nav .nav-sub a:hover,
+.main-nav .nav-sub a:focus-visible,
+.main-nav .nav-sub a[aria-current="page"] {
+  opacity: 1;
+  border-bottom-color: currentColor;
+}
+
+.nav-drawer .nav-sub {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.1rem;
+  padding-left: 1.1rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.14);
+}
+
+.nav-drawer .nav-sub a {
+  font-size: 0.98rem;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: 0.03em;
+  color: var(--color-3);
+}
+
+.nav-drawer .nav-sub a[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+/* section switch under the Artwork title */
+.aw-sec {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.2rem;
+  margin: -0.25rem 0 3rem;
+}
+
+.aw-sec a {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1.2;
+  color: rgba(34, 34, 34, 0.32);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+html[data-lang="ko"] .aw-sec a {
+  font-family: var(--font-serif-ko);
+  font-size: 1.2rem;
+}
+
+.aw-sec a:hover,
+.aw-sec a:focus-visible,
+.aw-sec a[aria-current="page"] {
+  color: var(--color-ink);
+  outline: none;
+}
+
+/* Fan Paintings intro + list */
+.fp-intro {
+  margin-bottom: 4.5rem;
+}
+
+.fp-intro .ed-side span {
+  display: block;
+}
+
+.fp-intro .ed-side .hz {
+  font-family: var(--font-serif-ko);
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--color-ink);
+}
+
+/* fan images are cut out onto the mat colour with their own soft shadow:
+   no frame shadow, so only the grey mat shows */
+.aw--fan .aw-mat {
+  aspect-ratio: 4 / 3;
+}
+
+.aw--fan .aw-mat img {
+  max-width: 88%;
+  max-height: 84%;
+  box-shadow: none;
+}
+
+.feature-image.is-fan img {
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .aw-sec {
+    gap: 1.4rem;
+    margin: 0 0 2rem;
+  }
+
+  .aw-sec a {
+    font-size: 1.35rem;
+  }
+
+  html[data-lang="ko"] .aw-sec a {
+    font-size: 1.05rem;
+  }
+
+  .fp-intro {
+    margin-bottom: 3rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .fp-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+body.home .main-nav .nav-sub a {
+  opacity: 0.95;
 }

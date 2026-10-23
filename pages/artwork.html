@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+KR:wght@300;400&display=swap" />
-  <link rel="stylesheet" href="../styles.css?v=20261023g" />
+  <link rel="stylesheet" href="../styles.css?v=20261023i" />
 </head>
 <body class="page">
   <!-- HEADER -->
@@ -45,7 +45,7 @@
         <ul>
           <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
           <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
-          <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+          <li class="has-sub"><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a><div class="nav-sub"><a href="artwork.html" aria-current="page"><span lang="en">Paintings</span><span lang="ko">회화</span></a><a href="fan-paintings.html"><span lang="en">Fan Paintings</span><span lang="ko">선면화</span></a></div></li>
           <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
         </ul>
       </nav>
@@ -67,7 +67,7 @@
     <ul>
       <li><a href="artist.html"><span lang="en">ARTIST</span><span lang="ko">작가</span></a></li>
       <li><a href="statement.html"><span lang="en">STATEMENT</span><span lang="ko">작가노트</span></a></li>
-      <li><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a></li>
+      <li class="has-sub"><a href="artwork.html"><span lang="en">ARTWORK</span><span lang="ko">작품</span></a><div class="nav-sub"><a href="artwork.html" aria-current="page"><span lang="en">Paintings</span><span lang="ko">회화</span></a><a href="fan-paintings.html"><span lang="en">Fan Paintings</span><span lang="ko">선면화</span></a></div></li>
       <li><a href="contact.html"><span lang="en">CONTACT</span><span lang="ko">연락처</span></a></li>
     </ul>
     <div class="drawer-lang" role="group" aria-label="Language">
@@ -80,9 +80,13 @@
   <main class="page-content art-page aw-page">
     <h1 class="ed-title"><span lang="en">Artwork</span><span lang="ko">작품</span></h1>
     <div class="ed-hair" aria-hidden="true"></div>
+    <nav class="aw-sec" aria-label="Artwork sections">
+      <a href="artwork.html" aria-current="page"><span lang="en">Paintings</span><span lang="ko">회화</span></a>
+      <a href="fan-paintings.html"><span lang="en">Fan Paintings</span><span lang="ko">선면화</span></a>
+    </nav>
 
     <div class="aw-bar">
-      <p class="aw-count"><span lang="en"><b>97</b> Works</span><span lang="ko">작품 <b>97</b>점</span></p>
+      <p class="aw-count"><span lang="en"><b>76</b> Works</span><span lang="ko">작품 <b>76</b>점</span></p>
       <div class="aw-tools">
         <label class="aw-sort"><span><span lang="en">Sort</span><span lang="ko">정렬</span></span>
           <select aria-label="Sort"><option value="new">Newest</option><option value="old">Oldest</option><option value="title">Title A–Z</option></select>
@@ -98,42 +102,6 @@
       <a class="aw" href="artwork-detail-99.html" data-id="99" data-year="2026">
         <div class="aw-mat"><img src="../images/thumbs/99.jpg" alt="Landscape of Life" width="720" height="887" loading="lazy" decoding="async" /></div>
         <div class="aw-cap"><h2 class="aw-t"><span lang="en">Landscape of Life</span><span lang="ko">삶의 풍경</span></h2><p class="aw-m">90.9 × 72.7 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-98.html" data-id="98" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/98.jpg" alt="Ode to the Clouds: Pouring Vitality" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Ode to the Clouds: Pouring Vitality</span><span lang="ko">구름의 찬가: 쏟아지는 강인한 생명력</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-97.html" data-id="97" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/97.jpg" alt="Harmony of Flight: Splendid Wingbeat" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Harmony of Flight: Splendid Wingbeat</span><span lang="ko">비상의 조화: 화려한 날갯짓</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-96.html" data-id="96" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/96.jpg" alt="The Hidden World: Clouds and Python" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Hidden World: Clouds and Python</span><span lang="ko">은닉된 세계: 구름과 비단뱀</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-95.html" data-id="95" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/95.jpg" alt="The Resonance of Green: The Breathing Forest" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Resonance of Green: The Breathing Forest</span><span lang="ko">초록의 울림: 숨 쉬는 숲</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-94.html" data-id="94" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/94.jpg" alt="Refreshing Liberation: Pouring Rain" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Refreshing Liberation: Pouring Rain</span><span lang="ko">쏟아지는 해방감: 시원한 빗줄기</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-93.html" data-id="93" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/93.jpg" alt="Joyful Play of Freedom: Soaring Carp" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Joyful Play of Freedom: Soaring Carp</span><span lang="ko">자유의 유희: 날아오르는 붕어</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-92.html" data-id="92" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/92.jpg" alt="Soaring Pride: The Three-Legged Crow" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Soaring Pride: The Three-Legged Crow</span><span lang="ko">비상하는 자존감: 삼족오</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-91.html" data-id="91" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/91.jpg" alt="Beyond the Red Gate: Infinite Curves of Dreams" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Beyond the Red Gate: Infinite Curves of Dreams</span><span lang="ko">빨간 대문 너머: 무한한 꿈의 곡선</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-90.html" data-id="90" data-year="2026" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/90.jpg" alt="Feast of Blue Water: Mountain and Waterfall" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Feast of Blue Water: Mountain and Waterfall</span><span lang="ko">푸른 물의 향연: 산과 폭포</span></h2><p class="aw-m">30 × 54 cm, 2026</p></div>
       </a>
       <a class="aw" href="artwork-detail-89.html" data-id="89" data-year="2026">
         <div class="aw-mat"><img src="../images/thumbs/89.jpg" alt="Circulating Universe: The Moving Chilseonggak" width="720" height="1041" loading="lazy" decoding="async" /></div>
@@ -194,26 +162,6 @@
       <a class="aw" href="artwork-detail-75.html" data-id="75" data-year="2026">
         <div class="aw-mat"><img src="../images/thumbs/75.jpg" alt="Fantasia: Aerial Dance" width="720" height="957" loading="lazy" decoding="async" /></div>
         <div class="aw-cap"><h2 class="aw-t"><span lang="en">Fantasia: Aerial Dance</span><span lang="ko">환상곡: 공중 무도</span></h2><p class="aw-m">82.5 × 62.5 cm, 2026</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-74.html" data-id="74" data-year="2025" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/74.jpg" alt="Lucky Moments: Gifts from Nature" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Lucky Moments: Gifts from Nature</span><span lang="ko">행운의 찰나: 자연이 건네는 선물</span></h2><p class="aw-m">30 × 54 cm, 2025</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-73.html" data-id="73" data-year="2025" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/73.jpg" alt="Reverence for Nature: Reconciliation through Curves" width="720" height="447" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Reverence for Nature: Reconciliation through Curves</span><span lang="ko">자연의 경의: 곡선으로 잇는 화해</span></h2><p class="aw-m">30 × 54 cm, 2025</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-72.html" data-id="72" data-year="2025" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/72.jpg" alt="Radiant Oneness: Awakening Life" width="720" height="431" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Radiant Oneness: Awakening Life</span><span lang="ko">빛의 합일: 생명의 깨어남</span></h2><p class="aw-m">30 × 54 cm, 2025</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-71.html" data-id="71" data-year="2025" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/71.jpg" alt="Dialogue of Impermanence: Where Water and Wind Rest" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Dialogue of Impermanence: Where Water and Wind Rest</span><span lang="ko">무상(無常)의 대화: 물과 바람이 머무는 곳</span></h2><p class="aw-m">30 × 54 cm, 2025</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-70.html" data-id="70" data-year="2025" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/70.jpg" alt="Steadfast Devotion: A Bold Swim" width="720" height="446" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">Steadfast Devotion: A Bold Swim</span><span lang="ko">여여(如如)한 정진: 대범한 유영</span></h2><p class="aw-m">30 × 54 cm, 2025</p></div>
       </a>
       <a class="aw" href="artwork-detail-69.html" data-id="69" data-year="2025">
         <div class="aw-mat"><img src="../images/thumbs/69.jpg" alt="The Dance of Butterflies: Freedom Beyond Boundaries" width="720" height="1005" loading="lazy" decoding="async" /></div>
@@ -307,10 +255,6 @@
         <div class="aw-mat"><img src="../images/thumbs/46.jpg" alt="Small Work – Excitement Spreading" width="720" height="581" loading="lazy" decoding="async" /></div>
         <div class="aw-cap"><h2 class="aw-t"><span lang="en">Small Work – Excitement Spreading</span><span lang="ko">소품 – 설렘이 번지는 중</span></h2><p class="aw-m">23.3 × 29 cm, 2025</p></div>
       </a>
-      <a class="aw aw--fan" href="artwork-detail-41.html" data-id="41" data-year="2025" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/41.jpg" alt="The Fan – Dance That Opens the Dawn" width="720" height="407" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan – Dance That Opens the Dawn</span><span lang="ko">부채 – 새벽을 여는 춤</span></h2><p class="aw-m">30 × 54 cm, 2025</p></div>
-      </a>
       <a class="aw" href="artwork-detail-47.html" data-id="47" data-year="2024">
         <div class="aw-mat"><img src="../images/thumbs/47.jpg" alt="Small Work – Rising Even in Darkness" width="720" height="560" loading="lazy" decoding="async" /></div>
         <div class="aw-cap"><h2 class="aw-t"><span lang="en">Small Work – Rising Even in Darkness</span><span lang="ko">소품 – 어둠 속에서도 피어오른다</span></h2><p class="aw-m">26.5 × 27.5 cm, 2024</p></div>
@@ -322,30 +266,6 @@
       <a class="aw" href="artwork-detail-44.html" data-id="44" data-year="2024">
         <div class="aw-mat"><img src="../images/thumbs/44.jpg" alt="Small Work – Quietly Blooming" width="720" height="725" loading="lazy" decoding="async" /></div>
         <div class="aw-cap"><h2 class="aw-t"><span lang="en">Small Work – Quietly Blooming</span><span lang="ko">소품 – 조용히 피어나는 중</span></h2><p class="aw-m">26.6 × 26.5 cm, 2024</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-42.html" data-id="42" data-year="2024" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/42.jpg" alt="The Fan – Noble Spirit of the Deep Mountain Valley" width="720" height="411" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan – Noble Spirit of the Deep Mountain Valley</span><span lang="ko">부채 – 심산유곡의 기상</span></h2><p class="aw-m">30 × 54 cm, 2024</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-39.html" data-id="39" data-year="2024" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/39.jpg" alt="The Fan – Phoenix Rising Through the Darkness" width="720" height="415" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan – Phoenix Rising Through the Darkness</span><span lang="ko">부채 – 어둠을 뚫고 피어오른 봉황</span></h2><p class="aw-m">30 × 54 cm, 2024</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-37.html" data-id="37" data-year="2024" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/37.jpg" alt="The Fan – A Doodle in the Sky" width="720" height="415" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan – A Doodle in the Sky</span><span lang="ko">부채 – 하늘의 낙서</span></h2><p class="aw-m">30 × 54 cm, 2024</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-36.html" data-id="36" data-year="2024" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/36.jpg" alt="The Fan – Simply Our Mountain" width="720" height="421" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan – Simply Our Mountain</span><span lang="ko">부채 – 그냥 우리 산</span></h2><p class="aw-m">30 × 54 cm, 2024</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-35.html" data-id="35" data-year="2024" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/35.jpg" alt="The Fan Embracing the Night" width="720" height="413" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan Embracing the Night</span><span lang="ko">부채 – 밤을 품은 부채</span></h2><p class="aw-m">30 × 54 cm, 2024</p></div>
-      </a>
-      <a class="aw aw--fan" href="artwork-detail-34.html" data-id="34" data-year="2024" data-cat="fan">
-        <div class="aw-mat"><img src="../images/thumbs/34.jpg" alt="The Fan – A Gift Carried by the Wind" width="720" height="419" loading="lazy" decoding="async" /></div>
-        <div class="aw-cap"><h2 class="aw-t"><span lang="en">The Fan – A Gift Carried by the Wind</span><span lang="ko">부채 – 바람이 주는 선물</span></h2><p class="aw-m">30 × 54 cm, 2024</p></div>
       </a>
       <a class="aw" href="artwork-detail-33.html" data-id="33" data-year="2024">
         <div class="aw-mat"><img src="../images/thumbs/33.jpg" alt="The Sun and the Water Jar on Her Head" width="720" height="1038" loading="lazy" decoding="async" /></div>
@@ -526,7 +446,7 @@
     </div>
   </footer>
 
-  <script src="../script.js?v=20261023g"></script>
-  <script src="artwork.js?v=20261023g"></script>
+  <script src="../script.js?v=20261023i"></script>
+  <script src="artwork.js?v=20261023i"></script>
 </body>
 </html>
