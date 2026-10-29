@@ -1,7 +1,7 @@
-// Home — passe-partout hero.
-// Three resting states: full-bleed (0) → halfway (0.5) → the whole work on a white wall (1).
-// One scroll / swipe / key press moves one step; a spring drives the motion so a second
-// gesture mid-move continues smoothly. After the last step the page scrolls on to the footer.
+// Home — passe-partout hero that plays by itself.
+// On load the first work opens full-bleed, then settles back onto the white wall.
+// From there the works change by themselves every few seconds; the arrows (and ← →) still work.
+// Scrolling is ordinary page scrolling down to the footer.
 (function () {
   const root = document.querySelector(".pp");
   if (!root) return;
@@ -9,15 +9,18 @@
   const stage = root.querySelector(".pp-stage");
   const imgs = [...root.querySelectorAll(".pp-img")];
   const caps = [...root.querySelectorAll(".pp-cap")];
-  const hint = root.querySelector(".pp-hint");
   const counter = root.querySelector(".pp-cn");
   const body = document.body;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const STOPS = [0, 0.5, 1];
   const n = imgs.length;
 
-  let p = 0, v = 0, target = 0, snap = 0, running = false, last = 0, cur = 0;
+  const HOLD = 1300;  // full-bleed pause before the pull-back (ms)
+  const MOVE = 2800;  // pull-back duration (ms)
+  const DWELL = 5500; // time each work stays on the wall (ms)
+
+  let p = 0, cur = 0, timer = 0, started = false, settled = false;
   const lerp = (a, b, t) => a + (b - a) * t;
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
   const isMobile = () => window.matchMedia("(max-width: 600px)").matches;
 
   // Geometry of one image: start (cover, centred) and end (contained between header and caption)
@@ -46,7 +49,6 @@
     });
     body.classList.toggle("hero-light", p >= 0.4);
     caps.forEach((c) => c.classList.toggle("is-shown", p > 0.97));
-    if (hint) hint.style.opacity = p < 0.02 ? 1 : 0;
   }
 
   // On phones the caption starts on the same vertical line as the work's left edge
@@ -60,84 +62,59 @@
     });
   }
 
-  const K = 60, C = 2 * Math.sqrt(K) * 0.94;
-  function tick(now) {
-    const dt = Math.min(0.032, (now - last) / 1000);
-    last = now;
-    v += ((target - p) * K - C * v) * dt;
-    p += v * dt;
-    if (Math.abs(target - p) < 0.0008 && Math.abs(v) < 0.002) { p = target; v = 0; running = false; paint(); return; }
-    paint();
-    requestAnimationFrame(tick);
+  // 1. the opening: full-bleed → whole work on the wall, once
+  function intro() {
+    if (started) return;
+    started = true;
+    if (reduceMotion) { p = 1; paint(); settled = true; schedule(); return; }
+    setTimeout(() => {
+      const t0 = performance.now();
+      const step = (now) => {
+        const t = Math.min(1, (now - t0) / MOVE);
+        p = ease(t);
+        paint();
+        if (t < 1) requestAnimationFrame(step);
+        else { settled = true; schedule(); }
+      };
+      requestAnimationFrame(step);
+    }, HOLD);
   }
 
-  function go(to) {
-    to = Math.max(0, Math.min(2, to));
-    if (to === snap && !running) return;
-    snap = to;
-    target = STOPS[to];
-    if (reduceMotion) { p = target; paint(); return; }
-    if (!running) { running = true; last = performance.now(); requestAnimationFrame(tick); }
+  // 2. then the works change by themselves
+  function schedule() {
+    clearTimeout(timer);
+    if (settled) timer = setTimeout(next, DWELL);
   }
+  function next() {
+    if (document.hidden) return schedule();
+    const k = (cur + 1) % n;
+    if (!imgs[k].naturalWidth) { timer = setTimeout(next, 800); return; } // still loading
+    show(k);
+    schedule();
+  }
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) schedule(); });
 
-  const atTop = () => window.scrollY <= 1;
-  const menuOpen = () => body.classList.contains("nav-open");
-
-  // Wheel / trackpad: a new gesture starts after a pause or when it accelerates again,
-  // so the inertia tail of one flick never skips the halfway stop.
-  let lastT = 0, lastA = 0, decaying = false;
-  window.addEventListener("wheel", (ev) => {
-    if (menuOpen()) return;
-    const now = performance.now(), dA = Math.abs(ev.deltaY);
-    const fresh = now - lastT > 140 || (decaying && dA > lastA * 1.8 && dA > 10);
-    if (fresh) decaying = false; else if (dA < lastA) decaying = true;
-    lastT = now; lastA = dA;
-    if (!atTop()) return;                                    // scrolling the rest of the page
-    if (snap === 2 && !running && ev.deltaY > 0) return;     // finished: continue to the footer
-    ev.preventDefault();
-    if (!fresh || dA < 1) return;
-    go(snap + (ev.deltaY > 0 ? 1 : -1));
-  }, { passive: false });
-
-  // Touch
-  let ty = null;
-  window.addEventListener("touchstart", (ev) => { ty = ev.touches[0].clientY; }, { passive: true });
-  window.addEventListener("touchmove", (ev) => {
-    if (ty === null || menuOpen() || !atTop()) return;
-    const dy = ty - ev.touches[0].clientY;
-    if (snap === 2 && dy > 0 && !running) return;
-    ev.preventDefault();
-    if (Math.abs(dy) < 8) return;
-    go(snap + (dy > 0 ? 1 : -1));
-    ty = null;
-  }, { passive: false });
-
-  // Keyboard
-  window.addEventListener("keydown", (ev) => {
-    const el = ev.target && ev.target.closest ? ev.target : null;
-    if (menuOpen() || (el && el.closest("input, select, textarea"))) return;
-    if (ev.key === " " && el && el.closest("button, a")) return;
-    if (ev.key === "ArrowRight") show(cur + 1);
-    if (ev.key === "ArrowLeft") show(cur - 1);
-    if (!atTop()) return;
-    const down = ev.key === "ArrowDown" || ev.key === "PageDown" || ev.key === " ";
-    const up = ev.key === "ArrowUp" || ev.key === "PageUp";
-    if (down && snap < 2) { ev.preventDefault(); go(snap + 1); }
-    if (up && snap > 0) { ev.preventDefault(); go(snap - 1); }
-  });
-
-  // Choosing a work
+  // Choosing a work by hand restarts the timer
   function show(k) {
     cur = (k + n) % n;
     imgs.forEach((im, i) => im.classList.toggle("is-on", i === cur));
     caps.forEach((c, i) => c.classList.toggle("is-on", i === cur));
     if (counter) counter.textContent = String(cur + 1).padStart(2, "0");
   }
-  root.querySelector(".pp-prev")?.addEventListener("click", () => show(cur - 1));
-  root.querySelector(".pp-next")?.addEventListener("click", () => show(cur + 1));
+  root.querySelector(".pp-prev")?.addEventListener("click", () => { show(cur - 1); schedule(); });
+  root.querySelector(".pp-next")?.addEventListener("click", () => { show(cur + 1); schedule(); });
+  window.addEventListener("keydown", (ev) => {
+    const el = ev.target && ev.target.closest ? ev.target : null;
+    if (body.classList.contains("nav-open") || (el && el.closest("input, select, textarea"))) return;
+    if (ev.key === "ArrowRight") { show(cur + 1); schedule(); }
+    if (ev.key === "ArrowLeft") { show(cur - 1); schedule(); }
+  });
 
-  // Images: first one loads with the page, the rest right after
+  // Images: first one loads with the page (and starts the opening), the rest right after
   imgs.forEach((img) => img.addEventListener("load", () => { img._g = 0; paint(); alignCaps(); }));
+  const first = imgs[0];
+  if (first.complete && first.naturalWidth) intro();
+  else { first.addEventListener("load", intro, { once: true }); first.addEventListener("error", intro, { once: true }); }
   const loadRest = () => imgs.forEach((img) => { if (img.dataset.src && !img.getAttribute("src")) img.src = img.dataset.src; });
   if (document.readyState === "complete") loadRest(); else window.addEventListener("load", loadRest);
 

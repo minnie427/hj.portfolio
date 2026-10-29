@@ -157,6 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
     onScroll();
   }
 
+  // Process: the time-lapse plays silently on a loop; with reduced motion the still stays
+  document.querySelectorAll("video.pr-video").forEach((v) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); return; }
+    v.muted = true;
+    const pr = v.play();
+    if (pr && pr.catch) pr.catch(() => {});
+  });
+
   // Footer year
   const year = String(new Date().getFullYear());
   document.querySelectorAll(".js-year").forEach((el) => (el.textContent = year));
