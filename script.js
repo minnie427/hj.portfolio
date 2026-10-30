@@ -170,88 +170,282 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".js-year").forEach((el) => (el.textContent = year));
 });
 
-// Ink on hanji: the page is the paper. Moving the mouse lets a faint wash of ink seep in and fade;
-// a click drops a drop of ink that slowly bleeds outward, then dries away.
+// Ink on hanji — the cursor is a loaded brush. Moving leaves a dry-brush stroke (at most about half strength);
+// resting in one place lets the ink pool and bloom, and a click drops ink that spreads into the paper (up to ~70%).
+// The ink shapes are grown in advance on a hanji fibre map (images/ink/brush.png, drops.png); here they are laid
+// along the cursor's path. A stroke is gone a moment after the brush passes (a clear trace, no lingering tail);
+// pools and drops spread, rest briefly and fade. The ink scrolls with the page. Needs WebGL2.
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-  const cv = document.createElement("canvas");
+  var me = document.currentScript, base = (me && me.src) || location.href;
+  var SRC = window.__inkTex || { brush: new URL("images/ink/brush.png", base).href, drops: new URL("images/ink/drops.png", base).href };
+  var cv = document.createElement("canvas");
   cv.className = "ink-layer";
   cv.setAttribute("aria-hidden", "true");
-  document.body.appendChild(cv);
-  const cx = cv.getContext("2d");
-  let W = 0, H = 0, dpr = 1;
+  var gl = cv.getContext("webgl2", { alpha: true, premultipliedAlpha: true, antialias: false, depth: false, stencil: false });
+  if (!gl || !gl.getExtension("EXT_color_buffer_float")) return;
+
+  var STROKE = 0.5 / 0.7;   // a stroke's darkest ink, as a share of the deepest (0.7 on screen)
+  var SOAK = 110;           // ms a new stretch of stroke is redrawn while its fringe soaks out
+  var INK = [0.1, 0.1, 0.11];
+  var BW = 1024, BH = 64, BCORE = 30;   // brush strip size and the width of its inked core
+  var FINE = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  // ---------- shaders ----------
+  var V_FULL = "#version 300 es\nin vec2 p;out vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
+  // red = ink, green = seconds it still rests, blue = 1 where it came from a drop (drops fade slower than strokes)
+  var F_FADE = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec2 shift;uniform float dt;in vec2 uv;out vec4 o;\n" +
+    "void main(){vec2 q=uv+shift;vec4 c=(q.y<0.||q.y>1.)?vec4(0):texture(st,q);float h=c.g-dt,d=c.r;\n" +
+    "if(h<=0.)d=max(0.,d-dt*mix(1.8+2.8*d,.45+.55*d,c.b));o=vec4(d,max(h,0.),d>.002?c.b:0.,1.);}";
+  var V_RIB = "#version 300 es\nin vec2 p;in vec4 a;uniform vec2 view;uniform float scroll;out vec4 va;\n" +
+    "void main(){vec2 c=vec2(p.x,p.y-scroll)/view*2.-1.;gl_Position=vec4(c.x,-c.y,0.,1.);va=a;}";
+  var F_RIB = "#version 300 es\nprecision highp float;uniform sampler2D tex;uniform float k;in vec4 va;out vec4 o;\n" +
+    "void main(){vec3 t=texture(tex,va.xy).rgb;float vis=smoothstep(va.z-.04,va.z+.04,t.g);\n" +
+    // the core lands at once, the fringe soaks out along the fibres in a tenth of a second
+    "float r=min(1.,.55+va.w/" + SOAK + ".*.45),sm=1.-smoothstep(r-.1,r,t.b);float d=t.r*vis*sm*k*(1.-.35*va.z);o=vec4(d,d>.01?.05:0.,0.,1.);}";
+  var V_DROP = "#version 300 es\nin vec2 p;uniform vec2 c,view;uniform float R,rot,scroll;out vec2 tc;\n" +
+    "void main(){float s=sin(rot),k=cos(rot);vec2 q=vec2(k*p.x-s*p.y,s*p.x+k*p.y)*R;vec2 sp=(c+q-vec2(0.,scroll))/view*2.-1.;\n" +
+    "gl_Position=vec4(sp.x,-sp.y,0.,1.);tc=p*.5+.5;}";
+  var F_DROP = "#version 300 es\nprecision highp float;uniform sampler2D tex;uniform vec2 tile;uniform float e,k;in vec2 tc;out vec4 o;\n" +
+    "void main(){vec2 t=texture(tex,tile+clamp(tc,.004,.996)*.5).rg;float m=1.-smoothstep(e-.06,e,t.g);float d=t.r*m*k;o=vec4(d,d>.01?.7:0.,d>.01?1.:0.,1.);}";
+  var F_SHOW = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec3 ink;in vec2 uv;out vec4 o;\n" +
+    "float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}\n" +
+    "void main(){float d=texture(st,uv).r;if(d<.004){o=vec4(0);return;}float n=h(floor(gl_FragCoord.xy));\n" +
+    "float a=.7*min(d,1.)*(1.-.12*(n-.5)*(1.-d));o=vec4(ink*a,a);}";
+
+  function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(x); return x; }
+  function prog(vs, fs, attrs) {
+    var p = gl.createProgram(); gl.attachShader(p, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
+    attrs.forEach(function (n, i) { gl.bindAttribLocation(p, i, n); }); gl.linkProgram(p);
+    if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw gl.getProgramInfoLog(p);
+    var u = {}, n = gl.getProgramParameter(p, gl.ACTIVE_UNIFORMS);
+    for (var i = 0; i < n; i++) { var a = gl.getActiveUniform(p, i); u[a.name] = gl.getUniformLocation(p, a.name); }
+    return { p: p, u: u };
+  }
+  var pFade, pRib, pDrop, pShow;
+  try { pFade = prog(V_FULL, F_FADE, ["p"]); pRib = prog(V_RIB, F_RIB, ["p", "a"]); pDrop = prog(V_DROP, F_DROP, ["p"]); pShow = prog(V_FULL, F_SHOW, ["p"]); } catch (e) { return; }
+
+  var vaoFull = gl.createVertexArray(); gl.bindVertexArray(vaoFull);
+  var bFull = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bFull); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  var vaoQuad = gl.createVertexArray(); gl.bindVertexArray(vaoQuad);
+  var bQuad = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bQuad); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+  var vaoRib = gl.createVertexArray(); gl.bindVertexArray(vaoRib);
+  var bRib = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bRib);
+  gl.enableVertexAttribArray(0); gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 24, 0);
+  gl.enableVertexAttribArray(1); gl.vertexAttribPointer(1, 4, gl.FLOAT, false, 24, 8);
+  gl.bindVertexArray(null);
+
+  function tex(w, h, f, fmt, type, data, wrapS, filt) {
+    var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texImage2D(gl.TEXTURE_2D, 0, f, w, h, 0, fmt, type, data);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filt); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrapS); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    return t;
+  }
+  var brushT = null, dropT = null;
+  function load(src, wrapS, done) {
+    var im = new Image(); im.decoding = "async";
+    im.onload = function () {
+      var t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false); gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, gl.RGBA, gl.UNSIGNED_BYTE, im); gl.generateMipmap(gl.TEXTURE_2D);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, wrapS); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      done(t);
+    };
+    im.src = src;
+  }
+  load(SRC.brush, gl.REPEAT, function (t) { brushT = t; });
+  load(SRC.drops, gl.CLAMP_TO_EDGE, function (t) { dropT = t; });
+
+  // ---------- the page of ink (CSS-pixel grid; red = ink, green = time left before it fades) ----------
+  var W, H, S, dpr, A, B, fA, fB;
+  function fbo(t) { var f = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, f); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); return f; }
   function size() {
-    dpr = Math.min(2, window.devicePixelRatio || 1);
-    W = innerWidth; H = innerHeight;
-    cv.width = W * dpr; cv.height = H * dpr;
-    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    W = innerWidth; H = innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2); S = Math.min(dpr, 1.5);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    [A, B].forEach(function (t) { if (t) gl.deleteTexture(t); });
+    A = tex(Math.round(W * S), Math.round(H * S), gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, null, gl.CLAMP_TO_EDGE, gl.LINEAR);
+    B = tex(Math.round(W * S), Math.round(H * S), gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, null, gl.CLAMP_TO_EDGE, gl.LINEAR);
+    fA = fbo(A); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); fB = fbo(B); gl.clear(gl.COLOR_BUFFER_BIT);
+    if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) throw 0;
   }
-  size();
-  addEventListener("resize", size);
+  try { size(); } catch (e) { return; }
+  document.body.appendChild(cv);
+  var lastW = W;
+  window.addEventListener("resize", function () { if (Math.abs(innerWidth - lastW) > 2) { lastW = innerWidth; try { size(); } catch (e) {} } });
 
-  const blots = []; // {x, y, r0, r1, a, t0, grow, life, ink}
-  const ease = (t) => 1 - Math.pow(1 - t, 3);
-  const rnd = (a, b) => a + Math.random() * (b - a);
-
-  function blot(x, y, r0, r1, a, grow, life, ink, rim) {
-    blots.push({ x, y, r0, r1, a, t0: performance.now(), grow, life, ink, rim: !!rim });
-    if (blots.length > 420) blots.splice(0, blots.length - 420);
-    if (!running) { running = true; requestAnimationFrame(frame); }
+  // ---------- the brush ----------
+  // nodes along a smoothed path, in page coordinates; each new stretch is redrawn for half a second while it soaks in
+  var nodes = [], pts = [], pt = 0, half = 7, strokeLen = 0, uLen = 0, dry0 = 0, lastNode = null;
+  var mx = 0, my = 0, inside = false, lastMove = 0, rest = 0, restX = -99, restY = -99, pool = null;
+  var drops = [], scrollY0 = window.scrollY, scrollAcc = 0;
+  function now() { return performance.now(); }
+  function begin(x, y, t) { pts = [[x, y], [x, y]]; strokeLen = 0; dry0 = Math.random() * .05; lastNode = null; pt = t; uLen = Math.random() * BW; }
+  function addNode(x, y, nx, ny, h, t) {
+    var s = Math.min(.7, dry0 + Math.max(0, strokeLen - 900) / 2400);       // the brush runs dry along the stroke
+    if (lastNode) uLen += Math.hypot(x - lastNode.x, y - lastNode.y) * BCORE / (lastNode.h + h);
+    var n = { x: x, y: y + window.scrollY, nx: nx, ny: ny, h: h, u: uLen / BW, s: s, t: t, first: !lastNode };
+    nodes.push(n); lastNode = n;
   }
-
-  // a watery stain: dense core, soft rim, a little darker at the drying edge
-  function paint(b, now) {
-    const t = now - b.t0;
-    if (t > b.life) return false;
-    const g = ease(Math.min(1, t / b.grow));
-    const r = b.r0 + (b.r1 - b.r0) * g;
-    const fade = t < b.life * 0.55 ? 1 : 1 - (t - b.life * 0.55) / (b.life * 0.45);
-    const a = b.a * fade;
-    const grad = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, r);
-    const c = b.ink;
-    grad.addColorStop(0, `rgba(${c},${a})`);
-    if (b.rim) {            // a drying drop: slightly darker just inside its edge
-      grad.addColorStop(0.6, `rgba(${c},${a * 0.8})`);
-      grad.addColorStop(0.84, `rgba(${c},${a * 0.92})`);
-    } else {                // a wash: simply fades into the paper
-      grad.addColorStop(0.45, `rgba(${c},${a * 0.7})`);
+  function stroke(x, y, t) {
+    if (!pts.length || t - pt > 350) { begin(x, y, t); return; }
+    var p1 = pts[pts.length - 1], L = Math.hypot(x - p1[0], y - p1[1]); if (L < 1.5) return;
+    var v = L / Math.max(6, t - pt), target = Math.max(2.2, Math.min(9, 9 - v * 2.8));
+    var p0 = pts[pts.length - 2], a0x = (p0[0] + p1[0]) / 2, a0y = (p0[1] + p1[1]) / 2, a1x = (p1[0] + x) / 2, a1y = (p1[1] + y) / 2;
+    var seg = Math.hypot(a1x - a0x, a1y - a0y), n = Math.max(1, Math.ceil(seg / 2.5)), h0 = half;
+    half += (target - half) * .3;
+    for (var k = lastNode ? 1 : 0; k <= n; k++) {
+      var t1 = k / n, u = 1 - t1;
+      var cx = u * u * a0x + 2 * u * t1 * p1[0] + t1 * t1 * a1x, cy = u * u * a0y + 2 * u * t1 * p1[1] + t1 * t1 * a1y;
+      var tx = 2 * u * (p1[0] - a0x) + 2 * t1 * (a1x - p1[0]), ty = 2 * u * (p1[1] - a0y) + 2 * t1 * (a1y - p1[1]), tl = Math.hypot(tx, ty);
+      if (tl < 1e-3) continue;
+      if (k > 0) strokeLen += seg / n;
+      var taper = .18 + .82 * Math.min(1, strokeLen / 70);
+      addNode(cx, cy, -ty / tl, tx / tl, (h0 + (half - h0) * t1) * taper, t);
     }
-    grad.addColorStop(1, `rgba(${c},0)`);
-    cx.fillStyle = grad;
-    cx.beginPath(); cx.arc(b.x, b.y, r, 0, Math.PI * 2); cx.fill();
-    return true;
+    pts.push([x, y]); if (pts.length > 3) pts.shift(); pt = t;
+  }
+  // when the brush stops, it lifts: the stroke narrows to a ragged point instead of ending square
+  function lift(t) {
+    var n = lastNode; if (!n || n.first || n.lifted) return; n.lifted = true;
+    var dx = n.ny, dy = -n.nx, h = n.h, x = n.x, y = n.y - window.scrollY;
+    for (var i = 1; i <= 5; i++) { var f = i / 5; addNode(x + dx * h * 1.3 * f, y + dy * h * 1.3 * f, n.nx, n.ny, h * (1 - .82 * f), t); }
+    lastNode.lifted = true;
+  }
+  function drop(x, y, R, dur, k, t) {
+    drops.push({ x: x, y: y + window.scrollY, R: R, rot: Math.random() * 6.283, tile: Math.random() * 4 | 0, t0: t, dur: dur, k: k, e: 0 });
   }
 
-  let running = false;
-  function frame(now) {
-    cx.clearRect(0, 0, W, H);
-    for (let i = blots.length - 1; i >= 0; i--) if (!paint(blots[i], now)) blots.splice(i, 1);
-    if (blots.length) requestAnimationFrame(frame); else running = false;
-  }
+  var running = false, until = 0, last = 0;
+  function wake(t) { until = Math.max(until, t + 5000); if (!running && !MANUAL) { running = true; last = now(); requestAnimationFrame(frame); } }
+  var MANUAL = !!window.__inkManual;
 
-  // moving: a faint grey wash that seeps in behind the pointer
-  if (fine) {
-    let lx = -1, ly = -1;
-    addEventListener("pointermove", (e) => {
-      if (e.pointerType !== "mouse") return;
-      const d = Math.hypot(e.clientX - lx, e.clientY - ly);
-      if (lx >= 0 && d < 5) return;
-      lx = e.clientX; ly = e.clientY;
-      blot(lx + rnd(-4, 4), ly + rnd(-4, 4), rnd(3, 6), rnd(22, 40), rnd(0.018, 0.03), rnd(1800, 2800), rnd(3600, 4800), "40,38,36");
-    }, { passive: true });
+  function onMove(x, y, t) {
+    mx = x; my = y; inside = true;
+    if (Math.hypot(x - restX, y - restY) > 5) { restX = x; restY = y; lastMove = t; rest = 0; pool = null; }
+    stroke(x, y, t); wake(t);
   }
-
-  // a click: a drop of ink that blooms unevenly, with a pale bleed around it
-  addEventListener("pointerdown", (e) => {
-    if (e.button !== 0) return;
-    const x = e.clientX, y = e.clientY;
-    blot(x, y, 0, rnd(80, 110), 0.06, 6500, 10000, "60,58,55");           // the pale water bleeding out first
-    blot(x, y, 1, rnd(16, 22), 0.6, 2400, 9000, "22,21,20", true);        // the drop
-    const n = 12 + Math.floor(Math.random() * 6);
-    for (let i = 0; i < n; i++) {                                         // uneven fibres the ink runs along
-      const ang = rnd(0, Math.PI * 2), dist = rnd(4, 26);
-      blot(x + Math.cos(ang) * dist, y + Math.sin(ang) * dist, 0, rnd(6, 20), rnd(0.12, 0.3), rnd(3000, 6500), rnd(8000, 10000), "26,25,24", Math.random() < 0.5);
-    }
+  function onDown(x, y, touch, t) {
+    var s = touch ? .8 : 1;
+    drop(x, y, (30 + Math.random() * 10) * s, 2400, 1, t);
+    var n = Math.random() * 3 | 0;
+    for (var i = 0; i < n; i++) { var a = Math.random() * 6.283, d = (24 + Math.random() * 34) * s; drop(x + Math.cos(a) * d, y + Math.sin(a) * d, (2.5 + Math.random() * 3.5) * s, 500, .85, t); }
+    pts = []; wake(t);
+  }
+  if (FINE) {
+    window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") onMove(e.clientX, e.clientY, now()); }, { passive: true });
+    document.documentElement.addEventListener("mouseleave", function () { inside = false; pts = []; });
+  }
+  var tap = null;
+  window.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "mouse") onDown(e.clientX, e.clientY, false, now());
+    else tap = { x: e.clientX, y: e.clientY, t: now() };
   }, { passive: true });
+  window.addEventListener("pointerup", function (e) {
+    if (!tap || e.pointerType === "mouse") return;
+    if (Math.hypot(e.clientX - tap.x, e.clientY - tap.y) < 10 && now() - tap.t < 450) onDown(tap.x, tap.y, true, now());
+    tap = null;
+  }, { passive: true });
+  window.addEventListener("pointercancel", function () { tap = null; }, { passive: true });
+  window.addEventListener("scroll", function () { var y = window.scrollY; scrollAcc += y - scrollY0; scrollY0 = y; if (now() < until) wake(now()); }, { passive: true });
+
+  // ---------- drawing ----------
+  var ribData = new Float32Array(6 * 6 * 512);
+  function pushV(o, x, y, u, v, s, age) { ribData[o] = x; ribData[o + 1] = y; ribData[o + 2] = u; ribData[o + 3] = v; ribData[o + 4] = s; ribData[o + 5] = age; return o + 6; }
+  function drawRibbons(t, scroll) {
+    if (!brushT) return;
+    var E = BH / BCORE, o = 0, cnt = 0;
+    for (var i = 1; i < nodes.length; i++) {
+      var a = nodes[i - 1], b = nodes[i]; if (b.first) continue;
+      if (o + 36 > ribData.length) { var g = new Float32Array(ribData.length * 2); g.set(ribData); ribData = g; }
+      var ea = a.h * E, eb = b.h * E, ag = t - a.t, bg = t - b.t;
+      o = pushV(o, a.x - a.nx * ea, a.y - a.ny * ea, a.u, 0, a.s, ag); o = pushV(o, a.x + a.nx * ea, a.y + a.ny * ea, a.u, 1, a.s, ag); o = pushV(o, b.x - b.nx * eb, b.y - b.ny * eb, b.u, 0, b.s, bg);
+      o = pushV(o, b.x - b.nx * eb, b.y - b.ny * eb, b.u, 0, b.s, bg); o = pushV(o, a.x + a.nx * ea, a.y + a.ny * ea, a.u, 1, a.s, ag); o = pushV(o, b.x + b.nx * eb, b.y + b.ny * eb, b.u, 1, b.s, bg);
+      cnt += 6;
+    }
+    if (!cnt) return;
+    gl.useProgram(pRib.p); gl.bindVertexArray(vaoRib); gl.bindBuffer(gl.ARRAY_BUFFER, bRib); gl.bufferData(gl.ARRAY_BUFFER, ribData.subarray(0, o), gl.DYNAMIC_DRAW);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, brushT); gl.uniform1i(pRib.u.tex, 0);
+    gl.uniform2f(pRib.u.view, W, H); gl.uniform1f(pRib.u.scroll, scroll); gl.uniform1f(pRib.u.k, STROKE);
+    gl.drawArrays(gl.TRIANGLES, 0, cnt);
+  }
+  function drawDrop(d, scroll) {
+    gl.uniform2f(pDrop.u.c, d.x, d.y); gl.uniform1f(pDrop.u.R, d.R); gl.uniform1f(pDrop.u.rot, d.rot);
+    gl.uniform2f(pDrop.u.tile, (d.tile & 1) * .5, (d.tile >> 1) * .5); gl.uniform1f(pDrop.u.e, d.e); gl.uniform1f(pDrop.u.k, d.k);
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+  }
+
+  function frame(t) {
+    var dt = Math.min(.1, (t - last) / 1000); last = t;
+    var scroll = window.scrollY;
+    // resting brush: the ink keeps flowing out into one spot
+    if (lastNode && !lastNode.lifted && t - pt > 140) { lift(t); pts = []; }
+    if (FINE && inside && t - lastMove > 600) {
+      rest = t - lastMove - 600;
+      if (!pool) { pool = { x: mx, y: my + scroll, R: 30 + Math.random() * 8, rot: Math.random() * 6.283, tile: Math.random() * 4 | 0, k: 1, e: 0 }; pts = []; }
+      pool.e = Math.min(1, Math.pow(rest / 3200, .75)); until = Math.max(until, t + 5000);
+    }
+    drops = drops.filter(function (d) { var q = Math.min(1, (t - d.t0) / d.dur); d.e = 1 - Math.pow(1 - q, 2.2); return q < 1 || d.e < 1; });
+    // 1. let the ink rest, then fade; follow the page when it scrolls
+    var cells = Math.round(scrollAcc * S); scrollAcc -= cells / S;
+    gl.disable(gl.BLEND); gl.bindVertexArray(vaoFull);
+    gl.useProgram(pFade.p); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A); gl.uniform1i(pFade.u.st, 0);
+    gl.uniform2f(pFade.u.shift, 0, -cells / Math.round(H * S)); gl.uniform1f(pFade.u.dt, dt);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fB); gl.viewport(0, 0, Math.round(W * S), Math.round(H * S)); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    var sw = A; A = B; B = sw; sw = fA; fA = fB; fB = sw;
+    // 2. lay down new ink (the darker of old and new wins)
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fA); gl.enable(gl.BLEND); gl.blendEquation(gl.MAX);
+    drawRibbons(t, scroll);
+    if (dropT && (drops.length || pool)) {
+      gl.useProgram(pDrop.p); gl.bindVertexArray(vaoQuad); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, dropT); gl.uniform1i(pDrop.u.tex, 0);
+      gl.uniform2f(pDrop.u.view, W, H); gl.uniform1f(pDrop.u.scroll, scroll);
+      drops.forEach(function (d) { drawDrop(d, scroll); }); if (pool) drawDrop(pool, scroll);
+    }
+    gl.disable(gl.BLEND); gl.blendEquation(gl.FUNC_ADD);
+    nodes = nodes.filter(function (n, i) { return t - n.t < SOAK + 20 || i === nodes.length - 1; });
+    // 3. show it
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, cv.width, cv.height); gl.bindVertexArray(vaoFull);
+    gl.useProgram(pShow.p); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A); gl.uniform1i(pShow.u.st, 0); gl.uniform3f(pShow.u.ink, INK[0], INK[1], INK[2]);
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (MANUAL) return;
+    if (t < until || scrollAcc) requestAnimationFrame(frame); else running = false;
+  }
+})();
+
+// Cursor — a small ink dot (html[data-cursor], "dot" unless the page sets another; "none" keeps the system arrow).
+// Mouse only; text fields keep their own caret; over links and buttons the dot opens into a pale wash.
+(function () {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  var root = document.documentElement, el = document.createElement("div");
+  if (!root.hasAttribute("data-cursor")) root.setAttribute("data-cursor", "dot");
+  el.className = "cur"; el.setAttribute("aria-hidden", "true");
+  el.innerHTML = '<span class="cur-b"><i></i></span><span class="cur-a"><i></i></span>';
+  document.body.appendChild(el);
+  var a = el.children[1], b = el.children[0], x = -200, y = -200, bx = -200, by = -200, raf = 0;
+  var KINDS = ["dot", "brush", "ring", "seal"];
+  function sync() { root.classList.toggle("cur-on", KINDS.indexOf(root.getAttribute("data-cursor")) > -1); }
+  sync(); new MutationObserver(sync).observe(root, { attributes: true, attributeFilter: ["data-cursor"] });
+  function loop() {
+    bx += (x - bx) * .2; by += (y - by) * .2;
+    a.style.transform = "translate3d(" + x + "px," + y + "px,0)";
+    b.style.transform = "translate3d(" + bx + "px," + by + "px,0)";
+    raf = Math.abs(x - bx) + Math.abs(y - by) > .2 ? requestAnimationFrame(loop) : 0;
+  }
+  var HOV = "a,button,[role=button],label,summary,select", TXT = "input,textarea,select,[contenteditable=true]";
+  window.addEventListener("pointermove", function (e) {
+    if (e.pointerType !== "mouse") return;
+    x = e.clientX; y = e.clientY; if (bx < -150) { bx = x; by = y; }
+    el.classList.add("on"); if (!raf) raf = requestAnimationFrame(loop);
+    var t = e.target && e.target.closest ? e.target : null;
+    el.classList.toggle("hov", !!(t && t.closest(HOV)));
+    el.classList.toggle("off", !!(t && t.closest(TXT)));
+  }, { passive: true });
+  root.addEventListener("mouseleave", function () { el.classList.remove("on"); });
+  window.addEventListener("pointerdown", function (e) { if (e.pointerType === "mouse") el.classList.add("down"); });
+  window.addEventListener("pointerup", function () { el.classList.remove("down"); });
+  window.addEventListener("blur", function () { el.classList.remove("down"); });
 })();

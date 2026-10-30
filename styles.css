@@ -2268,3 +2268,68 @@ html[data-lang="ko"] .pr-quote p {
   pointer-events: none;
   mix-blend-mode: multiply;
 }
+
+/* ========== CURSOR — a small ink dot (script.js), html[data-cursor="dot"] ========== */
+html.cur-on,
+html.cur-on * {
+  cursor: none !important;
+}
+
+html.cur-on input,
+html.cur-on textarea,
+html.cur-on select,
+html.cur-on [contenteditable="true"] {
+  cursor: auto !important;
+}
+
+.cur {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+html.cur-on .cur.on {
+  opacity: 1;
+}
+
+html.cur-on .cur.off {
+  opacity: 0;
+}
+
+.cur-a,
+.cur-b {
+  position: absolute;
+  left: 0;
+  top: 0;
+  will-change: transform;
+}
+
+.cur i {
+  position: absolute;
+  display: block;
+  transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.25s, background-color 0.25s, border-color 0.25s;
+}
+
+/* A — ink dot: a small drop that opens into a pale wash over links */
+html[data-cursor="dot"] .cur-a i {
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 52% 48% 50% 46%;
+  background: #1b1b1b;
+  box-shadow: 0 0 1.5px rgba(27, 27, 27, 0.6);
+}
+
+html[data-cursor="dot"] .cur.hov .cur-a i {
+  transform: scale(3.6);
+  background: rgba(27, 27, 27, 0.16);
+  box-shadow: none;
+}
+
+html[data-cursor="dot"] .cur.down .cur-a i {
+  transform: scale(0.7);
+}
