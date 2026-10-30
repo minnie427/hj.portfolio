@@ -2170,58 +2170,66 @@ html[data-lang="ko"] .pr-quote p {
   }
 }
 
-/* ========== STATEMENT MOTIFS — details cut from the paintings ========== */
-.st-page .ed-head {
-  position: relative;
+/* ========== STATEMENT MOTIFS — painting details drifting between the sections (layout D) ========== */
+.st-flow .st-sec {
+  max-width: 760px;
 }
 
-.st-art {
-  pointer-events: none;
-  user-select: none;
+.st-flow .st-sec:nth-of-type(even) {
+  margin-left: auto;
 }
+
+/* the hairlines between sections are replaced by open space */
+.st-flow .ed-row + .ed-row {
+  border-top: 0;
+}
+
+.st-flow .st-sec + .st-drift,
+.st-flow .st-drift + .st-sec {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.st-drift {
+  position: relative;
+  pointer-events: none;
+}
+
+.st-drift--1 { height: 300px; }
+.st-drift--2 { height: 380px; }
+.st-drift--3 { height: 290px; }
+.st-drift--4 { height: 400px; }
+.st-drift--5 { height: 300px; }
 
 .st-m {
+  position: absolute;
   display: block;
-  animation: st-float 9s ease-in-out infinite;
-}
-
-.st-m img {
-  display: block;
-  width: 100%;
   height: auto;
+  max-width: none;
+  transform: rotate(var(--r, 0deg));
+  animation: st-drift 10s ease-in-out infinite;
 }
 
-.ed-side .st-art {
-  margin-top: 2.8rem;
+/* every detail sits at its own height, size and tilt — no two on one line */
+.st-m.d1 { width: 270px; left: 58%; top: 34px; --r: -7deg; }
+.st-m.d2 { width: 310px; left: 3%; top: 150px; --r: 3deg; animation-duration: 12s; }
+.st-m.d3 { width: 118px; left: 70%; top: 6px; --r: 14deg; animation-delay: -3s; }
+.st-m.d4 { width: 230px; left: 33%; top: 46px; --r: -4deg; animation-duration: 13s; }
+.st-m.d5 { width: 132px; left: 12%; top: 12px; --r: -11deg; animation-delay: -2s; }
+.st-m.d6 { width: 250px; left: 63%; top: 150px; --r: 4deg; animation-delay: -5s; }
+.st-m.d7 { width: 250px; left: 20%; top: 60px; --r: -3deg; animation-delay: -4s; }
+
+@keyframes st-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
+  50% { transform: translate3d(6px, -10px, 0) rotate(calc(var(--r, 0deg) + 1.5deg)); }
 }
 
-/* one per section */
-.st-m--fish { width: 186px; }
-.st-m--woman { width: 168px; animation-delay: -1.5s; }
-.st-m--gcloud { width: 214px; animation-duration: 11s; }
-.st-m--skyfish { width: 196px; animation-name: st-swim; animation-delay: -4s; }
-.st-m--lotus { width: 164px; animation-duration: 12s; animation-delay: -2.5s; }
-
-/* after the signature */
-.st-end {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: 1.6rem;
-  margin-top: 4.5rem;
-}
-
-.st-end .ed-sign {
-  margin-top: 0;
-}
-
-.st-m--end {
-  width: 176px;
-  animation-delay: -5s;
+@media (prefers-reduced-motion: reduce) {
+  .st-m { animation: none; }
 }
 
 .st-credit {
-  margin-top: 2.2rem;
+  margin-top: 2.6rem;
   max-width: 640px;
   font-size: 0.7rem;
   line-height: 1.7;
@@ -2234,52 +2242,29 @@ html[data-lang="ko"] .pr-quote p {
   text-underline-offset: 3px;
 }
 
-@keyframes st-float {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(0, -7px, 0); }
-}
-
-@keyframes st-swim {
-  0%, 100% { transform: translate3d(0, 0, 0); }
-  50% { transform: translate3d(6px, -9px, 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .st-m {
-    animation: none;
-  }
-}
-
 @media (max-width: 900px) {
-  .st-page .ed-row {
-    position: relative;
-  }
-
-  .st-page .ed-side {
-    padding-right: 116px;
-    min-height: 84px;
-  }
-
-  .ed-side .st-art {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-  }
-
-  .st-m--fish { width: 96px; }
-  .st-m--woman { width: 88px; }
-  .st-m--gcloud { width: 112px; }
-  .st-m--skyfish { width: 106px; }
-  .st-m--lotus { width: 92px; }
-
-  .st-m--end {
-    width: 120px;
-  }
+  .st-flow .st-sec:nth-of-type(even) { margin-left: 0; }
+  .st-drift--1 { height: 190px; }
+  .st-drift--2 { height: 250px; }
+  .st-drift--3 { height: 190px; }
+  .st-drift--4 { height: 260px; }
+  .st-drift--5 { height: 190px; }
+  .st-m.d1 { width: 46%; left: 46%; top: 22px; }
+  .st-m.d2 { width: 54%; left: 0; top: 100px; }
+  .st-m.d3 { width: 22%; left: 70%; top: 4px; }
+  .st-m.d4 { width: 42%; left: 26%; top: 24px; }
+  .st-m.d5 { width: 24%; left: 6%; top: 8px; }
+  .st-m.d6 { width: 46%; left: 48%; top: 100px; }
+  .st-m.d7 { width: 46%; left: 14%; top: 30px; }
 }
 
-@media (max-width: 900px) {
-  .st-page .ed-row + .ed-row .ed-side .st-art {
-    top: 2.5rem;
-  }
+/* ========== INK ON HANJI — cursor wash and click drops (script.js) ========== */
+.ink-layer {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 40;
+  pointer-events: none;
+  mix-blend-mode: multiply;
 }

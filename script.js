@@ -169,3 +169,89 @@ document.addEventListener("DOMContentLoaded", () => {
   const year = String(new Date().getFullYear());
   document.querySelectorAll(".js-year").forEach((el) => (el.textContent = year));
 });
+
+// Ink on hanji: the page is the paper. Moving the mouse lets a faint wash of ink seep in and fade;
+// a click drops a drop of ink that slowly bleeds outward, then dries away.
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const cv = document.createElement("canvas");
+  cv.className = "ink-layer";
+  cv.setAttribute("aria-hidden", "true");
+  document.body.appendChild(cv);
+  const cx = cv.getContext("2d");
+  let W = 0, H = 0, dpr = 1;
+  function size() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    cx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  addEventListener("resize", size);
+
+  const blots = []; // {x, y, r0, r1, a, t0, grow, life, ink}
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  const rnd = (a, b) => a + Math.random() * (b - a);
+
+  function blot(x, y, r0, r1, a, grow, life, ink, rim) {
+    blots.push({ x, y, r0, r1, a, t0: performance.now(), grow, life, ink, rim: !!rim });
+    if (blots.length > 420) blots.splice(0, blots.length - 420);
+    if (!running) { running = true; requestAnimationFrame(frame); }
+  }
+
+  // a watery stain: dense core, soft rim, a little darker at the drying edge
+  function paint(b, now) {
+    const t = now - b.t0;
+    if (t > b.life) return false;
+    const g = ease(Math.min(1, t / b.grow));
+    const r = b.r0 + (b.r1 - b.r0) * g;
+    const fade = t < b.life * 0.55 ? 1 : 1 - (t - b.life * 0.55) / (b.life * 0.45);
+    const a = b.a * fade;
+    const grad = cx.createRadialGradient(b.x, b.y, 0, b.x, b.y, r);
+    const c = b.ink;
+    grad.addColorStop(0, `rgba(${c},${a})`);
+    if (b.rim) {            // a drying drop: slightly darker just inside its edge
+      grad.addColorStop(0.6, `rgba(${c},${a * 0.8})`);
+      grad.addColorStop(0.84, `rgba(${c},${a * 0.92})`);
+    } else {                // a wash: simply fades into the paper
+      grad.addColorStop(0.45, `rgba(${c},${a * 0.7})`);
+    }
+    grad.addColorStop(1, `rgba(${c},0)`);
+    cx.fillStyle = grad;
+    cx.beginPath(); cx.arc(b.x, b.y, r, 0, Math.PI * 2); cx.fill();
+    return true;
+  }
+
+  let running = false;
+  function frame(now) {
+    cx.clearRect(0, 0, W, H);
+    for (let i = blots.length - 1; i >= 0; i--) if (!paint(blots[i], now)) blots.splice(i, 1);
+    if (blots.length) requestAnimationFrame(frame); else running = false;
+  }
+
+  // moving: a faint grey wash that seeps in behind the pointer
+  if (fine) {
+    let lx = -1, ly = -1;
+    addEventListener("pointermove", (e) => {
+      if (e.pointerType !== "mouse") return;
+      const d = Math.hypot(e.clientX - lx, e.clientY - ly);
+      if (lx >= 0 && d < 5) return;
+      lx = e.clientX; ly = e.clientY;
+      blot(lx + rnd(-4, 4), ly + rnd(-4, 4), rnd(3, 6), rnd(22, 40), rnd(0.018, 0.03), rnd(1800, 2800), rnd(3600, 4800), "40,38,36");
+    }, { passive: true });
+  }
+
+  // a click: a drop of ink that blooms unevenly, with a pale bleed around it
+  addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return;
+    const x = e.clientX, y = e.clientY;
+    blot(x, y, 0, rnd(80, 110), 0.06, 6500, 10000, "60,58,55");           // the pale water bleeding out first
+    blot(x, y, 1, rnd(16, 22), 0.6, 2400, 9000, "22,21,20", true);        // the drop
+    const n = 12 + Math.floor(Math.random() * 6);
+    for (let i = 0; i < n; i++) {                                         // uneven fibres the ink runs along
+      const ang = rnd(0, Math.PI * 2), dist = rnd(4, 26);
+      blot(x + Math.cos(ang) * dist, y + Math.sin(ang) * dist, 0, rnd(6, 20), rnd(0.12, 0.3), rnd(3000, 6500), rnd(8000, 10000), "26,25,24", Math.random() < 0.5);
+    }
+  }, { passive: true });
+})();
