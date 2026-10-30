@@ -435,7 +435,8 @@ document.addEventListener("DOMContentLoaded", () => {
 })();
 
 // Cursor — a small ink dot (html[data-cursor], "dot" unless the page sets another; "none" keeps the system arrow).
-// Mouse only; text fields keep their own caret; over links and buttons the dot opens into a pale wash.
+// Mouse only; text fields keep their own caret; over links and buttons the dot opens into a pale wash;
+// over black sections ([data-dark]) it turns light.
 (function () {
   if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
   var root = document.documentElement, el = document.createElement("div");
@@ -461,6 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
     var t = e.target && e.target.closest ? e.target : null;
     el.classList.toggle("hov", !!(t && t.closest(HOV)));
     el.classList.toggle("off", !!(t && t.closest(TXT)));
+    el.classList.toggle("dark", !!(t && t.closest("[data-dark]")));               // light dot on black sections
   }, { passive: true });
   root.addEventListener("mouseleave", function () { el.classList.remove("on"); });
   window.addEventListener("pointerdown", function (e) { if (e.pointerType === "mouse") el.classList.add("down"); });
