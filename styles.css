@@ -1919,6 +1919,16 @@ html[data-lang="ko"] .aw-sec a {
   min-width: 0;
 }
 
+/* the opening paragraph runs from the left edge, under its subtitle */
+.pr-intro {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.2rem;
+}
+
+.pr-intro .pr-text {
+  max-width: 760px;
+}
+
 .pr-text p,
 .pr-p {
   font-size: 1.03rem;
