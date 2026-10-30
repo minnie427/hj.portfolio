@@ -196,7 +196,9 @@ document.addEventListener("DOMContentLoaded", () => {
   var V_FULL = "#version 300 es\nin vec2 p;out vec2 uv;void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}";
   // red = ink, green = seconds it still rests, blue = 1 where it came from a drop (drops fade slower than strokes)
   // fading ink sinks into the paper: it spreads a little, and fibres drink it unevenly (a paper map anchored to the page)
-  var PAPER = "float hs(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\n" +
+  // integer hash: the same quality at any distance down the page (sin-based hashes break on GPUs for large inputs)
+  var PAPER = "float hs(vec2 p){uvec2 q=uvec2(ivec2(floor(p))+ivec2(1<<20));uint h=q.x*1597334677u^q.y*3812015801u;\n" +
+    " h^=h>>16;h*=2246822519u;h^=h>>13;h*=3266489917u;h^=h>>16;return float(h)*(1./4294967296.);}\n" +
     "float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hs(i),hs(i+vec2(1,0)),f.x),mix(hs(i+vec2(0,1)),hs(i+vec2(1,1)),f.x),f.y);}\n" +
     "float paper(vec2 p){vec2 a=vec2(p.x*.8+p.y*.6,p.y*.8-p.x*.6),b=vec2(p.x*.5-p.y*.87,p.y*.5+p.x*.87);\n" +
     " return vn(p/7.)*.4+vn(a*vec2(.07,.7))*.22+vn(b*vec2(.06,.6))*.18+vn(p/1.7)*.2;}\n";
@@ -220,7 +222,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var F_DROP = "#version 300 es\nprecision highp float;uniform sampler2D tex;uniform vec2 tile;uniform float e,k;in vec2 tc;out vec4 o;\n" +
     "void main(){vec2 t=texture(tex,tile+clamp(tc,.004,.996)*.5).rg;float m=1.-smoothstep(e-.06,e,t.g);float d=t.r*m*k;o=vec4(d,d>.01?.7:0.,d>.01?1.:0.,1.);}";
   var F_SHOW = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec3 ink;uniform float dpr,py;in vec2 uv;out vec4 o;\n" + PAPER +
-    "float h(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}\n" +
+    "float h(vec2 p){return hs(p+vec2(7919.,104729.));}\n" +
     "void main(){vec4 c=texture(st,uv);float d=c.r;if(d<.004){o=vec4(0);return;}float n=h(floor(gl_FragCoord.xy));\n" +
     "float a=.7*min(d,1.)*(1.-.12*(n-.5)*(1.-d));\n" +
     "float sink=1.-smoothstep(0.,.02,c.g);if(sink>0.){float g=paper(vec2(gl_FragCoord.x/dpr,gl_FragCoord.y/dpr-py));\n" +
@@ -301,8 +303,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function begin(x, y, t) { pts = [[x, y], [x, y]]; strokeLen = 0; dry0 = Math.random() * .08; lastNode = null; pt = t; uLen = Math.random() * BW; }
   function addNode(x, y, nx, ny, h, t) {
     var s = Math.min(.86, dry0 + Math.max(0, strokeLen - 480) / 1700);       // the brush runs dry along the stroke
-    if (lastNode) uLen += Math.hypot(x - lastNode.x, y - lastNode.y) * BCORE / (lastNode.h + h);
-    var n = { x: x, y: y + window.scrollY, nx: nx, ny: ny, h: h, u: uLen / BW, s: s, t: t, first: !lastNode };
+    var py = y + window.scrollY;                                   // nodes live in page coordinates
+    if (lastNode) uLen += Math.hypot(x - lastNode.x, py - lastNode.y) * BCORE / (lastNode.h + h);
+    var n = { x: x, y: py, nx: nx, ny: ny, h: h, u: uLen / BW, s: s, t: t, first: !lastNode };
     nodes.push(n); lastNode = n;
   }
   function stroke(x, y, t) {
