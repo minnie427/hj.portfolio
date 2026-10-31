@@ -36,7 +36,7 @@
     if (Ih >= 1) ty0 = (-(Ih - 1) / 2 / Ih) * 100;
     else { s0 = 1 / Ih; tx0 = ((1 - s0) / 2) * 100; ty0 = 0; }
     const avail = 1 - t - bo;
-    const c = Math.min(avail / Ih, 0.84);
+    const c = Math.min(avail / Ih, 0.9);
     const y = t + (avail - c * Ih) / 2;
     return { c, a: { tx: tx0, ty: ty0, s: s0 }, b: { tx: ((1 - c) / 2) * 100, ty: (y / Ih) * 100, s: c } };
   }

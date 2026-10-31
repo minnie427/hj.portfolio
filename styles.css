@@ -1073,8 +1073,8 @@ body.home.hero-light .site-header {
   height: 100svh;
   overflow: hidden;
   /* space kept above and below the fully revealed work (px) */
-  --top: 124;
-  --bot: 100;
+  --top: 88;
+  --bot: 64;
 }
 
 .pp-img {
@@ -1224,8 +1224,8 @@ body.hero-light .pp-ctl {
 
 @media (max-width: 600px) {
   .pp-stage {
-    --top: 84;
-    --bot: 118;
+    --top: 76;
+    --bot: 96;
   }
 
   .pp-cap .sub {
@@ -2215,11 +2215,16 @@ html[data-lang="ko"] .pr-quote p {
   pointer-events: none;
 }
 
-.st-drift--1 { height: 300px; }
-.st-drift--2 { height: 380px; }
-.st-drift--3 { height: 290px; }
-.st-drift--4 { height: 400px; }
-.st-drift--5 { height: 300px; }
+.st-drift--1 { height: 270px; }
+.st-drift--2 { height: 330px; }
+.st-drift--3 { height: 360px; }
+.st-drift--4 { height: 340px; }
+.st-drift--5 { height: 400px; }
+
+/* details may reach past the column into the page margins (and slip off the edge); the page never scrolls sideways */
+body:has(.st-page) {
+  overflow-x: clip;
+}
 
 .st-m {
   position: absolute;
@@ -2230,14 +2235,18 @@ html[data-lang="ko"] .pr-quote p {
   animation: st-drift 10s ease-in-out infinite;
 }
 
-/* every detail sits at its own height, size and tilt — no two on one line */
-.st-m.d1 { width: 270px; left: 58%; top: 34px; --r: -7deg; }
-.st-m.d2 { width: 310px; left: 3%; top: 150px; --r: 3deg; animation-duration: 12s; }
-.st-m.d3 { width: 118px; left: 70%; top: 6px; --r: 14deg; animation-delay: -3s; }
-.st-m.d4 { width: 230px; left: 33%; top: 46px; --r: -4deg; animation-duration: 13s; }
-.st-m.d5 { width: 132px; left: 12%; top: 12px; --r: -11deg; animation-delay: -2s; }
-.st-m.d6 { width: 250px; left: 63%; top: 150px; --r: 4deg; animation-delay: -5s; }
-.st-m.d7 { width: 250px; left: 20%; top: 60px; --r: -3deg; animation-delay: -4s; }
+/* scattered freely: some in the margins, some beside the text above, one slipping off the edge —
+   sizes, heights and tilts all different. "edge" = calc(50% - 50vw), the window's edge seen from the column */
+.st-m.d1 { width: clamp(150px, 13vw, 190px); left: auto; right: calc(50% - 50vw + 4vw); top: -210px; --r: 13deg; }
+.st-m.d2 { width: 280px; left: calc(50% - 50vw + 2.5vw); right: auto; top: 96px; --r: -9deg; animation-duration: 12s; animation-delay: -4s; }
+.st-m.d3 { width: 232px; left: 7%; right: auto; top: 44px; --r: -15deg; animation-duration: 11s; }
+.st-m.d4 { width: clamp(160px, 14vw, 200px); left: auto; right: calc(50% - 50vw + 2vw); top: 6px; --r: 6deg; animation-delay: -3s; }
+.st-m.d5 { width: 220px; left: 45%; right: auto; top: 30px; --r: 8deg; animation-duration: 13s; }
+.st-m.d6 { width: 300px; left: calc(50% - 50vw - 36px); right: auto; top: 120px; --r: -5deg; animation-delay: -5s; }
+.st-m.d7 { width: 260px; left: auto; right: calc(50% - 50vw + 5vw); top: 40px; --r: -4deg; animation-duration: 12s; animation-delay: -2s; }
+.st-m.d8 { width: 196px; left: 16%; right: auto; top: 170px; --r: 11deg; animation-delay: -6s; }
+.st-m.d9 { width: clamp(160px, 15vw, 214px); left: auto; right: calc(50% - 50vw + 3vw); top: -230px; --r: -11deg; animation-duration: 11s; animation-delay: -1s; }
+.st-m.d10 { width: 250px; left: 21%; right: auto; top: 120px; --r: 3deg; animation-duration: 13s; animation-delay: -4s; }
 
 @keyframes st-drift {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
@@ -2264,18 +2273,21 @@ html[data-lang="ko"] .pr-quote p {
 
 @media (max-width: 900px) {
   .st-flow .st-sec:nth-of-type(even) { margin-left: 0; }
-  .st-drift--1 { height: 190px; }
+  .st-drift--1 { height: 300px; }
   .st-drift--2 { height: 250px; }
-  .st-drift--3 { height: 190px; }
-  .st-drift--4 { height: 260px; }
-  .st-drift--5 { height: 190px; }
-  .st-m.d1 { width: 46%; left: 46%; top: 22px; }
-  .st-m.d2 { width: 54%; left: 0; top: 100px; }
-  .st-m.d3 { width: 22%; left: 70%; top: 4px; }
-  .st-m.d4 { width: 42%; left: 26%; top: 24px; }
-  .st-m.d5 { width: 24%; left: 6%; top: 8px; }
-  .st-m.d6 { width: 46%; left: 48%; top: 100px; }
-  .st-m.d7 { width: 46%; left: 14%; top: 30px; }
+  .st-drift--3 { height: 320px; }
+  .st-drift--4 { height: 240px; }
+  .st-drift--5 { height: 260px; }
+  .st-m.d1 { width: 34%; left: auto; right: -6%; top: 0; }
+  .st-m.d2 { width: 56%; left: -8%; right: auto; top: 122px; }
+  .st-m.d3 { width: 46%; left: 26%; right: auto; top: 0; }
+  .st-m.d4 { width: 38%; left: auto; right: -7%; top: 92px; }
+  .st-m.d5 { width: 40%; left: auto; right: 2%; top: 0; }
+  .st-m.d6 { width: 58%; left: -10%; right: auto; top: 96px; }
+  .st-m.d7 { width: 52%; left: 22%; right: auto; top: 2px; }
+  .st-m.d8 { width: 38%; left: 3%; right: auto; top: 112px; }
+  .st-m.d9 { width: 42%; left: auto; right: 4%; top: 140px; }
+  .st-m.d10 { width: 48%; left: -7%; right: auto; top: 8px; }
 }
 
 /* ========== PROCESS — the quote near the end stands without a rule ========== */
