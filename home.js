@@ -95,9 +95,8 @@
   document.addEventListener("visibilitychange", () => { if (!document.hidden) schedule(); });
 
   // Choosing a work by hand restarts the timer
-  // the next work soaks in like ink: a bloom grown along paper fibres (images/soak.png) opens from its centre
-  // while the work before it stays underneath and fades (styles.css .is-soak / .is-prev)
-  const SOAK = 3200;
+  // the next work comes in by a slow crossfade; the one before leaves a little ahead of it (styles.css .is-soak / .is-prev)
+  const SOAK = 3000;
   let soakT = 0;
   function show(k) {
     const prev = cur;

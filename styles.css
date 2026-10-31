@@ -2522,34 +2522,22 @@ html[data-cursor="dot"] .cur.dark.hov .cur-a i {
 }
 
 /* ========== ROUND 17 — Home soak-in, Process closing centred, centred menu, Contact CV buttons ========== */
-/* Home: the next work soaks in from its centre like ink; the one before fades out underneath */
+/* Home: a slow, clean crossfade — the work before leaves a little ahead of the next one,
+   so the outline of a larger work never lingers */
 .pp-img.is-on { z-index: 2; }
 .pp-img.is-prev {
   z-index: 1;
   opacity: 1;
   transition: none;
-  animation: pp-out 3.2s ease-in forwards;
+  animation: pp-out 1.9s ease-in-out forwards;
 }
 .pp-img.is-soak {
   opacity: 1;
   transition: none;
-  -webkit-mask-image: url("images/soak.png");
-  mask-image: url("images/soak.png");
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
-  animation: pp-soak 3.2s cubic-bezier(0.42, 0.08, 0.5, 1) both;
+  animation: pp-in 2.5s ease-in-out 0.45s both;
 }
-@keyframes pp-soak {
-  0% { -webkit-mask-size: 6% 6%; mask-size: 6% 6%; opacity: 0.35; }
-  35% { opacity: 1; }
-  100% { -webkit-mask-size: 380% 380%; mask-size: 380% 380%; opacity: 1; }
-}
-@keyframes pp-out {
-  0%, 45% { opacity: 1; }
-  100% { opacity: 0; }
-}
+@keyframes pp-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes pp-in { from { opacity: 0; } to { opacity: 1; } }
 .pp-cap {
   transition: opacity 1.2s ease, visibility 1.2s;
 }
