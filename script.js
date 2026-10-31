@@ -170,11 +170,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".js-year").forEach((el) => (el.textContent = year));
 });
 
-// Ink on hanji — the cursor is a loaded brush. Moving leaves a dry-brush stroke (at most about half strength);
+// Ink on hanji — the cursor is a loaded brush. Moving leaves a dry-brush stroke (at most about half strength), darkest
+// where the brush is and paler toward the tail;
 // resting in one place lets the ink pool and bloom, and a click drops ink that spreads into the paper (up to ~70%).
 // The ink shapes are grown in advance on a hanji fibre map (images/ink/brush.png, drops.png); here they are laid
-// along the cursor's path. A stroke is gone soon after the brush passes, but it does not simply fade: it sinks into
-// the paper, spreading a little and thinning unevenly along the fibres. Pools and drops spread, rest briefly and sink
+// along the cursor's path. A stroke sinks into the paper over about a second after the brush passes, spreading a little
+// and thinning unevenly along the fibres. Pools and drops spread, rest briefly and sink
 // in the same way. The ink scrolls with the page. Needs WebGL2.
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -188,6 +189,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   var STROKE = 0.5 / 0.7;   // a stroke's darkest ink, as a share of the deepest (0.7 on screen)
   var SOAK = 150;           // ms a new stretch of stroke is redrawn while its fringe soaks out
+  // a passed stroke sinks into the paper over about a second: the ink thins by a share each moment (so the tail,
+  // laid down earlier, is always paler than the stretch just painted) and the fibres drink the last of it unevenly
+  var FADE_MUL = 2.3, FADE_SUB = 0.11;
   var INK = [0.1, 0.1, 0.11];
   var BW = 1024, BH = 64, BCORE = 30;   // brush strip size and the width of its inked core
   var FINE = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -202,13 +206,14 @@ document.addEventListener("DOMContentLoaded", () => {
     "float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hs(i),hs(i+vec2(1,0)),f.x),mix(hs(i+vec2(0,1)),hs(i+vec2(1,1)),f.x),f.y);}\n" +
     "float paper(vec2 p){vec2 a=vec2(p.x*.8+p.y*.6,p.y*.8-p.x*.6),b=vec2(p.x*.5-p.y*.87,p.y*.5+p.x*.87);\n" +
     " return vn(p/7.)*.4+vn(a*vec2(.07,.7))*.22+vn(b*vec2(.06,.6))*.18+vn(p/1.7)*.2;}\n";
-  var F_FADE = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec2 shift,px;uniform float dt,S,py;in vec2 uv;out vec4 o;\n" + PAPER +
+  var F_FADE = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec2 shift,px;uniform float dt,S,py;in vec2 uv;out vec4 o;\n" +
+    "const float KM=" + FADE_MUL.toFixed(2) + ",KS=" + FADE_SUB.toFixed(2) + ";\n" + PAPER +
     "vec4 T(vec2 q){return (q.y<0.||q.y>1.)?vec4(0):texture(st,q);}\n" +
     "void main(){vec2 q=uv+shift;vec4 c=T(q);float h=c.g-dt,d=c.r;\n" +
     "if(h<=0.){float nb=(T(q+vec2(px.x,0)).r+T(q-vec2(px.x,0)).r+T(q+vec2(0,px.y)).r+T(q-vec2(0,px.y)).r)*.25;\n" +
-    " d+=(nb-d)*min(.45,dt*11.);\n" +
     " float g=paper(vec2(gl_FragCoord.x/S,gl_FragCoord.y/S-py));\n" +
-    " d=max(0.,d-dt*mix(1.3+2.3*d,.45+.55*d,c.b)*mix(.45,1.7,g));}\n" +
+    " if(c.b<.5){d+=(nb-d)*min(.3,dt*4.);d=max(0.,d*exp(-dt*KM*mix(.55,1.6,g))-dt*KS*mix(.4,1.8,g));}\n" +
+    " else{d+=(nb-d)*min(.45,dt*11.);d=max(0.,d-dt*(.45+.55*d)*mix(.45,1.7,g));}}\n" +
     "o=vec4(d,max(h,0.),d>.002?c.b:0.,1.);}";
   var V_RIB = "#version 300 es\nin vec2 p;in vec4 a;uniform vec2 view;uniform float scroll;out vec4 va;\n" +
     "void main(){vec2 c=vec2(p.x,p.y-scroll)/view*2.-1.;gl_Position=vec4(c.x,-c.y,0.,1.);va=a;}";
