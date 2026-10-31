@@ -95,8 +95,21 @@
   document.addEventListener("visibilitychange", () => { if (!document.hidden) schedule(); });
 
   // Choosing a work by hand restarts the timer
+  // the next work soaks in like ink: a bloom grown along paper fibres (images/soak.png) opens from its centre
+  // while the work before it stays underneath and fades (styles.css .is-soak / .is-prev)
+  const SOAK = 3200;
+  let soakT = 0;
   function show(k) {
+    const prev = cur;
     cur = (k + n) % n;
+    if (prev !== cur && !reduceMotion) {
+      const a = imgs[prev], b = imgs[cur];
+      imgs.forEach((im) => { if (im !== a && im !== b) im.classList.remove("is-prev", "is-soak"); });
+      a.classList.remove("is-soak"); a.classList.add("is-prev");
+      b.classList.remove("is-prev", "is-soak"); void b.offsetWidth; b.classList.add("is-soak");
+      clearTimeout(soakT);
+      soakT = setTimeout(() => { a.classList.remove("is-prev"); b.classList.remove("is-soak"); }, SOAK + 80);
+    }
     imgs.forEach((im, i) => im.classList.toggle("is-on", i === cur));
     caps.forEach((c, i) => c.classList.toggle("is-on", i === cur));
     if (counter) counter.textContent = String(cur + 1).padStart(2, "0");
