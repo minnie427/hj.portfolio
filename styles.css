@@ -2352,7 +2352,7 @@ html[data-lang="ko"] .pr-quote p {
 .st-drift--4 { height: 299px; }
 .st-drift--5 { height: 352px; }
 
-/* details may reach past the column into the page margins (never off the edge); the page never scrolls sideways */
+/* details sit in the gaps, some reaching into the margins but kept well in from the window edge */
 body:has(.st-page) {
   overflow-x: clip;
 }
@@ -2368,16 +2368,16 @@ body:has(.st-page) {
 
 /* scattered freely: some in the margins, some beside the text above, one slipping off the edge —
    sizes, heights and tilts all different. "edge" = calc(50% - 50vw), the window's edge seen from the column */
-.st-m.d1 { width: clamp(123px, 10.7vw, 156px); left: auto; right: calc(50% - 50vw + 9vw); top: -210px; --r: 13deg; }
-.st-m.d2 { width: 230px; left: calc(50% - 50vw + 9vw); right: auto; top: 96px; --r: -9deg; animation-duration: 12s; animation-delay: -4s; }
-.st-m.d3 { width: 190px; left: 7%; right: auto; top: 44px; --r: -15deg; animation-duration: 11s; }
-.st-m.d4 { width: clamp(131px, 11.5vw, 164px); left: auto; right: calc(50% - 50vw + 9vw); top: 6px; --r: 6deg; animation-delay: -3s; }
-.st-m.d5 { width: 180px; left: 45%; right: auto; top: 30px; --r: 8deg; animation-duration: 13s; }
-.st-m.d6 { width: 246px; left: calc(50% - 50vw + 7vw); right: auto; top: 120px; --r: -5deg; animation-delay: -5s; }
-.st-m.d7 { width: 213px; left: auto; right: calc(50% - 50vw + 10vw); top: 40px; --r: -4deg; animation-duration: 12s; animation-delay: -2s; }
-.st-m.d8 { width: 161px; left: 16%; right: auto; top: 170px; --r: 11deg; animation-delay: -6s; }
-.st-m.d9 { width: clamp(131px, 12.3vw, 175px); left: auto; right: calc(50% - 50vw + 8vw); top: -230px; --r: -11deg; animation-duration: 11s; animation-delay: -1s; }
-.st-m.d10 { width: 205px; left: 21%; right: auto; top: 120px; --r: 3deg; animation-duration: 13s; animation-delay: -4s; }
+.st-m.d1 { width: clamp(123px, 10.7vw, 156px); left: auto; right: calc(50% - 50vw + 16vw); top: 14px; --r: 13deg; }
+.st-m.d2 { width: 230px; left: calc(50% - 50vw + 13vw); right: auto; top: 52px; --r: -9deg; animation-duration: 12s; animation-delay: -4s; }
+.st-m.d3 { width: 190px; left: 15%; right: auto; top: 44px; --r: -15deg; animation-duration: 11s; }
+.st-m.d4 { width: clamp(131px, 11.5vw, 164px); left: auto; right: calc(50% - 50vw + 15vw); top: 10px; --r: 6deg; animation-delay: -3s; }
+.st-m.d5 { width: 180px; left: 46%; right: auto; top: 30px; --r: 8deg; animation-duration: 13s; }
+.st-m.d6 { width: 246px; left: calc(50% - 50vw + 12vw); right: auto; top: 84px; --r: -5deg; animation-delay: -5s; }
+.st-m.d7 { width: 213px; left: auto; right: calc(50% - 50vw + 16vw); top: 40px; --r: -4deg; animation-duration: 12s; animation-delay: -2s; }
+.st-m.d8 { width: 161px; left: 20%; right: auto; top: 128px; --r: 11deg; animation-delay: -6s; }
+.st-m.d9 { width: clamp(131px, 12.3vw, 175px); left: auto; right: calc(50% - 50vw + 15vw); top: 24px; --r: -11deg; animation-duration: 11s; animation-delay: -1s; }
+.st-m.d10 { width: 205px; left: 26%; right: auto; top: 120px; --r: 3deg; animation-duration: 13s; animation-delay: -4s; }
 
 @keyframes st-drift {
   0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--r, 0deg)); }
@@ -2409,16 +2409,16 @@ body:has(.st-page) {
   .st-drift--3 { height: 288px; }
   .st-drift--4 { height: 216px; }
   .st-drift--5 { height: 234px; }
-  .st-m.d1 { width: 29%; left: auto; right: 3%; top: 0; }
-  .st-m.d2 { width: 47%; left: 3%; right: auto; top: 122px; }
-  .st-m.d3 { width: 39%; left: 26%; right: auto; top: 0; }
-  .st-m.d4 { width: 32%; left: auto; right: 3%; top: 92px; }
-  .st-m.d5 { width: 34%; left: auto; right: 2%; top: 0; }
-  .st-m.d6 { width: 49%; left: 2%; right: auto; top: 96px; }
-  .st-m.d7 { width: 44%; left: 22%; right: auto; top: 2px; }
-  .st-m.d8 { width: 32%; left: 3%; right: auto; top: 112px; }
-  .st-m.d9 { width: 35%; left: auto; right: 4%; top: 140px; }
-  .st-m.d10 { width: 40%; left: 4%; right: auto; top: 8px; }
+  .st-m.d1 { width: 29%; left: auto; right: 9%; top: 0; }
+  .st-m.d2 { width: 47%; left: 8%; right: auto; top: 122px; }
+  .st-m.d3 { width: 39%; left: 28%; right: auto; top: 0; }
+  .st-m.d4 { width: 32%; left: auto; right: 9%; top: 92px; }
+  .st-m.d5 { width: 34%; left: auto; right: 8%; top: 0; }
+  .st-m.d6 { width: 49%; left: 8%; right: auto; top: 96px; }
+  .st-m.d7 { width: 44%; left: 24%; right: auto; top: 2px; }
+  .st-m.d8 { width: 32%; left: 9%; right: auto; top: 112px; }
+  .st-m.d9 { width: 35%; left: auto; right: 9%; top: 140px; }
+  .st-m.d10 { width: 40%; left: 10%; right: auto; top: 8px; }
 }
 
 /* ========== PROCESS — the quote near the end, on the centre line under its rule ========== */
@@ -2436,6 +2436,8 @@ body:has(.st-page) {
 .ink-layer {
   position: fixed;
   inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 40;

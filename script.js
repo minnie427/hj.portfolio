@@ -287,10 +287,14 @@ document.addEventListener("DOMContentLoaded", () => {
   load(SRC.drops, gl.CLAMP_TO_EDGE, function (t) { dropT = t; });
 
   // ---------- the page of ink (CSS-pixel grid; red = ink, green = time left before it fades) ----------
-  var W, H, S, dpr, A, B, fA, fB;
+  var W, H, S, dpr, A, B, fA, fB, OX = 0, OY = 0, DPR0 = 0;
   function fbo(t) { var f = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, f); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); return f; }
   function size() {
-    W = innerWidth; H = innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2); S = Math.max(0.9, Math.min(dpr, Math.sqrt(3.4e6 / (W * H))));   // ink state as sharp as the screen, within a budget
+    // measure the layer itself: innerWidth counts a classic scrollbar (Windows) and innerHeight can disagree with a
+    // phone's toolbars — either would stretch the ink away from the pointer
+    var r = cv.getBoundingClientRect(), de = document.documentElement;
+    W = r.width || de.clientWidth || innerWidth; H = r.height || de.clientHeight || innerHeight; OX = r.left; OY = r.top;
+    DPR0 = window.devicePixelRatio || 1; dpr = Math.min(DPR0, 2); S = Math.max(0.9, Math.min(dpr, Math.sqrt(3.4e6 / (W * H))));   // ink state as sharp as the screen, within a budget
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     [A, B].forEach(function (t) { if (t) gl.deleteTexture(t); });
     A = tex(Math.round(W * S), Math.round(H * S), gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, null, gl.CLAMP_TO_EDGE, gl.LINEAR);
@@ -298,7 +302,8 @@ document.addEventListener("DOMContentLoaded", () => {
     fA = fbo(A); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); fB = fbo(B); gl.clear(gl.COLOR_BUFFER_BIT);
     if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) throw 0;
   }
-  try { size(); } catch (e) { return; }
+  document.body.appendChild(cv);
+  try { size(); } catch (e) { cv.remove(); return; }
   var papT = tex(PSZ, PSZ, gl.RGBA8, gl.RGBA, gl.UNSIGNED_BYTE, null, gl.MIRRORED_REPEAT, gl.LINEAR);
   gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
   (function () {
@@ -306,9 +311,13 @@ document.addEventListener("DOMContentLoaded", () => {
     gl.useProgram(pGen.p); gl.bindVertexArray(vaoFull); gl.drawArrays(gl.TRIANGLES, 0, 3);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.deleteFramebuffer(f);
   })();
-  document.body.appendChild(cv);
-  var lastW = W;
-  window.addEventListener("resize", function () { if (Math.abs(innerWidth - lastW) > 2) { lastW = innerWidth; try { size(); } catch (e) {} } });
+  // refit whenever the layer's size or the zoom changes (height too: a window or toolbar resize)
+  function refit() {
+    var r = cv.getBoundingClientRect();
+    if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1 || r.left !== OX || r.top !== OY || (window.devicePixelRatio || 1) !== DPR0) { try { size(); } catch (e) {} }
+  }
+  window.addEventListener("resize", refit);
+  if (window.visualViewport) visualViewport.addEventListener("resize", refit);
 
   // ---------- the brush ----------
   // nodes along a smoothed path, in page coordinates; each new stretch is redrawn for half a second while it soaks in
@@ -358,11 +367,13 @@ document.addEventListener("DOMContentLoaded", () => {
   var MANUAL = !!window.__inkManual;
 
   function onMove(x, y, t) {
+    x -= OX; y -= OY;
     mx = x; my = y; inside = true;
     if (Math.hypot(x - restX, y - restY) > 5) { restX = x; restY = y; lastMove = t; rest = 0; pool = null; }
     stroke(x, y, t); wake(t);
   }
   function onDown(x, y, touch, t) {
+    x -= OX; y -= OY;
     var s = touch ? .8 : 1;
     drop(x, y, (30 + Math.random() * 10) * s, 2400, 1, t);
     var n = 1 + (Math.random() * 4 | 0);
