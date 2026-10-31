@@ -206,12 +206,16 @@ document.addEventListener("DOMContentLoaded", () => {
     "float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(hs(i),hs(i+vec2(1,0)),f.x),mix(hs(i+vec2(0,1)),hs(i+vec2(1,1)),f.x),f.y);}\n" +
     "float paper(vec2 p){vec2 a=vec2(p.x*.8+p.y*.6,p.y*.8-p.x*.6),b=vec2(p.x*.5-p.y*.87,p.y*.5+p.x*.87);\n" +
     " return vn(p/7.)*.4+vn(a*vec2(.07,.7))*.22+vn(b*vec2(.06,.6))*.18+vn(p/1.7)*.2;}\n";
-  var F_FADE = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec2 shift,px;uniform float dt,S,py;in vec2 uv;out vec4 o;\n" +
-    "const float KM=" + FADE_MUL.toFixed(2) + ",KS=" + FADE_SUB.toFixed(2) + ";\n" + PAPER +
+  // the paper map is drawn once into a 1024 px texture (mirrored as it repeats) and only looked up per frame
+  var PSZ = 1024;
+  var F_PGEN = "#version 300 es\nprecision highp float;out vec4 o;\n" + PAPER +
+    "void main(){vec2 p=gl_FragCoord.xy;o=vec4(paper(p),vn(p/1.3),0.,1.);}";
+  var F_FADE = "#version 300 es\nprecision highp float;uniform sampler2D st,pap;uniform vec2 shift,px;uniform float dt,S,py;in vec2 uv;out vec4 o;\n" +
+    "const float KM=" + FADE_MUL.toFixed(2) + ",KS=" + FADE_SUB.toFixed(2) + ";\n" +
     "vec4 T(vec2 q){return (q.y<0.||q.y>1.)?vec4(0):texture(st,q);}\n" +
     "void main(){vec2 q=uv+shift;vec4 c=T(q);float h=c.g-dt,d=c.r;\n" +
     "if(h<=0.){float nb=(T(q+vec2(px.x,0)).r+T(q-vec2(px.x,0)).r+T(q+vec2(0,px.y)).r+T(q-vec2(0,px.y)).r)*.25;\n" +
-    " float g=paper(vec2(gl_FragCoord.x/S,gl_FragCoord.y/S-py));\n" +
+    " float g=texture(pap,vec2(gl_FragCoord.x/S,gl_FragCoord.y/S-py)/" + PSZ + ".).r;\n" +
     " if(c.b<.5){d+=(nb-d)*min(.3,dt*4.);d=max(0.,d*exp(-dt*KM*mix(.55,1.6,g))-dt*KS*mix(.4,1.8,g));}\n" +
     " else{d+=(nb-d)*min(.45,dt*11.);d=max(0.,d-dt*(.45+.55*d)*mix(.45,1.7,g));}}\n" +
     "o=vec4(d,max(h,0.),d>.002?c.b:0.,1.);}";
@@ -226,12 +230,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "gl_Position=vec4(sp.x,-sp.y,0.,1.);tc=p*.5+.5;}";
   var F_DROP = "#version 300 es\nprecision highp float;uniform sampler2D tex;uniform vec2 tile;uniform float e,k;in vec2 tc;out vec4 o;\n" +
     "void main(){vec2 t=texture(tex,tile+clamp(tc,.004,.996)*.5).rg;float m=1.-smoothstep(e-.06,e,t.g);float d=t.r*m*k;o=vec4(d,d>.01?.7:0.,d>.01?1.:0.,1.);}";
-  var F_SHOW = "#version 300 es\nprecision highp float;uniform sampler2D st;uniform vec3 ink;uniform float dpr,py;in vec2 uv;out vec4 o;\n" + PAPER +
-    "float h(vec2 p){return hs(p+vec2(7919.,104729.));}\n" +
-    "void main(){vec4 c=texture(st,uv);float d=c.r;if(d<.004){o=vec4(0);return;}float n=h(floor(gl_FragCoord.xy));\n" +
+  var F_SHOW = "#version 300 es\nprecision highp float;uniform sampler2D st,pap;uniform vec3 ink;uniform float dpr,py;in vec2 uv;out vec4 o;\n" +
+    "void main(){vec4 c=texture(st,uv);float d=c.r;if(d<.004){o=vec4(0);return;}\n" +
+    "vec2 pg=texture(pap,vec2(gl_FragCoord.x/dpr,gl_FragCoord.y/dpr-py)/" + PSZ + ".).rg;float n=pg.g;\n" +
     "float a=.7*min(d,1.)*(1.-.12*(n-.5)*(1.-d));\n" +
-    "float sink=1.-smoothstep(0.,.02,c.g);if(sink>0.){float g=paper(vec2(gl_FragCoord.x/dpr,gl_FragCoord.y/dpr-py));\n" +
-    " float th=.02+.3*g*(1.-d)+.06*(n-.5);a*=mix(1.,smoothstep(th,th+.08,d),sink);}\n" +
+    "float sink=1.-smoothstep(0.,.02,c.g);if(sink>0.){float th=.02+.3*pg.r*(1.-d)+.06*(n-.5);\n" +
+    " a*=mix(1.,smoothstep(th-.03,th+.12,d),sink);}\n" +
     "o=vec4(ink*a,a);}";
 
   function sh(t, s) { var x = gl.createShader(t); gl.shaderSource(x, s); gl.compileShader(x); if (!gl.getShaderParameter(x, gl.COMPILE_STATUS)) throw gl.getShaderInfoLog(x); return x; }
@@ -243,8 +247,8 @@ document.addEventListener("DOMContentLoaded", () => {
     for (var i = 0; i < n; i++) { var a = gl.getActiveUniform(p, i); u[a.name] = gl.getUniformLocation(p, a.name); }
     return { p: p, u: u };
   }
-  var pFade, pRib, pDrop, pShow;
-  try { pFade = prog(V_FULL, F_FADE, ["p"]); pRib = prog(V_RIB, F_RIB, ["p", "a"]); pDrop = prog(V_DROP, F_DROP, ["p"]); pShow = prog(V_FULL, F_SHOW, ["p"]); } catch (e) { return; }
+  var pFade, pRib, pDrop, pShow, pGen;
+  try { pFade = prog(V_FULL, F_FADE, ["p"]); pRib = prog(V_RIB, F_RIB, ["p", "a"]); pDrop = prog(V_DROP, F_DROP, ["p"]); pShow = prog(V_FULL, F_SHOW, ["p"]); pGen = prog(V_FULL, F_PGEN, ["p"]); } catch (e) { return; }
 
   var vaoFull = gl.createVertexArray(); gl.bindVertexArray(vaoFull);
   var bFull = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, bFull); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
@@ -286,7 +290,7 @@ document.addEventListener("DOMContentLoaded", () => {
   var W, H, S, dpr, A, B, fA, fB;
   function fbo(t) { var f = gl.createFramebuffer(); gl.bindFramebuffer(gl.FRAMEBUFFER, f); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, t, 0); return f; }
   function size() {
-    W = innerWidth; H = innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2); S = Math.min(dpr, 1.5);
+    W = innerWidth; H = innerHeight; dpr = Math.min(window.devicePixelRatio || 1, 2); S = Math.max(0.9, Math.min(dpr, Math.sqrt(3.4e6 / (W * H))));   // ink state as sharp as the screen, within a budget
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     [A, B].forEach(function (t) { if (t) gl.deleteTexture(t); });
     A = tex(Math.round(W * S), Math.round(H * S), gl.RGBA16F, gl.RGBA, gl.HALF_FLOAT, null, gl.CLAMP_TO_EDGE, gl.LINEAR);
@@ -295,6 +299,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) throw 0;
   }
   try { size(); } catch (e) { return; }
+  var papT = tex(PSZ, PSZ, gl.RGBA8, gl.RGBA, gl.UNSIGNED_BYTE, null, gl.MIRRORED_REPEAT, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.MIRRORED_REPEAT);
+  (function () {
+    var f = fbo(papT); gl.viewport(0, 0, PSZ, PSZ); gl.disable(gl.BLEND);
+    gl.useProgram(pGen.p); gl.bindVertexArray(vaoFull); gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.deleteFramebuffer(f);
+  })();
   document.body.appendChild(cv);
   var lastW = W;
   window.addEventListener("resize", function () { if (Math.abs(innerWidth - lastW) > 2) { lastW = innerWidth; try { size(); } catch (e) {} } });
@@ -359,7 +370,12 @@ document.addEventListener("DOMContentLoaded", () => {
     pts = []; wake(t);
   }
   if (FINE) {
-    window.addEventListener("pointermove", function (e) { if (e.pointerType === "mouse") onMove(e.clientX, e.clientY, now()); }, { passive: true });
+    window.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var list = e.getCoalescedEvents ? e.getCoalescedEvents() : null, t = now();
+      if (list && list.length > 1) list.forEach(function (c) { onMove(c.clientX, c.clientY, Math.min(t, c.timeStamp || t)); });
+      else onMove(e.clientX, e.clientY, t);
+    }, { passive: true });
     document.documentElement.addEventListener("mouseleave", function () { inside = false; pts = []; });
   }
   var tap = null;
@@ -418,6 +434,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gl.useProgram(pFade.p); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A); gl.uniform1i(pFade.u.st, 0);
     gl.uniform2f(pFade.u.shift, 0, -cells / Math.round(H * S)); gl.uniform1f(pFade.u.dt, dt);
     gl.uniform2f(pFade.u.px, 1 / Math.round(W * S), 1 / Math.round(H * S)); gl.uniform1f(pFade.u.S, S); gl.uniform1f(pFade.u.py, scroll);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, papT); gl.uniform1i(pFade.u.pap, 1); gl.activeTexture(gl.TEXTURE0);
     gl.bindFramebuffer(gl.FRAMEBUFFER, fB); gl.viewport(0, 0, Math.round(W * S), Math.round(H * S)); gl.drawArrays(gl.TRIANGLES, 0, 3);
     var sw = A; A = B; B = sw; sw = fA; fA = fB; fB = sw;
     // 2. lay down new ink (the darker of old and new wins)
@@ -433,6 +450,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. show it
     gl.bindFramebuffer(gl.FRAMEBUFFER, null); gl.viewport(0, 0, cv.width, cv.height); gl.bindVertexArray(vaoFull);
     gl.useProgram(pShow.p); gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, A); gl.uniform1i(pShow.u.st, 0); gl.uniform3f(pShow.u.ink, INK[0], INK[1], INK[2]); gl.uniform1f(pShow.u.dpr, dpr); gl.uniform1f(pShow.u.py, scroll);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, papT); gl.uniform1i(pShow.u.pap, 1); gl.activeTexture(gl.TEXTURE0);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); gl.drawArrays(gl.TRIANGLES, 0, 3);
     if (MANUAL) return;
     if (t < until || scrollAcc) requestAnimationFrame(frame); else running = false;
