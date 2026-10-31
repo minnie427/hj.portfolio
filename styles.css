@@ -2643,3 +2643,109 @@ html[data-lang="ko"] .ct-btn { font-family: var(--font-serif-ko); font-size: 0.9
 @media (max-width: 900px) {
   .ct-cv { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ========== PROCESS TIME-LAPSE — a minimal player on hover (script.js) ========== */
+.pr-film-frame {
+  position: relative;
+}
+
+.pr-video {
+  cursor: pointer;
+}
+
+.pr-vc {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 2.4rem 1rem 0.85rem;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.32), rgba(0, 0, 0, 0));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.pr-film-frame:hover .pr-vc,
+.pr-film-frame.show-ctl .pr-vc,
+.pr-film-frame:not(.is-playing) .pr-vc,
+.pr-vc:focus-within {
+  opacity: 1;
+}
+
+.pr-vc-btn {
+  all: unset;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.pr-vc-btn svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.35));
+}
+
+.pr-vc-btn .i-pause,
+.pr-film-frame.is-playing .pr-vc-btn .i-play {
+  display: none;
+}
+
+.pr-film-frame.is-playing .pr-vc-btn .i-pause {
+  display: block;
+}
+
+.pr-vc-btn:focus-visible,
+.pr-vc-bar:focus-visible {
+  outline: 1px solid rgba(255, 255, 255, 0.8);
+  outline-offset: 3px;
+}
+
+.pr-vc-bar {
+  position: relative;
+  flex: 1;
+  height: 16px;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.pr-vc-bar::before,
+.pr-vc-fill {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  margin-top: -0.5px;
+  background: rgba(255, 255, 255, 0.38);
+}
+
+.pr-vc-fill {
+  display: block;
+  background: #fff;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+.pr-vc-bar:hover::before,
+.pr-vc-bar:hover .pr-vc-fill {
+  height: 2px;
+  margin-top: -1px;
+}
+
+.pr-vc-time {
+  flex: none;
+  min-width: 4.6em;
+  text-align: right;
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.9;
+}

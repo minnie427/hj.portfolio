@@ -157,12 +157,68 @@ document.addEventListener("DOMContentLoaded", () => {
     onScroll();
   }
 
-  // Process: the time-lapse plays silently on a loop; with reduced motion the still stays
+  // Process: the time-lapse starts when it is scrolled into view and pauses when it leaves (silent, looping).
+  // A minimal player shows on hover (or a tap): play/pause, a thin line to seek along, the time.
+  // Once the visitor pauses it, it stays paused until they press play. With reduced motion it never starts by itself.
   document.querySelectorAll("video.pr-video").forEach((v) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { v.removeAttribute("autoplay"); v.pause(); return; }
-    v.muted = true;
-    const pr = v.play();
-    if (pr && pr.catch) pr.catch(() => {});
+    const frame = v.closest(".pr-film-frame") || v.parentElement;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let held = still, inView = false, hideT = 0, drag = false;
+    v.muted = true; v.removeAttribute("autoplay"); v.removeAttribute("controls");
+    const ui = document.createElement("div");
+    ui.className = "pr-vc";
+    ui.innerHTML =
+      '<button type="button" class="pr-vc-btn" aria-label="Play">' +
+      '<svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>' +
+      '<svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h2.6v10H4zM9.4 3H12v10H9.4z"/></svg></button>' +
+      '<div class="pr-vc-bar" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="pr-vc-fill"></span></div>' +
+      '<span class="pr-vc-time">0:00</span>';
+    frame.appendChild(ui);
+    const btn = ui.querySelector(".pr-vc-btn"), bar = ui.querySelector(".pr-vc-bar"), fill = ui.querySelector(".pr-vc-fill"), time = ui.querySelector(".pr-vc-time");
+    const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); };
+    const play = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    const paint = () => {
+      const d = v.duration || 0, f = d ? v.currentTime / d : 0;
+      fill.style.transform = "scaleX(" + f + ")";
+      bar.setAttribute("aria-valuenow", String(Math.round(f * 100)));
+      time.textContent = fmt(v.currentTime) + " / " + fmt(d);
+    };
+    const state = () => {
+      const on = !v.paused;
+      frame.classList.toggle("is-playing", on);
+      btn.setAttribute("aria-label", on ? "Pause" : "Play");
+    };
+    let raf = 0;
+    const tick = () => { paint(); raf = v.paused ? 0 : requestAnimationFrame(tick); };
+    v.addEventListener("play", () => { state(); if (!raf) raf = requestAnimationFrame(tick); });
+    v.addEventListener("pause", () => { state(); paint(); });
+    v.addEventListener("loadedmetadata", paint);
+    v.addEventListener("seeked", paint);
+    const toggle = () => { if (v.paused) { held = false; play(); } else { held = true; v.pause(); } };
+    btn.addEventListener("click", (e) => { e.stopPropagation(); toggle(); });
+    v.addEventListener("click", toggle);
+    // touch: a tap shows the player for a moment
+    const show = () => { frame.classList.add("show-ctl"); clearTimeout(hideT); hideT = setTimeout(() => frame.classList.remove("show-ctl"), 2600); };
+    frame.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") show(); });
+    // seek along the line
+    const seekTo = (x) => { const r = bar.getBoundingClientRect(), d = v.duration || 0; if (!d) return; v.currentTime = Math.min(d - 0.05, Math.max(0, (x - r.left) / r.width * d)); paint(); };
+    bar.addEventListener("pointerdown", (e) => { drag = true; bar.setPointerCapture(e.pointerId); seekTo(e.clientX); show(); e.stopPropagation(); });
+    bar.addEventListener("pointermove", (e) => { if (drag) seekTo(e.clientX); });
+    bar.addEventListener("pointerup", () => { drag = false; });
+    bar.addEventListener("pointercancel", () => { drag = false; });
+    bar.addEventListener("keydown", (e) => {
+      const d = v.duration || 0; if (!d) return;
+      if (e.key === "ArrowRight") { v.currentTime = Math.min(d - 0.05, v.currentTime + 5); e.preventDefault(); }
+      if (e.key === "ArrowLeft") { v.currentTime = Math.max(0, v.currentTime - 5); e.preventDefault(); }
+    });
+    // play when it comes into view, pause when it leaves
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((es) => es.forEach((en) => {
+        inView = en.isIntersecting && en.intersectionRatio >= 0.5;
+        if (inView && !held) play(); else if (!inView && !v.paused) v.pause();
+      }), { threshold: [0, 0.5, 1] }).observe(frame);
+    }
+    state(); paint();
   });
 
   // Footer year
